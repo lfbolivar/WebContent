@@ -1,0 +1,99 @@
+<div class="content">
+	<center>
+		<h2 class="content">Upload File To Database</h2>
+		<p>
+<form action="Upload.php" method="post" enctype="multipart/form-data" name="uploadform">
+<table width="600" bgcolor="#660066" cellpadding="0" border="0" cellspacing="0">
+	<tr>
+		<td bgcolor="#000080" colspan="2" align="center">
+		<!-- width='448' below 
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="555" height="104" id="banner" align="middle">
+				<param name="allowScriptAccess" value="sameDomain" />
+				<param name="movie" value="http://www.bolitech.com/ClassAds/banner.swf" />
+				<param name="quality" value="high" />
+				<param name="bgcolor" value="#ffffff" />
+				<embed src="http://www.bolitech.com/ClassAds/banner.swf" quality="high" bgcolor="#ffffff" width="555" height="104" name="banner" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+		</object> -->
+		</td></tr>
+	<tr>
+<!--  	<td bgcolor="#000080" colspan="2" align="center">
+			<img style="vertical-align: middle;"
+				src="<?php// echo ($priv_upload_form_image) ?>"
+				alt="$priv_upload_form_image" width="600"></td> 
+		-->	
+		</tr>
+	<tr>
+		<td colspan="2" bgcolor="#660066" align="center">
+			<font color="#F1F1F9" FACE="arial,helvetica,bold" size="4">
+			<? echo($MsgTitle) ?></font></td>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">
+		<font color="#660066" FACE="arial,helvetica">
+		<?php echo ($MsgType) ?></font></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">
+		<font FACE="arial,helvetica">
+		<? echo ($msg1) ?></font></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">
+		<font FACE="arial,helvetica">
+		<? echo ($msg2) ?></font></td>
+		</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center">
+		<font color="#660066" FACE="arial,helvetica"><br /></font></td>
+		</tr>
+	<tr>
+		<td class=c width="555" colspan="2" align="center">
+		<font face="arial,helvetica" size="2" color="WHITE">
+		STEP-3 Please select an image to upload by clickin Browse button...</font></td>
+		</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center">
+		<font color="#660066" FACE="arial,helvetica"><br></font></td>
+		</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center">
+		<font color="#660066" FACE="arial,helvetica"><br></font></td>
+		</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center">
+		<font color="#660066" FACE="arial,helvetica">
+		<input type="hidden" name="MAX_FILE_SIZE" value="2000000">
+		<input name="userfile" type="file" class="box" id="userfile" size="60"></font></td>
+		</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center">
+		<font color="#660066" FACE="arial,helvetica"><br></font></td>
+		</tr>
+</table>
+<table width="600" bgcolor="#660066" cellpadding="0" border="0" cellspacing="0">
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center">
+		<font color="#660066" FACE="arial,helvetica"></font></td>
+		</tr>
+	<tr>
+		<td colspan="1" width="500" bgcolor="#F1F1F9" align="left">
+<!-- 	<ul>
+			<li><a href="Member.php">Cancel</a></li>
+			<li><a href="ViewMyAd.php">My Ads</a></li>
+			<li><a href="../pophelp/postad.html">Help</a></li>
+		 </ul> -->	</td>
+		<td colspan="1" width="100" bgcolor="#F1F1F9" align="right">
+		<font color="#660066" FACE="arial,helvetica">
+		<input name="upload" type=submit class="box" id="upload" value="Upload"></font></td>
+		</tr>
+	<tr>
+<!--  	<td width="555" colspan="2" align="center">
+		<font face="arial,helvetica" size="1" color="WHITE">
+		<b>Bolitech.com 2005-<?php echo date("Y") ?></b></font></td>  -->	
+		</tr>
+	<tr>
+		<td class=c width="555" colspan="2" align="center">
+		<font face="arial,helvetica" size="1" color="WHITE">
+		<b>upload.html</b></font></td>
+		</tr>
+</table>
+</form>

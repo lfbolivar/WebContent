@@ -1,0 +1,92 @@
+<!-- Start of browsedetails.html -->
+<!--  
+<div class="img">
+<img src="DisplayImage.php?imageName=<?echo($ImageId)?>" alt="bolitech.com" width="110" height="90" />
+ <div class="desc"><? echo ($Id) ?></div>
+ <div class="desc"><? echo ($Caption) ?></div>
+ <div class="desc"><? echo ($Headline) ?></div>
+</div>
+ -->
+<table>
+	<tr>
+		<td class=b colspan="2" ><br />
+		<img src="DisplayImage.php?imageName=<?php echo $ImageId?>" alt="<?php echo $imageName?>"></td>
+		</tr>
+	<tr>
+		<td class=d colspan="2" ><br />
+		<b><? echo ($Headline) ?></b></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2" ><br />
+		<textarea rows="8" cols="60" readonly><?php echo html_entity_decode($AdDesc) ?></textarea></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2"><br />
+		<a href="<? echo ($URL) ?>"><? echo ($URL) ?></a></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2"><br />
+		<? echo ($pub_content_desc.' #'.$Id) ?></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2">Gallery
+		Status: <? echo ($AdActive) ?></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2"><br />
+		Category: <? echo ($Cat) ?></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2">
+		<? echo ($Caption) ?></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2"><br />
+		Posted: <?php echo ($AdDate) ?></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2">
+		Expires: <?php echo ($AdExDate) ?>
+		</td>
+		</tr>
+	<tr>
+		<td class=b colspan="2">
+		Last Modified: <?php echo ($AdModDate) ?>
+		</td>
+		</tr>
+	<tr>
+		<td class=b colspan="2"><br />
+		</td>
+		</tr>
+	<tr>
+		<td class=c colspan="2">
+		<font face="arial,helvetica" size="2" color="WHITE">
+		Contact information...</font></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2" ><br />
+		<font face="arial, helvetica"> 
+		<?php echo ($first.' '.$last) ?></font></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2">
+		<font face="arial, helvetica">
+		<a href="mailto:<?php echo ($AdEmail) ?>"><?php echo ($AdEmail) ?></a></font></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2"><br />
+		Address: <br />
+		<?php echo ($Addr1) ?> <br />
+		<?php echo ($Addr2.' '.$Addr3) ?> <br />
+		<?php echo ($City.' '.$State.' '.$Zip.' '.$Country) ?></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2"><br />
+		<?php echo ($Phone) ?></td>
+		</tr>
+	<tr>
+		<td class=b colspan="2"><br /></td>
+		</tr>
+
+</table>
+<!-- End of browsedetails.html -->

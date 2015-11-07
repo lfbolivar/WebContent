@@ -1,0 +1,126 @@
+[17-Jul-2008 00:13:55] PHP Parse error:  syntax error, unexpected ',', expecting ')' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 164
+[17-Jul-2008 00:14:31] PHP Parse error:  syntax error, unexpected ',', expecting ')' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 164
+[17-Jul-2008 00:53:51] PHP Parse error:  syntax error, unexpected T_BOOLEAN_OR in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 161
+[17-Jul-2008 00:54:53] PHP Parse error:  syntax error, unexpected $end in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 183
+[17-Jul-2008 01:03:06] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting ',' or ';' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 165
+[17-Jul-2008 01:31:28] PHP Parse error:  syntax error, unexpected '[' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 161
+[17-Jul-2008 01:32:17] PHP Parse error:  syntax error, unexpected T_IS_EQUAL in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 161
+[17-Jul-2008 01:39:15] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 161
+[17-Jul-2008 01:41:37] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 161
+[17-Jul-2008 01:54:54] PHP Parse error:  syntax error, unexpected T_STRING, expecting ',' or ';' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 165
+[17-Jul-2008 22:48:16] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 83
+[17-Jul-2008 22:48:43] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 83
+[17-Jul-2008 22:48:55] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 83
+[17-Jul-2008 22:51:01] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 83
+[17-Jul-2008 22:51:44] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 83
+[17-Jul-2008 22:52:06] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 83
+[17-Jul-2008 22:52:39] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 83
+[17-Jul-2008 22:53:56] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 83
+[17-Jul-2008 22:54:03] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 83
+[17-Jul-2008 22:54:16] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 175
+[17-Jul-2008 22:54:16] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 83
+[17-Jul-2008 22:57:22] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 175
+[17-Jul-2008 23:12:05] PHP Parse error:  syntax error, unexpected T_BOOLEAN_OR in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 175
+[17-Jul-2008 23:12:41] PHP Parse error:  syntax error, unexpected T_CONSTANT_ENCAPSED_STRING, expecting ',' or ';' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 179
+[17-Jul-2008 23:35:29] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting ')' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 27
+[17-Jul-2008 23:53:10] PHP Fatal error:  Function name must be a string in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 176
+[17-Jul-2008 23:55:08] PHP Parse error:  syntax error, unexpected T_IF in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 177
+[17-Jul-2008 23:55:35] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting ',' or ';' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 181
+[17-Jul-2008 23:58:00] PHP Fatal error:  Call to undefined function  string() in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 176
+[19-Jul-2008 09:56:51] PHP Parse error:  syntax error, unexpected T_STRING in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 161
+[19-Jul-2008 10:21:05] PHP Parse error:  syntax error, unexpected T_VARIABLE, expecting ',' or ';' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 179
+[24-Jul-2008 08:51:33] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 81
+[24-Jul-2008 09:06:02] PHP Parse error:  syntax error, unexpected T_STRING in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 149
+[24-Jul-2008 09:18:14] PHP Warning:  join() [<a href='function.join'>function.join</a>]: Invalid arguments passed in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 165
+[24-Jul-2008 09:20:32] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:20:32] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 126
+[24-Jul-2008 09:20:32] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 126
+[24-Jul-2008 09:20:32] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 126
+[24-Jul-2008 09:20:32] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 126
+[24-Jul-2008 09:20:32] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 126
+[24-Jul-2008 09:20:32] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 126
+[24-Jul-2008 09:20:32] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 126
+[24-Jul-2008 09:20:32] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 126
+[24-Jul-2008 09:20:32] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 126
+[24-Jul-2008 09:25:26] PHP Parse error:  syntax error, unexpected '{' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 146
+[24-Jul-2008 09:27:12] PHP Parse error:  syntax error, unexpected '{' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 146
+[24-Jul-2008 09:27:51] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 120
+[24-Jul-2008 09:27:51] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:51] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:51] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:51] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:51] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:51] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:51] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:51] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:51] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:54] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 120
+[24-Jul-2008 09:27:54] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:54] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:54] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:54] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:54] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:54] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:54] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:54] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:27:54] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:29] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 120
+[24-Jul-2008 09:28:29] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:29] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:29] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:29] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:29] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:29] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:29] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:29] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:29] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:31] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 120
+[24-Jul-2008 09:28:31] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:31] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:31] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:31] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:31] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:31] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:31] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:31] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:31] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:57] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 120
+[24-Jul-2008 09:28:57] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:57] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:57] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:57] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:57] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:57] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:57] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:57] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:57] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:59] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 120
+[24-Jul-2008 09:28:59] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:59] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:59] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:59] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:59] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:59] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:59] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:59] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:28:59] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:29:42] PHP Warning:  reset() [<a href='function.reset'>function.reset</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 120
+[24-Jul-2008 09:29:42] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:29:42] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:29:42] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:29:42] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:29:42] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:29:42] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:29:42] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:29:42] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:29:42] PHP Warning:  current() [<a href='function.current'>function.current</a>]: Passed variable is not an array or object in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 123
+[24-Jul-2008 09:37:17] PHP Parse error:  syntax error, unexpected ')', expecting ';' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 120
+[24-Jul-2008 09:49:45] PHP Parse error:  syntax error, unexpected ',' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 120
+[24-Jul-2008 09:50:16] PHP Parse error:  syntax error, unexpected ',' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 120
+[24-Jul-2008 09:58:32] PHP Parse error:  syntax error, unexpected T_ELSE in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 126
+[24-Jul-2008 17:44:24] PHP Warning:  mysql_pconnect() [<a href='function.mysql-pconnect'>function.mysql-pconnect</a>]: Access denied for user 'caUser'@'localhost' (using password: YES) in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 161
+[24-Jul-2008 17:44:24] PHP Warning:  mysql_db_query() [<a href='function.mysql-db-query'>function.mysql-db-query</a>]: Access denied for user 'lbolivar'@'localhost' (using password: NO) in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 166
+[24-Jul-2008 17:44:24] PHP Warning:  mysql_db_query() [<a href='function.mysql-db-query'>function.mysql-db-query</a>]: A link to the server could not be established in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 166
+[29-Jul-2008 22:32:07] PHP Parse error:  syntax error, unexpected T_STRING, expecting '(' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 167
+[29-Jul-2008 22:33:21] PHP Parse error:  syntax error, unexpected T_STRING, expecting '(' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 167
+[29-Jul-2008 22:33:25] PHP Parse error:  syntax error, unexpected T_STRING, expecting '(' in /home/lbolivar/public_html/ClassAds/NewAdForm.php on line 167

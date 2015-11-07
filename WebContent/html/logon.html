@@ -1,0 +1,158 @@
+<html>
+<head>
+<link rel="shortcut icon"
+	href="http://www.bolitech.com/~bolitest/favicon.ico" />
+<style type="text/css">
+<!--
+********************* --><!--Inline Menu Section   --><!--********************* --><!--this first file csshover.htc is used in IE to fix hover over functionality -->body
+	{
+	behavior: url(csshover.htc);
+	font-size: 100%;
+	font-family: <?php echo $priv_body_font ?>;
+}
+
+ul {
+	float: left;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+a:link {
+	float: left;
+	width: 6em;
+	text-decoration: none;
+	color: white;
+	background-color: purple;
+	padding: 0.2em 0.6em;
+	border-right: 1px solid white;
+}
+a:visited {
+	background-color: #000080
+}
+/* <!-- border-right:0px solid white; --> */
+a:hover {
+	background-color: #ff3300
+}
+a:active {
+	background-color: #0000FF
+}
+
+.button {
+	float: right;
+	width: 6em;
+	text-decoration: none;
+	color: white;
+	background-color: purple;
+	padding: 0em 0.0em;
+	font-family: <?php echo $priv_body_font ?>;
+}
+
+
+input[type="submit"]:hover {
+	background-color: #e6fdc9
+}
+
+.button:hover {
+	background-color: #33ff00
+}
+
+li {
+	display: inline
+}
+body {
+	background-image:url<?php echo ('$priv_logon_bg_image')?>;
+	background-color:#FFFFFF;
+	}
+	
+
+</style>
+</head>
+
+<!-- if they are not logged in, Generate Form with input variables -->
+
+<!--  <body style BACKGROUND='<?php //echo ($priv_logon_bg_image)?>'
+	BGCOLOR="#FFFFFF" TEXT="#66066" LINK="#000080" VLINK="#000080"
+	alink="#0000FF">   -->
+
+<form name="Logon" action="<?php echo $_SERVER['PHP_SELF']?>"
+	method="post">
+<center>
+<table width="555" bgcolor="#660066" cellpadding="0" border="0" cellspacing="0">
+	<tr>
+		<td bgcolor="#000080" colspan="2" align="center"><!-- width='448' below 
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="555" height="104" id="banner" align="middle">
+				<param name="allowScriptAccess" value="sameDomain" />
+				<param name="movie" value="/ClassAds/banner.swf" />
+				<param name="quality" value="high" />
+				<param name="bgcolor" value="#ffffff" />
+				<embed src="/ClassAds/banner.swf" quality="high" bgcolor="#ffffff" width="555" height="104" name="banner" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+			</object></td></tr>		-->
+		<tr>
+			<td bgcolor="#000080" colspan="2" align="center"><img
+				style="vertical-align: middle;"
+				src="<?php echo $priv_logon_form_image ?>" alt="logon image"
+				width="555" height="294"></img></td>
+		</tr>
+		<tr>
+			<td width="555" colspan="2" align="center"><font
+				face="arial,helvetica" size="3" color="WHITE"><b>LOGON</b></td>
+		</tr>
+		</font>
+		<tr>
+			<td width="555" colspan="2" bgcolor="#F1F1F9"><font
+				face="arial,helvetica" size="1"><br></br></td>
+			<tr>
+				<td width="100" bgcolor="#F1F1F9" align="right"><font
+					face="arial,helvetica" size="2">Email:</td>
+				<td width="455" bgcolor="#F1F1F9" align="left"><input type="text"
+					name="email" maxlength="50" size="32">*</td>
+			</tr>
+			<tr>
+				<td width="100" bgcolor="#F1F1F9" align="right"><font
+					face="arial,helvetica" size="2">Password:</td>
+				<td width="455" bgcolor="#F1F1F9" align="left"><input
+					type="password" name="pass" maxlength="12" size="32">*</td>
+			</tr>
+			<tr>
+				<td width="555" colspan="2" bgcolor="#F1F1F9"><font
+					face="arial,helvetica" size="1"><br></br></td>
+				<tr>
+					<td width="350" colspan="1" align="center" bgcolor="#F1F1F9"><font
+						face="arial,helvetica" size="2">
+					<ul>
+						<!-- 		<li><input type="submit" name="login"  value="Submit" class="button" /></li> 
+		<li><a href="http://www.bolitech.com/">BoliTech</a></li>-->
+						<li><a href="<?php echo $url_php?>BrowseAd.php">Gallery</a></li>
+						<li><a href="Register.php">Register</a></li>
+					</ul>
+					<!--		<li><a><input type="submit" name="login"  value="submit" class="button" /></a></li></td>
+<!--		<li><a href="#" onclick="document.forms[0].submit();">Click Login</a></li>
+		<li><a href="javascript: document.forms[0].submit();">Login</a></li>
+<!--		<li><p class="submit"><input type="submit" name="login" value="Login"></p></li> 
+<!--		<li><a href="http://www.playaloscabos.com/ClassAds/php/Register.php">Register</a></li> -->
+					<!--		<td width="555" colspan="1" align="right" bgcolor="#F1F1F9">  -->
+					<td width="200" colspan="1" align="right" bgcolor="#F1F1F9">
+					<input type="submit" name="logon" value="Submit" /> 
+					<!--<input type="button" name=submit value="PlayaLosCabos" onClick="window.location.href('http://www.playaloscabos.com/');return false"> -->
+					</td>
+				
+				</tr>
+				<tr>
+					<td width="555" colspan="2" align="center"><font
+						face="arial,helvetica" size="1" color="WHITE"><b>Bolitech.com
+					2005-<?php echo date("Y") ?></b></td>
+				</tr>
+				</font>
+				<td width="555" colspan="2" align="center"><font
+					face="arial,helvetica" size="1" color="WHITE"><b>logon.html</b></td>
+			</tr>
+			</font>
+			</form>
+
+</table>
+</center>
+</form>
+</body>
+</html>

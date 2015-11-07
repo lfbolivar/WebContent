@@ -1,0 +1,35 @@
+<!-- Start of pageFooter.html -->
+<!-- Closes div class=content -->
+</div> 
+<!--  closes the div class=left  -->
+	</div> 
+<div id="loginmodal" style="display:none;">
+  	<h1>User Login</h1>
+  	<form id="loginform" name="Logon" method="post" action="Logon.php" >
+    	<label for="username">*Email:</label>
+    	<input type="text" name="email" id="username" class="txtfield" tabindex="1">
+    	<label for="password">*Password:</label>
+    	<input type="password" name="pass" id="password" class="txtfield" tabindex="2">
+    
+   		<div class="center">
+			<!-- <input type="submit" name="logon" value="Submit" /> -->
+   			<input type="submit" name="logon" id="loginbtn" value="Logon" tabindex="3"> 
+    		<br/><a href="Register.php">New Member Registration</a>
+   		</div>
+	</form>
+</div>
+<div class="footer">Copyright <?php echo date("Y")?> Bolitech.com</div>
+<!-- Closes div class=container -->
+</div>
+<script type="text/javascript">
+	$(function(){
+/*  $('#loginform').submit(function(e){
+    return false;
+  });
+*/ 
+	$('#modaltrigger').leanModal({ top: 110, overlay: 0.45, closeButton: ".hidemodal" });
+});
+</script>
+</body>
+</html>
+<!-- End of pageFooter.html -->

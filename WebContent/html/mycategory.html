@@ -1,0 +1,19 @@
+<div class="img">
+<form action="MyAdDetail.php" method="post">
+<input type="image"
+	value="<? echo($Headline) ?>"
+	src="DisplayImage.php?imageName=<?echo($ImageId)?>"
+	name="adnbr" alt="<? echo($imageName) ?>" width="110" height="90" /> 
+<!-- 
+<a target="_blank" href="http://www.playaloscabos.com/ClassAds/php/MyDetails.php?imageName=<? echo ($Id) ?>"> 
+<img src="http://www.playaloscabos.com/ClassAds/php/DisplayImpage.php?imageName=" alt="PlayaLosCabos.com" width="110" height="90"></a></img> 
+-->
+<div class="hide"><input type="text" name=myAd value="<? echo ($Id) ?>"></div>
+<div class="hide"><input type="text" name=myImage
+	value="<? echo ($ImageId) ?>"></div>
+<div class="desc"><? echo ("Ad# ".$Id) ?></div>
+<div class="desc"><? echo ($AdStatus)?"Active":"Inactive" ?></div>
+<div class="desc"><? echo ($Caption) ?></div>
+<div class="desc"><? echo ($Headline) ?></div>
+</form>
+</div>

@@ -1,0 +1,70 @@
+@CHARSET "ISO-8859-1";
+/*
+<!-- ********************* -->
+<!-- Inline Menu Section   -->
+<!-- ********************* -->
+<!-- this first file csshover.htc is used in IE to fix hover over functionality -->
+colors	#000080=dark blue
+		#F1F1F9=medium gray
+		#0000FF=bright blue
+		#e6fdc9=lime green
+		#660066=magenta
+		#ff3300=bright red
+/*
+<!--********************* --><!--Image Gallery section --><!--*********************  -->
+*/
+div.img{
+	margin:2px;
+/*	border:1px solid #0000ff;  */
+	height:<?=THMBHEIGHT?>px;
+/*	height:156px;
+	auto; px;<?php echo (THMBHEIGHT) ?>*/ 
+	width:<?=(THMBWIDTH)?>px;
+/*	auto; px;<?php echo (THMBWIDTH) ?> float : left;*/
+	text-align: center;
+/*	clear: both; */
+}
+div.img img{
+	display:inline;
+	margin:3px;
+/*	border:2px solid #ffffff; */
+}
+div.img input:hover{
+	border:2px solid #0000ff;
+	background-color:#ff3300;
+}
+div.desc{
+	text-align:center;
+	font-weight:normal;
+/*	width:<? echo(THMBWIDTH-2) ?> px; 160 px;*/
+	margin: 1px;
+}
+div.hide{
+	display:none;
+}
+/* controls the browsedetails.html page primarily the hover on the <a href> tags. */
+td.b{
+	background-color:#F1F1F9;
+	color:#660066;
+	font-size:100%;
+	font:17px arial, helvetica
+}
+td.b a{
+	background-color:#F1F1F9;
+	color:#000080;
+	font-size:100%;
+	font:17px arial, helvetica
+}
+td.b a:link{
+	background-color:#660066;
+	color:#F1F1F9;
+}
+td.b a:visited{
+	color:#000080;
+}
+td.b a:hover{
+	background-color:#ff3300;
+}
+td.b a:active{
+	color:#0000FF;
+}

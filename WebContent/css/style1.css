@@ -1,0 +1,103 @@
+@CHARSET "ISO-8859-1";
+/*
+<!-- ********************* -->
+<!-- Inline Menu Section   -->
+<!-- ********************* -->
+<!-- this first file csshover.htc is used in IE to fix hover over functionality -->
+colors	#000080=dark blue
+		#F1F1F9=medium gray
+		#0000FF=bright blue
+		#e6fdc9=lime green
+		#660066=magenta
+
+/* Lean overlay is used in the member screen */
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top:0px;
+    left:0px;
+    height:100%;
+    width:100%;
+    background:#000;
+    display:none;
+}
+/*		font-family:<?php echo($priv_body_font) ?>;}	*/
+ul {
+	float:left;
+	width:100%;
+	padding:0;
+	margin:0;
+	list-style-type:none;
+}
+li {
+	display:inline
+}
+a {
+	background-color:purple;
+	border-right:1px solid white;
+	color:white;
+	float:left;
+	padding:0.2em 0.6em;
+	text-decoration:none;
+	width:6em;
+}
+a:link {
+	color:white
+}
+a:visited {
+	color:#000080;
+}
+a:hover {
+	background-color:#ff3300
+}
+a:active {
+	color:#0000FF;
+}
+.button {
+	float:right;
+	width:6em;
+	text-decoration:none;
+	color:white;
+	background-color:#660066;
+	padding:0em 0.0em; 
+/*<!-- 	border-right: 0px solid white; 	--> */
+}
+.button:hover {
+	background-color:#33ff00
+}
+input[type="submit"]:hover {
+	background-color:#e6fdc9
+}
+table {
+	background-color:#F1F1F9;
+	color:white;
+	width:555px;
+	cellpadding:0;
+}
+th {
+	background-color:#660066;
+	color: white;
+}
+td.a {
+	background-color: #000080;
+	border-color: #F1F1F9;
+	width: 555px;
+	colspan: 2;
+	text-align: center;
+	font-size: 100%;
+	font: 15px arial, helvetica;
+	vertical-align: middle;
+}
+td.b {
+	background-color: #F1F1F9;
+	border-color: #F1F1F9;
+	color: #660066;
+	font-size: 100%;
+	font: 15px arial, helvetica
+}
+td.c {
+	background-color: #660066;
+	color: white;
+	font: 10px calibri, arial, helvetica
+}
+

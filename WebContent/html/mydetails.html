@@ -1,0 +1,387 @@
+<!-- Start of mydetails.html  -->
+<!-- ----------------------------------------------------------------------------  -->
+<!-- The first section contains display information as it appears on the Public Gallery.  -->
+<!-- ----------------------------------------------------------------------------  -->
+
+<!--
+<div class="img">
+<img src="<?php echo ($sec_url_php) ?>DisplayImage.php?imageName=<?php echo($ImageId)?>" alt="Not Found" width="110" height="90"></img>
+ <div class="desc"><?php echo ($Id) ?></div>
+ <div class="desc"><?php echo ($Caption) ?></div>
+ <div class="desc"><?php echo ($Headline) ?></div>  -->
+<table>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		<img
+			src="DisplayImage.php?imageName=<?php echo($ImageId)?>"
+			alt="Image Not Found"></img></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		<b><?php echo ($Headline) ?></b></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		<textarea rows="8" cols="60" readonly><?php echo html_entity_decode($AdDesc) ?></textarea></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		<a href="<?php echo ($URL) ?>"><? echo ($URL) ?></a></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		<?php echo ($priv_content_desc.'# '.$Id) ?></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">Gallery
+		Status: <?php echo ($AdActive) ?></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		Category: <?php echo ($Cat) ?></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><?php echo ($Caption) ?></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		Posted: <?php echo ($AdDate) ?></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">
+		Expires: <?php echo ($AdExDate) ?>
+		</td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">
+		Last Modified: <?php echo ($AdModDate) ?>
+		</td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><font face="arial,helvetica" size="2"
+			color="WHITE"> Contact information... <i>(to modify use MyProfile
+		from Member menu)</i></font></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" width="180" bgcolor="#F1F1F9" align="center">
+		<br />
+		<font face="arial, helvetica"> <?php echo ($first.' '.$last) ?></font></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" width="180" bgcolor="#F1F1F9" align="center">
+		<font face="arial, helvetica"> <a
+			href="mailto:<?php echo ($AdEmail) ?>"><?php echo ($AdEmail) ?></a></font>
+		</td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		Address: <br />
+		<?php echo ($Addr1) ?> <br />
+		<?php echo ($Addr2.' '.$Addr3) ?> <br />
+		<?php echo ($City.' '.$State.' '.$Zip.' '.$Country) ?></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		<?php echo ($Phone) ?></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		</td>
+	</tr>
+
+	<!-- ----------------------------------------------------------------------------  -->
+	<!-- The second section contains a form that allows updates to this specific  Ad.  -->
+	<!-- ----------------------------------------------------------------------------  -->
+	<FORM ACTION="MyAdUpdate.php" METHOD="POST"
+		name="myadupdate">
+	<tr>
+		<td colspan="2" bgcolor="#000080" align="center"><font
+			face="arial,helvetica" size="2" color="WHITE"> Please enter
+		modifications to your content information ...</font> <input
+			type="hidden" name="AdId" value="<?php echo $Id ?>" size="11"
+			maxlength="11"></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font color="#000080"
+			FACE="arial,helvetica"> <br />
+		</font></td>
+	</tr>
+	<tr>
+		<td width="350" bgcolor="#F1F1F9" align="right"><font
+			face="arial, helvetica" size="2" color="#000080"> <b>Classified
+		Category </b></font></td>
+		<td width="350" bgcolor="#F1F1F9" align="left"><font
+			face="arial, helvetica" size="2" color="#000080"> <SELECT
+			NAME=AdCategory size="1">
+			<?php foreach($options as $category => $catdesc)
+			{
+				//	echo "<OPTION";
+				if ($AdCategory==$category)
+				{
+					echo "<option value=$category SELECTED>$catdesc</option> \n" ;
+					//	next($adcategory);
+				}
+				else
+				{
+					echo "<option value=$category>$catdesc</option> \n";
+				}
+			}?>
+		</SELECT></font> <font face="arial, helvetica" size="3"
+			color="#000080"> *</font></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9"><font color="#F1F1F9"></font></td>
+	</tr>
+	<tr>
+		<td colspan="1" width="300" bgcolor="#F1F1F9" align="right"><font
+			face="arial,helvetica" SIZE="2" color="#000080"> <b>How long should
+		your AD be displayed </b></font></td>
+		<td colspan="1" width="300" bgcolor="#F1F1F9" align="left"><select
+			size="1" name="AdPeriod">
+			<?php foreach($periodWk as $per => $perdesc)
+			{
+				//	echo "<OPTION";
+				if ($AdPeriod==$per)
+				{
+					echo "<option value=$per SELECTED>$perdesc</option> \n" ;
+					//	next($adcategory);
+				}
+				else
+				{
+					echo "<option value=$per>$perdesc</option> \n";
+				}
+			}?>
+		</select> <font face="arial, helvetica" size="3" color="#000080"> *</font></td>
+	</tr>
+	<!--###############		To Place Ads by MONTH uncomment below
+				<option value="30" selected>1 month </option>
+				<option value="60">2 months </option>
+				<option value="90">3 months </option>
+					END OF COMMENTED FIELDS 							####################--> <!--###############		To Place Ads by WEEK uncomment below				
+				<option value="7" selected>1 week</option>
+				<option value="14">2 weeks</option>
+				<option value="21">3 weeks</option>
+				<option value="28">4 weeks</option>						####################--> <!-- ################	Weekly options reduced								
+				<option value="35">5 weeks
+				<option value="42">6 weeks
+				<option value="49">7 weeks
+				<option value="56">8 weeks								####################-->
+	<tr>
+		<td colspan="1" width="300" bgcolor="#F1F1F9" align="right"><font
+			face="arial,helvetica" size="2" color="#000080"> <b>Ad Headline
+		Caption </b></font></td>
+		<td colspan="1" width="300" bgcolor="#F1F1F9" align="left"><select
+			name="AdCaption" size="1">
+			<?php foreach($caption as $cap => $capdesc)
+			{
+				//	echo "<OPTION";
+				if ($AdCaption==$cap)
+				{
+					echo "<option value='$cap' SELECTED>$capdesc</option> \n" ;
+					//	next($adcategory);
+				}
+				else
+				{
+					echo "<option value='$cap' >$capdesc</option> \n";
+				}
+			}?>
+		</select><font face="arial, helvetica" size="3" color="#000080"> *</font></td>
+	</tr>
+	<!-- ################				<option value="Subject:">  Click To Scroll  ></option>
+				<option value="FOR SALE:">For Sale: </option>
+				<option value="WANTED:">Wanted: </option>
+				<option value="BEST OFFER FOR:">Best offer for: </option>
+				<option value="POSITION DESIRED:">Position desired: </option>
+				<option value="POSITION OFFERED:">Position offered: </option>
+				<option value="FOR RENT:">For Rent: </option>
+				<option value="FOR LEASE:">For Lease: </option>
+				<option value="SERVICES OFFERED:">Services Offered: </option>
+				<option value="BUSINESS OPPORTUNITY:">Business Opportunity: </option>
+				<option value="BUY WHOLESALE:">Buy Wholesale: </option>   ####################-->
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9"><br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font
+			face="arial,helvetica" size="2" color="#000080"> <b>Headline for your
+		AD</b></font> <br />
+		<font face="arial,helvetica" size="1" color="#000080"> (<i>This should
+		be the specific topic of your AD... </i>)</font> <br />
+		<input type="text" name="AdHeadline" value="<?php echo $AdHeadline ?>"
+			size="55" maxlength="100" /> <font face="arial, helvetica" size="3"
+			color="#000080"> *</font></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9"><br />
+		</td>
+	</tr>
+
+	<!-- ######## COMMENT OUT THIS AREA IF YOU DO NOT WANT TO ALLOW URL'S IN THE AD ###-->
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9"><br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font
+			face="arial,helvetica" size="2" color="#000080"> <b>Have a Web Site?
+		Include your URL in the Ad</b></font> <font face="arial,helvetica"
+			size="1" color="#000080"> <br />
+		(Enter exactly as shown here: http://www.yourdomain.com)</font> <br />
+		<input type="text" name="AdURL" value="<?php echo $AdURL ?>"
+			maxlength="100" size="60" /></td>
+		<td bgcolor="#F1F1F9"><br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align=center><br />
+		<font face="arial,helvetica" size="2" color="#000080"> <b>To activate
+		and view your content in the Public Gallery select below...</b></font>
+		<br />
+		<font face="arial,helvetica" size="1" color="#000080"> <i>("Yes" to
+		display in Public Gallery)</i></font></td>
+	</tr>
+
+	<tr>
+		<td colspan="1" width="180" bgcolor="#F1F1F9" align="right"></td>
+		<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><!-- ####	<font face="arial, helvetica" size="2"> ###-->
+		<select name=AdValid size="1">
+		<?php $showit = array(0 => No,1 => Yes);
+		foreach($showit as $v => $s)
+		{
+			//	echo "<OPTION";
+			if ($AdValid == $v)
+			{
+				echo "<option value='$v' SELECTED>$s</option>/n" ;
+				//	next($AdValid);
+			}
+			else
+			{
+				echo "<option value='$v'>$s</option>/n";
+			}
+		}
+		?>
+		</select></td>
+	</tr>
+
+	<!-- ######## Ad Description  ###-->
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font color="#660066"
+			FACE="arial,helvetica"></font></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" ALIGN="CENTER"><font
+			face="arial,helvetica" size="2" color="#000080"> <b>Now enter your AD
+		content below</b></font>
+		<blockquote><i><font face="arial,helvetica" size="1" color="#000080">
+		(Continously type your text, words will wrap <b>automatically.</b> You
+		may enter up to approximately </font> <b><font face="arial, helvetica"
+			size="1" color="#000080">250</font></b> <font FACE="arial,helvetica"
+			color="#000080"> <font face="arial, helvetica" size="1"
+			color="#000080"> words in your AD content. For a <b>better</b>
+		appearance, use <b>paragraph breaks</b> wherever possible.)</font></font></i></blockquote>
+		<!--			<p align="center">
+			<b><font face="arial, helvetica" color="#FF0000" size="2">WARNING: IF YOU ENTER YOUR HEADLINE OR<br>CONTENT IN ALL CAPS YOUR AD WILL BE DELETED!</font></b>
+			<font FACE="arial,helvetica"> --></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center">
+		<p><font face="arial" size="2" color="#000080"><br>
+		<b>For a Line break:</b> press enter <b>ONCE</b>.&nbsp;&nbsp; <b>Paragraph
+		break:</b> press enter <b>TWICE</b>.<br />
+		</font>
+		
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><textarea cols="60"
+			rows="8" name="AdDesc"><?php echo html_entity_decode($AdDesc) ?></textarea>
+		<font face="arial, helvetica" size="3" color="#000080"> *</font> <br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font
+			FACE="arial,helvetica"> <?php echo ($msg1) ?></font></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font
+			FACE="arial,helvetica"> <?php echo ($msg2) ?></font></td>
+	</tr>
+	<tr>
+		<td colspan="2" width=400 " bgcolor="#F1F1F9" align="center"><br />
+		<INPUT TYPE=submit name="myadupdate" value="Update"></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font color="#660066"
+			FACE="arial,helvetica"> <br />
+		</font></td>
+	</tr>
+	</form>
+	<!-- -----------------------------------------------------------------------------------------------------  -->
+	<!-- The third section contains a form that allows the upload of a new image file associated with the Ad.  -->
+	<!-- -----------------------------------------------------------------------------------------------------  -->
+	<FORM action="Upload.php" method="post"
+		enctype="multipart/form-data" name="upload"><!-- <FORM ACTION="Upload.php" METHOD="POST" name="upload">  -->
+	<tr>
+		<td width="755" colspan="2" align="center"><font
+			face="arial,helvetica" size="2" color="WHITE"> Please select an image
+		to upload and add to your <?php echo($priv_content_desc)?>(s)...</font></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		</td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><input
+			type="hidden" name="MAX_FILE_SIZE" value="10000000"> <input
+			name="userfile" type="file" class="box" id="userfile" size="60"></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		</td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><input
+			type="hidden" name=myAd value="<?php echo ($Id) ?>" /> <input
+			name="upload" type=submit class="box" id="upload" value="Upload" /></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		</td>
+	</tr>
+	</FORM>
+
+	<!-- -----------------------------------------------------------------------------------------------------  -->
+	<!-- The fourth section contains a form that allows the deletion of the Ad or Image row.  -->
+	<!-- -----------------------------------------------------------------------------------------------------  -->
+	<FORM action="MyAdDelete.php"
+		method="post" enctype="multipart/form-data" name="delete">
+	<tr>
+		<td colspan="2"  bgcolor="#000080" align="center"><font
+			face="arial,helvetica" size="2" color="WHITE"> Please select whether
+		to delete <?php echo($priv_content_desc)?> or image ...</font></td>
+	</tr>
+	<tr>
+		<td colspan="1" bgcolor="#F1F1F9" align="right"><font color="#000080"
+			FACE="arial,helvetica"> <input type="hidden" name="AdId"
+			value="<?php echo ($Id) ?>" size="11" /> <input type="hidden"
+			name="ImageId" value="<?php echo($ImageId)?>" size="11" /></font> <input
+			name="delete" type=submit class="box" id="delete" value="Delete" /></td>
+		<td colspan="1" bgcolor="#F1F1F9" align="left"><font color="#000080"
+			FACE="arial,helvetica"> <br />
+		<input type="radio" name="deltype" value="Ad"><?php echo ($priv_content_desc) ?><br />
+		<input type="radio" name="deltype" value="Img">Image</font></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font color="#000080"
+			FACE="arial,helvetica"> <br />
+		</font></td>
+	</tr>
+	</form>
+</table>
+</div>
+<!-- End of mydetails.html -->

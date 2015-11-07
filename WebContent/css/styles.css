@@ -1,0 +1,89 @@
+/**************************/
+/*  Start of Styles.css   */
+/*************************
+/* content */
+.text-header {
+	font-weight: bold;
+	font-size: 13pt;
+	font-family: "Arial Narrow", Arial, sans-serif;
+	color: #2C2C2E;
+	text-transform: uppercase;
+}
+.pageContent { font-size: 8pt; font-family: Tahoma, sans-serif; color: #2D2D2D; }
+ .pageContent a { font-size: 8pt; font-family: Tahoma, sans-serif; color: #8D8D8D; }
+
+/* top elements */
+.company {
+	font-weight: bold;
+	font-size: 15pt;
+	font-family: "Arial Narrow", Arial, sans-serif;
+	color: #FFFFFF;
+	text-transform: capitalize;
+}
+.slogan { font-weight: bold; font-size: 8pt; font-family: "Arial Narrow", Arial, sans-serif; color: #FFFFFF; }
+
+/*main menu*/
+.menu {
+	font-size: 8pt;
+	font-family: Tahoma, sans-serif;
+	color: #ffffff;
+	text-decoration: none;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+.amenu {
+	font-size: 8pt;
+	font-family: Tahoma, sans-serif;
+	color: #FE9900;
+	text-decoration: none;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+/*submenu*/
+.submenu {
+	font-size: 8pt;
+	font-family: Tahoma, sans-serif;
+	color: #FFFFFF;
+	text-decoration: none;
+	font-weight: bold;
+}
+.asubmenu {
+	font-size: 8pt;
+	font-family: Tahoma, sans-serif;
+	color: #FFFFFF;
+	text-decoration: underline;
+	font-weight: bold;
+}
+/*bottom menu*/
+.bmenu {
+	font-size: 8pt;
+	font-family: Tahoma, sans-serif;
+	color: #006699;
+	text-decoration: none;
+	font-weight: normal;
+	text-transform: capitalize;
+}
+.abmenu {
+	font-size: 8pt;
+	font-family: Tahoma, sans-serif;
+	color: #006699;
+	text-decoration: underline;
+	font-weight: normal;
+	text-transform: capitalize;
+}
+
+/*copyright*/
+.footer {
+	font-size: 8pt;
+	font-family: Tahoma, sans-serif;
+	color: #333333;
+	text-transform: capitalize;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+/*backgrounds*/
+.main-bg { background-color: #E1E1E1; }
+.submenu-bg { background-color: #8B0000; }
+.menu-hr { background-color: #A41F1F; }
+.line { background-color: #CACACA; }

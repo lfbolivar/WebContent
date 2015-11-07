@@ -1,0 +1,284 @@
+<head>
+<style type="text/css">
+<!--
+********************* --><!--Inline Menu Section   --><!--********************* --><!--this first file csshover.htc is used in IE to fix hover over functionality -->body
+	{
+	behavior: url(csshover.htc);
+	font-size: 100%;
+	font-family: <?php echo $priv_body_font ?>;
+}
+
+ul {
+	float: left;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	font-family: <?php echo $priv_body_font ?>;
+}
+
+a {
+	float: left;
+	width: 6em;
+	text-decoration: none;
+	color: white;
+	background-color: purple;
+	padding: 0.2em 0.6em;
+	border-right: 1px solid white;
+	font-family: <?php echo $priv_body_font ?>;
+}
+
+.button {
+	float: right;
+	width: 6em;
+	text-decoration: none;
+	color: white;
+	background-color: purple;
+	padding: 0em 0.0em;
+	font-family: <?php echo $priv_body_font ?>; <!--
+	border-right: 0px solid white;
+	-->
+}
+
+a:hover {
+	background-color: #ff3300
+}
+
+input[type="submit"]:hover {
+	background-color: #e6fdc9
+}
+
+.button:hover {
+	background-color: #33ff00
+}
+
+li {
+	display: inline
+}
+</style>
+</head>
+
+<HTML>
+<TITLE>New Ad Form</TITLE>
+<body BACKGROUND="<?php echo ($priv_newad_bg_image) ?>"
+	BGCOLOR="#FFFFFF" TEXT="#66066" LINK="#000080" VLINK="#000080"
+	alink="#0000FF">
+<center>
+
+<FORM ACTION="<?php echo $_SERVER['PHP_SELF']?>" METHOD="POST"><!-- *******************************************************************************-->
+<!-- *** This is STEP-1 section of the table where the form captures User profile info  -->
+<!-- *******************************************************************************-->
+<table width="600" bgcolor="#660066" cellpadding="0" border="0"
+	colspan="0" cellspacing="0">
+	<!-- width='448' below 
+	<tr>
+		<td bgcolor="#000080" colspan="2" align="center">
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="600" height="104" id="banner" align="middle">
+				<param name="allowScriptAccess" value="sameDomain" />
+				<param name="movie" value="/ClassAds/banner.swf" />
+				<param name="quality" value="high" />
+				<param name="bgcolor" value="#ffffff" />
+				<embed src="<?php echo $url_home ?>banner.swf" quality="high" bgcolor="#ffffff" width="600" height="104" name="banner" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+			</object></td></tr> -->
+	<tr>
+		<td width="555" colspan="2" align="center"><font
+			face="arial,helvetica" size="3" color="WHITE"><b><?php echo $MsgTitle ?></b></td>
+	</tr>
+	</font>
+	<tr>
+		<td width="555" colspan="2" bgcolor="#F1F1F9" align="left"><font
+			FACE="arial,helvetica" size="2"> <? echo ($MsgType) ?></td>
+	</tr>
+	<tr>
+		<td width="555" colspan="2" bgcolor="#F1F1F9" align="center"><font
+			color="#660066" FACE="arial,helvetica"><br></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font
+			FACE="arial,helvetica"> <? echo ($msg1) ?></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font
+			FACE="arial,helvetica"> <? echo ($msg2) ?></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font color="#660066"
+			FACE="arial,helvetica"><br></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><font face="arial,helvetica" size="2"
+			color="WHITE"> STEP-1 Please provide your contact information...</font></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><font color="#660066"
+			FACE="arial,helvetica"><br></td>
+	</tr>
+	<tr>
+		<td colspan="1" width="180" bgcolor="#F1F1F9" align="center"><font
+			face="arial, helvetica" size="2"> <b>First Name </b></td>
+		<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><INPUT
+			TYPE=text NAME=first VALUE="<?echo $first?>">*</font></td>
+	</tr>
+	<tr>
+		<td colspan="1" width="180" bgcolor="#F1F1F9" align="center"><font
+			face="arial, helvetica" size="2"> <b>Last Name </b></td>
+		<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><INPUT
+			TYPE=text NAME=last VALUE="<?echo $last?>">*</font></td>
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9"><br>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="1" width="180" bgcolor="#F1F1F9" align="center"><font
+			face="arial, helvetica" size="2"> <b>Street Address</b></td>
+		<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><input
+			type=text name=addr1 size="50" VALUE="<?echo $addr1?>"></font></td>
+	</tr>
+	<tr>
+		<td colspan="1" width="180" bgcolor="#F1F1F9" align="right"><font
+			face="arial, helvetica" size="2">
+		<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><font
+			face="arial, helvetica" size="2"> <input type=text name=addr2
+			size="50" VALUE="<?echo $addr2?>"></font></td>
+	
+	</tr>
+	<tr>
+		<td colspan="1" width="180" bgcolor="#F1F1F9" align="right"><font
+			face="arial, helvetica" size="2">
+		<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><font
+			face="arial, helvetica" size="2"> <input type=text name=addr3
+			size="50" VALUE="<?echo $addr3?>"></font></td>
+	
+	</tr>
+	<tr>
+		<td colspan="2" bgcolor="#F1F1F9"><br>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="1" width="180" bgcolor="#F1F1F9" align="right"></td>
+		<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><font
+			face="arial,helvetica" size="1"><i>(Displayed only if you select
+		"Yes" below)</i></font></td>
+	</tr>
+	<tr>
+		<td colspan="1" width="180" bgcolor="#F1F1F9" align="center"><font
+			face="arial, helvetica" size="2"> <b>City and State</b></td>
+		<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><font
+			face="arial, helvetica" size="2"> <input type=text name=city
+			size="28" VALUE="<?echo $city?>"> <input type="text" name=state
+			size="1" maxlength="2" VALUE="<?echo $state?>"> <input type=text
+			name=zip size="50" VALUE="<?echo $zip ?>"></td>
+	</tr>
+	<tr>
+		<td colspan="1" width="180" bgcolor="#F1F1F9" align="center"><font
+			face="arial, helvetica" size="2"> <b>Country</b></td>
+		<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><font
+			face="arial, helvetica" size="2"> <input type=text name=country
+			size="50" VALUE="<?echo $country?>"></font></td>
+	</tr>
+	<tr>
+		<td colspan="1" width="180" bgcolor="#F1F1F9" align="center"><font
+			face="arial, helvetica" size="2"> <b>Phone</b></font></td>
+		<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><font
+			face="arial, helvetica" size="2"> <input type=text name=phone
+			size="28" VALUE="<?echo $phone?>"></td>
+		<tr>
+			<td colspan="2" bgcolor="#F1F1F9"><br>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="1" width="180" bgcolor="#F1F1F9" align="right"></td>
+			<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><font
+				face="arial, helvetica" size="2"> Do you wish to <b>display</b> your
+			<b>City, State, Phone</b> in the <b>AD</b>?</font></td>
+		</tr>
+		<tr>
+			<td colspan="1" width="180" bgcolor="#F1F1F9" align="right"></td>
+			<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><font
+				face="arial, helvetica" size="2"> <select name=citystphone size="1"
+				VALUE="<?echo $citystphone?>">
+				<? $showit = array(0 => No,1 => Yes);
+				foreach($showit as $v => $s)
+				{
+					//	echo "<OPTION";
+					if ($citystphone == $v)
+					{
+						echo "<option value='$v' SELECTED>$s</option>/n" ;
+						//	next($citystphone);
+					}
+					else
+					{
+						echo "<option value='$v'>$s</option>/n";
+					}
+				}
+				?>
+			</select> <font face="arial,helvetica" size="1"> <i>Recommend "Yes"
+			when selling, leasing, etc.</i></font></td>
+		</tr>
+		<tr>
+			<td colspan="2" bgcolor="#F1F1F9"><br>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="1" width="180" bgcolor="#F1F1F9" align="center"><font
+				face="arial,helvetica" size="2"> <b>E-Mail</b></td>
+			<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><input
+				type="text" name=email size="40" maxlength="40"
+				VALUE="<?echo $email?>" readonly>* </font></td>
+		</tr>
+		<tr>
+			<td colspan="1" width="180" bgcolor="#F1F1F9" align="right"></td>
+			<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><font
+				face="arial, helvetica" size="1">(<i>12 characters max </i>)</font>
+			<tr>
+				<td colspan="1" width="180" bgcolor="#F1F1F9" align="center"><font
+					face="arial, helvetica" size="2"> <b>Password</b></td>
+				<td colspan="1" width="375" bgcolor="#F1F1F9" align="left"><input
+					type="password" name=pass size="40" maxlength="32"
+					VALUE="<?echo $password?>" readonly>*</td>
+			</tr>
+			<tr>
+				<td colspan="2" bgcolor="#F1F1F9"><br>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" width="555" align="center"><font
+					face="arial,helvetica" size="2" color="WHITE"> Once your
+				modifications are made click on the <b>Update Contact</b> button
+				below...<font></i></td>
+			</tr>
+			<tr>
+				<td colspan="2" bgcolor="#F1F1F9"><br>
+
+</table>
+<table width="600" bgcolor="#660066" cellpadding="0" border="0"
+	colspan="0" cellspacing="0">
+	<tr>
+		<td colspan="1" width=400 " bgcolor="#F1F1F9" align="left">
+		<ul>
+			<li><a href="Member.php">Cancel</a></li>
+			<li><a href="ViewMyAd.php">My Ads</a></li>
+			<li><a href="../pophelp/postad.html">Help</a></li>
+		
+		</td>
+		<td colspan="1" width="155" bgcolor="#F1F1F9"><br>
+		<INPUT TYPE=submit name="newAdForm" value="Update Contact">
+		</ul>
+		</td>
+	</tr>
+	<tr>
+		<td width="555" colspan="2" align="center"><font
+			face="arial,helvetica" size="1" color="WHITE"><b>Bolitech.com 2005-<?php echo date("Y") ?></b></td>
+	</tr>
+	</font>
+	<tr>
+		<td width="555" colspan="2" align="center"><font
+			face="arial,helvetica" size="1" color="WHITE"><b>newAdForm.html</b></td>
+	</tr>
+	</font>
+</table>
+</FORM>
+</center>
+</BODY>
+</HTML>
