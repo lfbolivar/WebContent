@@ -4,22 +4,22 @@ global $_hostname;
 $_hostname = "localhost";			// Host name
 
 global $_session_user;
-$_session_user = $_SERVER['DB_USER'];	// Mysql username
+$_session_user = 'lfbolivar';	// Mysql username
 // echo ($_SERVER['DB_USER']."\n");
 
 global $_session_pass;
-$_session_pass = $_SERVER['DB_PASS'];	// Mysql password
+$_session_pass = 'Tereb!nth';	// Mysql password
 // echo ($_SERVER['DB_PASS']."\n");
 
 global $_session_db_name;
-$_session_db_name = "lbolivar_session";	// Database name
+$_session_db_name = 'mamp_session';	// Database name
 
 global $_session_tbl_name;
-$_session_tbl_name = "sessions";				// member Table name
+$_session_tbl_name = 'sessions';	// member Table name
 
 global $_connection;
 $_connection = mysqli_init();
-if (!mysqli_real_connect($_connection ,$_hostname,$_session_user,$_session_pass,$_session_db_name))
+if (!mysqli_real_connect($_connection , $_hostname, $_session_user, $_session_pass, $_session_db_name))
 {
 	die ("Failed _open() @mysqli_connect");
 }
@@ -30,9 +30,9 @@ if (!mysqli_select_db($_connection,$_session_db_name))
 
 // these are session variables that control the GC garbage collection time
 // must be set via root logon.
-//ini_set(‘session.gc_maxlifetime’,30);
-//ini_set(‘session.gc_probability’,1);
-//ini_set(‘session.gc_divisor’,1);
+//ini_set(ï¿½session.gc_maxlifetimeï¿½,30);
+//ini_set(ï¿½session.gc_probabilityï¿½,1);
+//ini_set(ï¿½session.gc_divisorï¿½,1);
 
 // connect to sessions db and start session
 require_once("sessionHandler.php");

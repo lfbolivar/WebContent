@@ -4,7 +4,7 @@
 //  If they are not logged in they are redirected to the login page.
 
 //  Local config allows for dynamic definition of file paths and single point for private paths
-include "Config.php";
+include_once "Config.php";
 
 // Sets path for files and start session.
 require PRIVATE_SESSION."sessionConfig.php";

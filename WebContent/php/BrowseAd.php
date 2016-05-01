@@ -28,8 +28,9 @@ $CatBody = "Category";
 // Aggregate select query groups by Category (5) and sums Open un-expired ADs (3).
 
 $OpenAds = mysqli_query($link, "SELECT CatId, CatDesc, CatImage, min(IAdCatId),count(*) FROM ".$tbl_name5."
-			left join ".$tbl_name3." on CatId = iAdCatId
-			 and dtAdExpireDate > now() and tiAdValid <> 0 group by 1,2,3 order by 2") or die('-BrowseAd.php- '.mysqli_error().'');
+			left outer join ".$tbl_name3." on CatId = iAdCatId group by 1,2,3 order by 2")
+			// and dtAdExpireDate > now() and tiAdValid <> 0 group by 1,2,3 order by 2") 
+             or die('-BrowseAd.php- '.mysqli_error().'');
 // Loop and display each category
 //	echo ($DispInfo['vchAdCategory']);
 //	$Cat = $DispInfo['CatDesc'];
