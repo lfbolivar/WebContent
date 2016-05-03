@@ -19,4 +19,11 @@
 	<natures>
 		<nature>org.eclipse.php.core.PHPNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>README.md</name>
+			<type>1</type>
+			<location>/Users/Fernando/Documents/2015/Projects/WebContent/README.md</location>
+		</link>
+	</linkedResources>
 </projectDescription>
