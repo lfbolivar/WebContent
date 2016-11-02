@@ -3,6 +3,13 @@
 </div> 
 <!--  closes the div class=left  -->
 	</div> 
+
+<!--  div that defines error modal window similar to the loginmodal form  -->
+<div id="errormodal" style="display:none;">
+  	<h3>Error Message</h3>
+   		<div class="err"><?php echo $message ?>
+        </div>    
+</div>
 <div id="loginmodal" style="display:none;">
   	<h1>User Login</h1>
   	<form id="loginform" name="Logon" method="post" action="Logon.php" >
@@ -21,14 +28,19 @@
 <div class="footer">Copyright <?php echo date("Y")?> by <?php echo $domain ?> </div>
 <!-- Closes div class=container -->
 </div>
-<script type="text/javascript">
-	$(function(){
-/*  $('#loginform').submit(function(e){
-    return false;
-  });
-*/ 
-	$('#modaltrigger').leanModal({ top: 110, overlay: 0.45, closeButton: ".hidemodal" });
-});
+	<script type="text/javascript">
+/*	 	$(document).ready(function() {
+        	 $( "#errormodal" ).dialog();
+    	});
+
+	$('#loginmodal').submit(function(e){
+			return false;
+		});
+*/
+		$(function(){
+			$('#modaltrigger').leanModal({ top: 110, overlay: 0.45, closeButton: ".hidemodal" });
+		});
+
 </script>
 </body>
 </html>

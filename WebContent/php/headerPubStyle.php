@@ -1,14 +1,15 @@
 <?php
+//  Start of headerPubStyle.php   //
 //  Local config allows for dynamic definition of file paths and single point for private paths
-include "Config.php";
+include "setConfig.php";
 
 /*** set the content type header ***/
 /*** Without this header, it wont work ***/
 header("Content-type:text/css");
 ?>
-<!-- ********************* -->
-<!-- Inline Menu Section   -->
-<!-- ********************* -->
+<!-- /***************************/ -->
+<!-- /** Inline Menu Section ****/ -->
+<!-- /***************************/ -->
 <!-- this first file csshover.htc is used in IE to fix hover over functionality 
 colors	#000080=dark blue
 		#F1F1F9=medium gray
@@ -16,9 +17,9 @@ colors	#000080=dark blue
 		#e6fdc9=lime green
 		#660066=magenta
 		#ff3300=bright red -->
-<!-- ********************** Page Master Section Public Gallery ************* -->
-<!-- *** Container consists of Header, Left Menu Pane, and Footer            -->
-<!-- *** Main section of the master template and its primary configurations  -->
+<!-- /********************** Page Master Section Public Gallery        *************/ -->
+<!-- /*** Container consists of Header, Left Menu Pane, and Footer         *********/ -->
+<!-- /*** Main section of the master template and its primary configurations *******/ -->
 body{
 	background-image:url('<?=$pub_browseAd_bg_image?>');
 	color:black;
@@ -50,8 +51,7 @@ div.header h1{
 <!--  /******************** Left block Menu Section  *********************/ -->
 <!--  /******************** Left block Menu Section  *********************/ -->
 <!--  /******************** Left block Menu Section  *********************/ -->
-div.left{
-<!--  position:fixed;  -->	
+div.left {
  	display:block; 	
 	border-right:1px white;	
 	float:left;
@@ -69,10 +69,11 @@ div.left p {
 	width:250px;
 }
 div.left ul{
-	position:fixed;
+	position:fixed; 
+ 	display:block; 	
 	height:100%;
 	float:left;
-	width:25%;
+	width:5%;
 	padding-left:1em;
 	margin:0;
 	list-style-type:none;
@@ -121,6 +122,7 @@ div.content{
 	float:left;
 	position:relative;
 	top:-130px;
+	width:600px;
 	}
 div.content h2{
 	color:#000080;
@@ -162,7 +164,7 @@ div.content td.b a{
 	vertical-align:middle;
  	margin:0;
 	float:none;
-<!-- width:6em; -->
+<!--/* width:6em; */-->
 	text-decoration:none;
 	text-align:center;
 }
@@ -236,6 +238,13 @@ div.desc{
 div.hide{
 	display:none;
 }
+div.err{
+	display:block;
+	font-size:1.1em; 
+	font-weight:bold; 
+	color:#c70039; 
+	margin-bottom:3px;
+}
 /** modal window styles **/
 #lean_overlay{
     position:fixed;
@@ -246,6 +255,17 @@ div.hide{
     width:100%;
     background:#000;
     display:none;
+}
+#errormodal{
+  width:600px;
+  padding:15px 20px;
+  background:#fdfefe ;
+  -webkit-border-radius:6px;
+  -moz-border-radius:6px;
+  border-radius:6px;
+  -webkit-box-shadow:0 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow:0 1px 5px rgba(0, 0, 0, 0.5);
+  box-shadow:0 1px 5px rgba(0, 0, 0, 0.5);
 }
 #loginmodal{
   width:300px;

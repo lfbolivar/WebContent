@@ -1,6 +1,6 @@
 <?php
 //  Local config allows for dynamic definition of file paths and single point for private paths
-include "Config.php";
+include "setConfig.php";
 
 // Connects to your Database
 //  Include the db connection script from non public_html location

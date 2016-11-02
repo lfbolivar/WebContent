@@ -1,5 +1,5 @@
 <!-- Start of category.html -->
-<form action="AdDetail.php" method="post">
+<form action="Details.php" method="post">
 	<div class="img">
 		<input type="image"
 			value="<? echo($Headline) ?>"
@@ -8,6 +8,7 @@
 			width="<?echo(THMBWIDTH) ?>"
 			height="<?echo(THMBHEIGHT) ?>"
 			style="opacity:0.6;filter:alpha(opacity = 60)"
+			title="<? echo ($Caption) ?>"
 			onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100"
 			onmouseout="this.style.opacity=0.6;this.filters.alpha.opacity=60" />
 		<!-- <a target="_blank" href="http://www.bolitech.com/ClassAds/php/category.php?<?//echo ($CatCount[0]) ?>">
@@ -17,7 +18,7 @@
 		<div class="hide">
 			<input type="text" name="AdNbr" value="<? echo($ImageId)?>"></div>
 		<div class="desc"><? echo ($Id) ?></div>
-		<div class="desc"><? echo ($Caption) ?></div>
+		<!-- <div class="desc"><? echo ($Caption) ?></div> -->
 		<div class="desc"><? echo ($Headline) ?></div>
 <!-- This closes div class=img -->
 	</div>

@@ -5,7 +5,7 @@
 // If everything is OK it adds the user to the database, if not it returns the appropriate error.
 // If the form has not been submitted, they are shown the registration form, which collects the email and password.
 //  Local config allows for dynamic definition of file paths and single point for private paths
-include "Config.php";
+require_once "setConfig.php";
 
 //  If they are not logged in they are redirected to the login page.
 // Sets path for files and start session.

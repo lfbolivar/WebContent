@@ -1,12 +1,11 @@
 <?php
 //  Start of headerPrivStyle.php   //
 //  Local config allows for dynamic definition of file paths and single point for private paths
-include "Config.php";
+include "setConfig.php";
 
 /*** set the content type header ***/
 /*** Without this header, it wont work ***/
 header("Content-type:text/css");
-//<style type="text/css">
 ?>
 <!-- ********************* -->
 <!-- Inline Menu Section   -->
@@ -20,91 +19,65 @@ colors	#000080=dark blue
 		#ff3300=bright red -->
 <!-- ********************** Page Template section ********************* -->
 <!-- ******************** Private Gallery image settings  ********************* -->
-body{
+<!-- *** Main section of the master template and its primary configurations  -->
+body {
 	background-image:url('<?=$priv_myAd_bg_image?>');	
 	color:#660066;
 	font-size:100%;
-	margin-right:80px;
-	margin-left:80px; 	
-	clear:both;
-<!--  background-color:#FFFFFF;  -->	
+	margin-right:20px;
+	margin-left:20px; 	
+	background-color:white;
 	behavior:url(csshover.htc);
 }
-div.container{
+div.container {
 	background-color:<?=$priv_container_color?>; 
 	width:80%;
 	margin-left:10%;
 <!--  border:1px <?=$pub_container_color?>; -->	
 	line-height:150%;
 }
-div.header, div.footer{
+div.header, div.footer {
 	padding:0.2em;
 	color:white;
 	background-color:<?=$priv_header_color?>;
 	font-family:<?=$priv_header_font?>;
-	clear:left;
 	text-align:center;
+	clear:left;
 }
-div.header h1{
+div.header h1 {
 	padding:0;
 	margin:0;
 }
-div.content{
-	margin-left:250px;
-	margin-top:10px;
-	padding-left:5em;
-	font-family:<?=$priv_header_font?>;
-	float:left;
-	position:relative;
-	top:-130px;
-/* <!-- border-left:1px<?=$pub_container_color?>;   --> */		
-}
-div.content h2{
-	color:#660066;
-	width:100%;
-	margin:10px;
-}
-div.content2{
-	margin-left:270px;
-	margin-top:10px;
-	position:relative;
-	float:left;
-	top:70px;
-	padding:1em;
-	font-family:<?=$pub_header_font?>;
-	top:-130px;
-}
-div.content2 h3{
-	color:red
-	}
-<!-- ******************** Left  Menu pane     ********************* -->
-<!-- ******************** Left  Menu pane     ********************* -->
-<!-- ******************** block Menu Section  ********************* -->
-div.left{
-	background-color:#F1F1F9;
+<!-- /******************** Left  Menu pane     *********************/ -->
+<!-- /******************** Left  Menu pane     *********************/ -->
+<!-- /******************** block Menu Section  *********************/ -->
+div.left {
 	display:block;
 	border-right:1px white;	
 	float:left;
 	width:250px;
 	height:100%;
 	margin:0;	
-	padding:1em;
+	padding-left:1em;
+	padding-right:1em;
 	font-family:<?=$priv_header_font?>;
 	background-color:#F1F1F9;
 }
 div.left p {
 	padding:0;
+	padding-bottom:10px;
 	margin:10px;
 	width:250px;
 	font-family:<?=$priv_header_font?>;
 	color: #660066;
 }
-div.left ul{
-	position:fixed;
+div.left ul {
+  	position:fixed; 
+ 	display:block; 	
 	height:100%;
 	border-right:"1px white";	
 	float:left;
-	width:25%;
+ 	width:150px; 
 	padding-left:1em;
 	margin:0;
 	list-style-type:none;
@@ -115,10 +88,10 @@ div.left li {
 	float:left;
 	margin:0;
 	width:250px;
-	padding:0;
+	padding:2;
 	color:#660066;
 }
-div.left a{
+div.left a {
 	float:left;
 	width:8em;
 	text-decoration:none;
@@ -141,6 +114,39 @@ div.left a:hover {
 div.left a:active{
 	color:white;
 }
+<!--  /******************** Content Section  *********************/ -->
+<!--  /******************** Content Section  *********************/ -->
+<!--  /******************** Content Section  *********************/ -->
+div.content{
+	margin-left:250px;
+	margin-top:10px;
+	padding-left:5em;
+	font-family:<?=$priv_header_font?>;
+	float:left;
+	position:relative;
+	top:-130px;
+	width:600px;
+<!-- /* border-left:1px<?=$pub_container_color?>;  */ -->		
+}
+div.content h2{
+	color:#660066;
+	width:100%;
+	margin:10px;
+}
+div.content2{
+	margin-left:270px;
+	margin-top:10px;
+	position:relative;
+	float:left;
+	top:70px;
+	padding:1em;
+	font-family:<?=$pub_header_font?>;
+	top:-130px;
+}
+div.content2 h3{
+	color:red
+	}
+
 div.url{
 	margin-left:0px;
 <!-- padding:1em; --> 
@@ -163,13 +169,13 @@ div.url a:hover{
 <!-- ******************** Table settings for MyGallery.php and My  ***********  -->
 table {
 	background-color: #F1F1F9;
-	color:white;
+	color:#F1F1F9;
 	width:700px;
 	cellpadding: 0;
+	border-color:#F1F1F9;
 }
 th {
 	background-color: #660066;
-	color: white;
 }
 td.a {
 	background-color: #000080;
@@ -183,7 +189,7 @@ td.a {
 }
 td.b {
 	background-color: #F1F1F9;
-	border-color: #660066;
+	border-color: #F1F1F9;
 	color: #660066;
 	font-size: 100%;
 	font: 15px arial, helvetica
@@ -232,7 +238,7 @@ div.desc{
 div.hide{
 	display:none;
 }
-<!-- /** modal window styles for User Logon  **/   -->
+<!-- /** modal window styles for User Logon  **/ -->
 #lean_overlay{
     position:fixed;
     z-index:100;
@@ -299,4 +305,51 @@ div.hide{
   -moz-box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.15), 0 0 7px #96c7ec;
   box-shadow:inset 0 1px 2px rgba(0, 0, 0, 0.15), 0 0 7px #96c7ec;
 }
-<!-- End of headerPrivStyle.php -->
+
+<!--  /******************** New TAB Section  *********************/ -->
+<!--  /******************** New TAB Section  *********************/ -->
+<!--  /******************** New TAB Section  *********************/ -->
+<!-- /* Style the list */ -->
+div.tabmenu ul.tab {
+	display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    width: 505px;
+    height: 30px;
+    position:relative;
+    background-color: #F1F1F9; 
+}
+
+<!-- /* Float the list items side by side */ -->
+div.tabmenu ul.tab li {
+	float: left;
+	width:130px
+	}
+
+<!-- /* Style the links inside the list items */ -->
+div.tabmenu ul.tab li a {
+    color: black;
+    text-align: center;
+    padding: 6px 8px;
+    text-decoration: none;
+    transition: 0.3s;
+    font-size: 14px;
+    border-top-right-radius: 1em;
+}
+
+<!-- /* Change background color of links on hover */ -->
+div.tabmenu ul.tab li a:hover {background-color: #ddd;}
+
+<!-- /* Create an active/current tablink class */ -->
+div.tabmenu ul.tab li a:focus, .active {background-color: #ccc;}
+
+<!-- /* Style the tab content */ -->
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}
+<!-- /* End of headerPrivStyle.php */ -->

@@ -1,17 +1,15 @@
 <?php
 //  Local config allows for dynamic definition of file paths and single point for private paths
-include "Config.php";
+require_once "class/Config.php";
+$objConfig = Config::getInstance();
+$PRIVATE_DB = $objConfig->get('PRIVATE_DB');
 
-// Connects to your Database
-//  Include the db connection script from non public_html location
-include PRIVATE_DB."dbConfig.php";
+//	This is a new db class that loads the category table
+require_once $this->priv_class_files.'db_category.php';
 
-$CatTable = mysqli_query($link, "SELECT CatId, CatDesc FROM ".$tbl_name5." order by 2") or die('-LoadCatArray.php- '.mysql_error().' LoadCatArray.php Error on Select of Category table.');
-while($CatRow = mysqli_fetch_array( $CatTable ))
-{
-	// Loop and display each item detail for given category
-	$options[$CatRow['CatId']] = $CatRow['CatDesc'];
-}
+$obj_category = new db_category($data);
+$options = $obj_category->read();
+//print_r($options);
 
 // Load the Period values dynamically to the control box on mydetails.html and newAdForm2.html
 $periodWk = array("7" => "1 week","14"=>"2 weeks","21"=>"3 weeks","28"=>"4 weeks");

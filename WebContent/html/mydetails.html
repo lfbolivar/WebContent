@@ -1,24 +1,29 @@
-<!-- Start of mydetails.html  -->
-<!-- ----------------------------------------------------------------------------  -->
-<!-- The first section contains display information as it appears on the Public Gallery.  -->
-<!-- ----------------------------------------------------------------------------  -->
-
-<!--
-<div class="img">
+<!-- Start of mydetails.html -->  
+<!-- ################################################################################## --> 
+<!-- The first section contains display information as it appears on the Public Gallery -->  
+<!-- ################################################################################## -->  
+<!--<div class="img">
 <img src="<?php echo ($sec_url_php) ?>DisplayImage.php?imageName=<?php echo($ImageId)?>" alt="Not Found" width="110" height="90"></img>
  <div class="desc"><?php echo ($Id) ?></div>
  <div class="desc"><?php echo ($Caption) ?></div>
- <div class="desc"><?php echo ($Headline) ?></div>  -->
+ <div class="desc"><?php echo ($Headline) ?></div>  
+//-->
+<div class="tabmenu">
+<ul class="tab">
+  <li><a href="javascript:void(0)" class="tablinks" onclick="openDetail(event, 'Headline')" id="defaultOpen">Headline</a></li>
+  <li><a href="javascript:void(0)" class="tablinks" onclick="openDetail(event, 'Content')">Content</a></li>
+  <li><a href="javascript:void(0)" class="tablinks" onclick="openDetail(event, 'Images')">Images</a></li>
+</ul>
+
+<div id="Headline" class="tabcontent">
 <table>
 	<tr>
-		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
-		<img
-			src="DisplayImage.php?imageName=<?php echo($ImageId)?>"
-			alt="Image Not Found"></img></td>
+		<td class=b colspan="2" align="center"><br />
+		<img src='DisplayImage.php?imageName=<?php echo($ImageId)?>' alt='Image Not Found'></td>
 	</tr>
 	<tr>
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
-		<b><?php echo ($Headline) ?></b></td>
+		<b><?php echo ($AdHeadline) ?></b></td>
 	</tr>
 	<tr>
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
@@ -26,22 +31,22 @@
 	</tr>
 	<tr>
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
-		<a href="<?php echo ($URL) ?>"><? echo ($URL) ?></a></td>
+		<a href="<?php echo ($URL) ?>"><? echo ($AdURL) ?></a></td>
 	</tr>
 	<tr>
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
-		<?php echo ($priv_content_desc.'# '.$Id) ?></td>
+		<?php echo ($this->_priv_content_desc.' #'.$Id) ?></td>
 	</tr>
 	<tr>
-		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">Gallery
-		Status: <?php echo ($AdActive) ?></td>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">
+		Gallery Status: <?php echo ($AdActive) ?></td>
 	</tr>
 	<tr>
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
 		Category: <?php echo ($Cat) ?></td>
 	</tr>
 	<tr>
-		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><?php echo ($Caption) ?></td>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><?php echo ($AdCaption) ?></td>
 	</tr>
 	<tr>
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
@@ -92,46 +97,39 @@
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
 		</td>
 	</tr>
-
-	<!-- ----------------------------------------------------------------------------  -->
-	<!-- The second section contains a form that allows updates to this specific  Ad.  -->
-	<!-- ----------------------------------------------------------------------------  -->
-	<FORM ACTION="MyAdUpdate.php" METHOD="POST"
-		name="myadupdate">
-	<tr>
-		<td colspan="2" bgcolor="#000080" align="center"><font
-			face="arial,helvetica" size="2" color="WHITE"> Please enter
-		modifications to your content information ...</font> <input
-			type="hidden" name="AdId" value="<?php echo $Id ?>" size="11"
-			maxlength="11"></td>
-	</tr>
+	</table>
+</div>
+<!-- ###########################################################################  -->
+<!-- The second section contains a form that allows updates to this specific  Ad. -->
+<!-- ############################################################################ -->
+<div id="Content" class="tabcontent">
+<FORM ACTION="MyAdUpdate.php" METHOD="POST" name="myadupdate">
+	<table>
+	<tr><td width="755" colspan="2" bgcolor="#000080" align="center">
+		<font face="arial,helvetica" size="2" color="WHITE">
+		Please enter modifications to your content information ...</font> 
+		<input type="hidden" name="AdId" value="<?php echo $Id ?>" size="11" maxlength="11"></td></tr>
 	<tr>
 		<td colspan="2" bgcolor="#F1F1F9" align="center"><font color="#000080"
 			FACE="arial,helvetica"> <br />
 		</font></td>
 	</tr>
 	<tr>
-		<td width="350" bgcolor="#F1F1F9" align="right"><font
-			face="arial, helvetica" size="2" color="#000080"> <b>Classified
-		Category </b></font></td>
-		<td width="350" bgcolor="#F1F1F9" align="left"><font
-			face="arial, helvetica" size="2" color="#000080"> <SELECT
-			NAME=AdCategory size="1">
-			<?php foreach($options as $category => $catdesc)
-			{
-				//	echo "<OPTION";
-				if ($AdCategory==$category)
-				{
+		<td width="350" bgcolor="#F1F1F9" align="right">
+		<font face="arial, helvetica" size="2" color="#000080">
+		 <b>Classified Category </b></font></td>
+		<td width="350" bgcolor="#F1F1F9" align="left">
+		<font face="arial, helvetica" size="2" color="#000080"> 
+		<SELECT NAME=AdCategory size="1">
+		<?php foreach($options as $category => $catdesc){
+				if ($AdCategory==$category){
 					echo "<option value=$category SELECTED>$catdesc</option> \n" ;
-					//	next($adcategory);
+				} else {
+					echo "<option value=$category >$catdesc</option> \n";
 				}
-				else
-				{
-					echo "<option value=$category>$catdesc</option> \n";
-				}
-			}?>
-		</SELECT></font> <font face="arial, helvetica" size="3"
-			color="#000080"> *</font></td>
+			   } ?>
+		</SELECT></font> 
+		<font face="arial, helvetica" size="3" color="#000080"> *</font></td>
 	</tr>
 	<tr>
 		<td colspan="2" bgcolor="#F1F1F9"><font color="#F1F1F9"></font></td>
@@ -140,8 +138,8 @@
 		<td colspan="1" width="300" bgcolor="#F1F1F9" align="right"><font
 			face="arial,helvetica" SIZE="2" color="#000080"> <b>How long should
 		your AD be displayed </b></font></td>
-		<td colspan="1" width="300" bgcolor="#F1F1F9" align="left"><select
-			size="1" name="AdPeriod">
+		<td colspan="1" width="300" bgcolor="#F1F1F9" align="left">
+		<select size="1" name="AdPeriod">
 			<?php foreach($periodWk as $per => $perdesc)
 			{
 				//	echo "<OPTION";
@@ -312,7 +310,7 @@
 			FACE="arial,helvetica"> <?php echo ($msg2) ?></font></td>
 	</tr>
 	<tr>
-		<td colspan="2" width=400 " bgcolor="#F1F1F9" align="center"><br />
+		<td colspan="2" bgcolor="#F1F1F9" align="center"><br />
 		<INPUT TYPE=submit name="myadupdate" value="Update"></td>
 	</tr>
 	<tr>
@@ -320,16 +318,21 @@
 			FACE="arial,helvetica"> <br />
 		</font></td>
 	</tr>
-	</form>
-	<!-- -----------------------------------------------------------------------------------------------------  -->
-	<!-- The third section contains a form that allows the upload of a new image file associated with the Ad.  -->
-	<!-- -----------------------------------------------------------------------------------------------------  -->
-	<FORM action="Upload.php" method="post"
-		enctype="multipart/form-data" name="upload"><!-- <FORM ACTION="Upload.php" METHOD="POST" name="upload">  -->
+</table>
+</form>
+</div>
+
+<!-- #################################################################################################### -->
+<!-- The third section contains a form that allows the upload of a new image file associated with the Ad. -->
+<!-- #################################################################################################### -->
+<div id="Images" class="tabcontent">
+<FORM action="Upload.php" method="post" enctype="multipart/form-data" name="upload">
+<!-- <FORM ACTION="Upload.php" METHOD="POST" name="upload">  -->
+	<table>
 	<tr>
-		<td width="755" colspan="2" align="center"><font
-			face="arial,helvetica" size="2" color="WHITE"> Please select an image
-		to upload and add to your <?php echo($priv_content_desc)?>(s)...</font></td>
+		<td width="755" colspan="2" bgcolor="#000080" align="center">
+		<font face="arial,helvetica" size="2" color="WHITE"> 
+		Please select an image to upload and add to your <?php echo($this->_priv_content_desc)?>(s)...</font></td>
 	</tr>
 	<tr>
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
@@ -353,17 +356,18 @@
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
 		</td>
 	</tr>
+	</table>
 	</FORM>
 
-	<!-- -----------------------------------------------------------------------------------------------------  -->
-	<!-- The fourth section contains a form that allows the deletion of the Ad or Image row.  -->
-	<!-- -----------------------------------------------------------------------------------------------------  -->
-	<FORM action="MyAdDelete.php"
-		method="post" enctype="multipart/form-data" name="delete">
+<!-- ################################################################################### -->
+<!-- The fourth section contains a form that allows the deletion of the Ad or Image row. -->
+<!-- ################################################################################### -->
+<FORM action="MyAdDelete.php" method="post" enctype="multipart/form-data" name="delete">
+	<table>
 	<tr>
-		<td colspan="2"  bgcolor="#000080" align="center"><font
-			face="arial,helvetica" size="2" color="WHITE"> Please select whether
-		to delete <?php echo($priv_content_desc)?> or image ...</font></td>
+		<td width="755" colspan="2"  bgcolor="#000080" align="center">
+		<font face="arial,helvetica" size="2" color="WHITE"> 
+		Please select whether to delete <?php echo($this->_priv_content_desc)?> or image ...</font></td>
 	</tr>
 	<tr>
 		<td colspan="1" bgcolor="#F1F1F9" align="right"><font color="#000080"
@@ -373,7 +377,7 @@
 			name="delete" type=submit class="box" id="delete" value="Delete" /></td>
 		<td colspan="1" bgcolor="#F1F1F9" align="left"><font color="#000080"
 			FACE="arial,helvetica"> <br />
-		<input type="radio" name="deltype" value="Ad"><?php echo ($priv_content_desc) ?><br />
+		<input type="radio" name="deltype" value="Ad"><?php echo ($this->_priv_content_desc) ?><br />
 		<input type="radio" name="deltype" value="Img">Image</font></td>
 	</tr>
 	<tr>
@@ -381,7 +385,34 @@
 			FACE="arial,helvetica"> <br />
 		</font></td>
 	</tr>
-	</form>
-</table>
+	</table>
+</form>
 </div>
+</div>
+<script>
+function openDetail(evt, tabName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+//Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+
+</script>
 <!-- End of mydetails.html -->

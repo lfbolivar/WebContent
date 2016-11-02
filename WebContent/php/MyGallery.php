@@ -1,6 +1,6 @@
 <?php
 //  Local config allows for dynamic definition of file paths and single point for private paths
-include "Config.php";
+require_once "setConfig.php";
 
 // require_once("config.php");
 include PRIVATE_DB."dbConfig.php";

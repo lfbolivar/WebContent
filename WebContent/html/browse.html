@@ -1,16 +1,18 @@
-<!-- Start of browseAd.html -->
+<!-- Start of browse.html -->
 <form action="Category.php" method="POST">
 	<div class="img"><!-- <a target="_blank" href="http://www.bolitech.com/ClassAds/php/Category.php"><img src="http://www.bolitech.com/ClassAds/images/fishingboat.jpg" alt="PlayaLosCabos.com" width="110" height="90"></a> -->
-		<input type="image" value="<? echo ($Cat) ?>" src="<? echo ($Image) ?>"
+		<input type="image" value="<? echo ($Cat) ?>" src="<? echo ($Image) ?>" 
 				name=category alt="<? echo ($imageName) ?>" width="<?echo(THMBWIDTH) ?>"
 				height="<?echo(THMBHEIGHT) ?>"
+				title="<? echo sprintf('%s [%u]',$Cat,$CatCount) ?>"
 				style="opacity:0.40; filter:alpha(opacity =40)"
 				onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100"
 				onmouseout="this.style.opacity=0.4;this.filters.alpha.opacity=40">
 		<div class="hide">
+			<p  title="<? echo ($CatDesc) ?>">
 			<input type="text" name=catid value="<? echo ($CatId) ?>">
 			<input type="text" name=catdesc value="<? echo ($Cat) ?>"></div>
-		<div class="desc"><? echo ($Cat.' ('.$CatCount.')') ?></div>
+		<!--  <div class="desc"><? echo sprintf("%s-%u",$Cat,$CatCount) ?></div>  -->
 
 	</div>
 </form>

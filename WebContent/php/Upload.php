@@ -1,6 +1,6 @@
 <?
 //  Local config allows for dynamic definition of file paths and single point for private paths
-include "Config.php";
+require_once "setConfig.php";
 
 //  If they are not logged in they are redirected to the login page.
 // Sets path for files and start session.
@@ -113,6 +113,11 @@ if(isset($_SESSION['ClassAdsEmail']))
 }
 else
 {
+	// Implement public header html code to produce page container
+	// Followup with logonMsg and allow user to submit credentials
+	include $sec_html_files.'pageHeader.html';
+	include $html_files.'pageHeaderMenu.html';
+	
 	//if the cookie does not exist, they are taken to the login screen
 	//header("Location: Login.php");
 	//echo ('Session does not exist: '.$_SESSION['ClassAdsEmail'].' PASS: '.$_SESSION['ClassAdsPassword'].'');
@@ -123,6 +128,7 @@ else
 	$Msg2= "Please re-establish credentials with Login.";
 	$button = "Login";
 	include $sec_html_files.'logonMsg.html';
+	include $sec_html_files.'pageFooter.html';
 	unset($_POST['submit']);
 	exit();
 }
