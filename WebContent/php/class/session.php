@@ -148,5 +148,5 @@ class Session {
 		session_destroy();
 		
 	}
-}  // End of session Class
 	
+}  // End of session Class

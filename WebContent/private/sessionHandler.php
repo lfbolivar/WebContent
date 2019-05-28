@@ -8,14 +8,15 @@ function _open($database_name, $table_name)
 	global $_session_pass;
 
 	$_connection = mysqli_init();
-	if (!mysqli_real_connect($_connection ,$_hostname,$_session_user,$_session_pass,$database_name))
+	if (!mysqli_real_connect($_connection ,$_hostname,$_session_user,$_session_pass,$database_name,8889))
 	{
-		die ("Failed _open() @mysqli_connect");
+		die ("Failed msqli_real_connect() ".$database_name);
+//	    trigger_error("Failed msqli_real_connect()", E_USER_ERROR);
 	}
-	if (!mysqli_select_db($_connection,$database_name))
-	{
-		die ("Failed _open() mysqli_select_db to ".$database_name);
-	}
+//	if (!mysqli_select_db($_connection,$database_name))
+//	{
+//		die ("Failed _open() mysqli_select_db to ".$database_name);
+//	}
 	global $session_table;
 	$session_table = $table_name;
 
@@ -68,7 +69,7 @@ function _write($id, $data)
 	global $_session_pass;
 
 	$_connection = mysqli_init();
-	if (!mysqli_real_connect($_connection ,$_hostname,$_session_user,$_session_pass,$_session_db_name))
+	if (!mysqli_real_connect($_connection ,$_hostname,$_session_user,$_session_pass,$_session_db_name,8889))
 	{
 		die ("Failed _open() @mysqli_connect");
 	}
@@ -118,6 +119,7 @@ function _clean($max)
 
 // ini_set('session.gc_probability', 50);
 // ini_set('session.save_handler', 'user');
+ini_set('session.save_path','mamp_session');
 
 session_set_save_handler('_open',
                          '_close',

@@ -8,7 +8,7 @@ class errHandler {
 	#  **************** ERROR MANAGEMENT ***************** #
 	
 	// Create the error handler:
-	function myErrorHandler($e_number, $e_message, $e_file, $e_line, $e_vars) {
+	function myErrorHandler($e_number, $e_message, $e_file, $e_line) {
 	
 		global $debug, $developer_email, $php_files, $html_files;
 	    
@@ -17,10 +17,10 @@ class errHandler {
         return;
         }
         
-		switch ($errno) {
+		switch ($e_number) {
 			case E_USER_ERROR:
 				$message = "<b>My ERROR</b> [$e_number] $e_message<br />\n";
-				$message .= "  Fatal error on line $errline in file $e_file";
+				$message .= "  Fatal error on line $e_line in file $e_file";
 				$message .= ", PHP " . PHP_VERSION . " (" . PHP_OS . ")<br />\n";
 				$message .= "Aborting...<br />\n";
 //				exit(1);
@@ -42,13 +42,13 @@ class errHandler {
 		// $message = 'An error: '.$e_number.', occured in the script '.$e_file.' on line '.$e_line.': '.$e_message;
 	
 		//  Append $e_vars to the $message:
-		$message .= print_r($e_vars, 1);
+		//$message .= print_r($e_vars, 1);
 	
 		if ($debug) {  
 			// Show the error
 			//echo '<div class="error">'.$message.'</div>';
    			//debug_print_backtrace();
-            $_Get['err'] = $message;
+            $_GET['err'] = $message;
 			
 		} else {
 	
@@ -72,11 +72,12 @@ class errHandler {
 //$old_error_handler = set_error_handler("myErrorHandler");
 
 //  Use my error handler:
-// set_error_handler(array("errHandler","MyErrorHandler"),E_ERROR);
-//set_error_handler("errHandler", "myErrorHandler");
+//set_error_handler(array("errHandler","myErrorHandler"),E_ERROR);
+//set_error_handler("errHandler", E_ALL);
 //$err = new errHandler();
 //$err->myErrorHandler($e_number, $e_message, $e_file, $e_line, $e_vars);
-
+$err = new errHandler();
+$err->myErrorHandler($e_number, $e_message, $e_file, $e_line);
 
 #  **************** ERROR MANAGEMENT ***************** #
 #  *************************************************** #

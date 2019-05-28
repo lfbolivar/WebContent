@@ -1,9 +1,18 @@
+<!--  -->
+<!-- Start of mycategory.html --> 
+<!--  --> 
 <div class="img">
 <form action="MyAdDetail.php" method="post">
 <input type="image"
 	value="<? echo($Headline) ?>"
-	src="DisplayImage.php?imageName=<?echo($ImageId)?>"
-	name="adnbr" alt="<? echo($imageName) ?>" width="110" height="90" /> 
+	src="DisplayImage.php?thmbImg=<?echo($ImageId)?>"
+	name="adnbr" alt="<? echo($imageName) ?>" 
+	width="<?echo(THMBWIDTH) ?>" 
+	height="<?echo(THMBHEIGHT) ?>"
+	style="opacity:0.6;filter:alpha(opacity = 60)"
+	title="<? echo ($Caption) ?>"
+	onmouseover="this.style.opacity=1;this.filters.alpha.opacity=100"
+	onmouseout="this.style.opacity=0.6;this.filters.alpha.opacity=60" /> 
 <!-- 
 <a target="_blank" href="http://www.playaloscabos.com/ClassAds/php/MyDetails.php?imageName=<? echo ($Id) ?>"> 
 <img src="http://www.playaloscabos.com/ClassAds/php/DisplayImpage.php?imageName=" alt="PlayaLosCabos.com" width="110" height="90"></a></img> 
@@ -11,8 +20,8 @@
 <div class="hide"><input type="text" name=myAd value="<? echo ($Id) ?>"></div>
 <div class="hide"><input type="text" name=myImage
 	value="<? echo ($ImageId) ?>"></div>
-<div class="desc"><? echo ("Ad# ".$Id) ?></div>
-<div class="desc"><? echo ($AdStatus)?"Active":"Inactive" ?></div>
+<div class="desc"><? echo ($Id) ?></div>
+<div class="desc"><? echo ($AdActive)?></div>
 <div class="desc"><? echo ($Caption) ?></div>
 <div class="desc"><? echo ($Headline) ?></div>
 </form>

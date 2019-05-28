@@ -14,6 +14,7 @@ class db_category implements iCRUD {
 	private $_dbUser = NULL;
 	private $_dbPass = NULL;
 	private $_dbName = NULL;
+	private $_dbPort   = NULL;
 	private $_dbCategory = NULL;
 //	private $_dbAd = NULL;
 
@@ -27,9 +28,11 @@ class db_category implements iCRUD {
 		$this->_dbPass     =$data['pass'];
 		$this->_dbName     =$data['name'];
 		$this->_dbCategory =$data['table5'];
+		$this->_dbPort     =$data['port'];
+		
 
 		// Connects to the Database provided
-		$this->mysqli = new mysqli($this->_dbHost,$this->_dbUser,$this->_dbPass,$this->_dbName) or
+		$this->mysqli = new mysqli($this->_dbHost,$this->_dbUser,$this->_dbPass,$this->_dbName,$this->_dbPort) or
 		die('db_category '.$this->_dbName.' Connection error: '.mysqli_connect_error().' ');
 		$this->mysqli->select_db($this->_dbName) or
 		die('db_category '.$this->_dbName.' mysqli_select_db error: '.mysqli_error($this->mysqli).' ');

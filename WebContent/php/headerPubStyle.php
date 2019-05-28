@@ -232,7 +232,7 @@ div.img a:hover{
 div.desc{
 	text-align:center;	
 	font-weight:normal;
-	width:<?=THMBWIDTH?>px;
+<!--  /*	width:<?=THMBWIDTH?>px; */ -->
 	margin: 1px;
 }
 div.hide{

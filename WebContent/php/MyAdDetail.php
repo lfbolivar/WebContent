@@ -48,23 +48,28 @@ if(isset($session_vars['sessionEmail'])) {
 }
 else
 {
-	// Implement public header html code to produce page container
-	// Followup with logonMsg and allow user to submit credentials
-	include $sec_html_files.'pageHeader.html';
-	include $html_files.'pageHeaderMenu.html';
+	/*
+	 * Implement public header html code to produce page container
+	 * Followup with logonMsg and allow user to submit credentials
+	 */
+	$params = array();
+	$params['modal'] = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Logon</a>';
 	
-	//if the session does not exist, you are taken to the login screen
 	//header("Location: Login.php");
 	//echo ('Session does not exist: '.$_SESSION['ClassAdsEmail'].' PASS: '.$_SESSION['ClassAdsPassword'].'');
-	$MsgTitle = "MY Ad Details";
-	$redirect = "Logout.php";
-	$MsgType = "MyAdDetail.php Warning:";
-	$Msg1 = "User name and password sesssion lost";
-	$Msg2= "Please re-establish credentials with Login.";
-	$button = "Logon";
-	include $sec_html_files.'logonMsg.html';
-	include $sec_html_files.'pageFooter.html';
+	$params['MsgTitle'] = "MY Ad Details";
+	$params['redirect'] = "Logout.php";
+	$params['MsgType'] = "MyAdDetail.php Warning:";
+	$params['Msg1'] = "User name and password sesssion lost";
+	$params['Msg2']= "Please re-establish credentials with Logon.";
+	$params['button'] = "Logon";
+	
 	unset($_POST['submit']);
-	exit();
+	
+	require_once 'class/user.php';
+	
+	$obj_user = new User();
+	$obj_user->timed_out($params);
+
 }
 ?>

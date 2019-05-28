@@ -10,14 +10,17 @@ require 'dbConfig_params.php';
 
 class db_user implements iCRUD {
 	
-	private $_dbHost = NULL;
-	private $_dbUser = NULL;
-	private $_dbPass = NULL;
-	private $_dbName = NULL;
-	private $_dbTable = NULL;
+	private $_dbHost	= NULL;
+	private $_dbUser	= NULL;
+	private $_dbPass	= NULL;
+	private $_dbName	= NULL;
+	private $_dbPort    = NULL;
+
+	private $_tbMember	= NULL;
+	private $_tbUser	= NULL;
 	
-	private $_userID = NULL;
-	private $_userEmail = NULL;
+	private $_userID	= NULL;
+	private $_userEmail	= NULL;
 /*
  * __contruct Funtion/Method to initialize database and establish connection to MySQL
  */	 
@@ -27,11 +30,13 @@ class db_user implements iCRUD {
 		$this->_dbUser =$data['user'];
 		$this->_dbPass =$data['pass'];
 		$this->_dbName =$data['name'];
-		$this->_dbTable=$data['table'];
+		$this->_tbMember=$data['table1'];
+		$this->_tbUser	=$data['table2'];
 		$this->_userEmail =$data['semail'];
+		$this->_dbPort    =$data['port'];
 		
 		// Connects to the Database provided
-		$this->mysqli = new mysqli($this->_dbHost,$this->_dbUser,$this->_dbPass,$this->_dbName) or
+		$this->mysqli = new mysqli($this->_dbHost,$this->_dbUser,$this->_dbPass,$this->_dbName,$this->_dbPort) or
 			die('MySQL DB '.$this->_dbName.' Connection error: '.mysqli_connect_error().' ');
 		$this->mysqli->select_db($this->_dbName) or
 			die('MySQL DB '.$this->_dbName.' mysqli_select_db error: '.mysqli_error($this->mysqli).' ');
@@ -55,8 +60,19 @@ class db_user implements iCRUD {
 	 * Function/Method to read user row by email key passed by __construct()
 	 */
 	function read(){
-		$check = $this->mysqli->query("SELECT * FROM ".$this->_dbTable."
-											WHERE vchEmail = '$this->_userEmail'")
+		$check = $this->mysqli->query("SELECT vchFirstName
+				                             ,vchLastName
+				                             ,vchEmail
+				                             ,vchPassword
+				                       FROM ".$this->_tbUser."
+									   WHERE vchEmail = '$this->_userEmail'
+				                       Union all
+				                       SELECT 'Member'
+				                             ,'Name'
+				                             ,vchEmail
+				                             ,vchPassword
+				                       FROM ".$this->_tbMember."
+									   WHERE vchEmail = '$this->_userEmail'")
 				or die("select user mysql error -1- : ".mysqli_error($this->mysqli));
 				
 				// Gives error if user doesn't exist

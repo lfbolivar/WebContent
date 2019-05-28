@@ -50,6 +50,6 @@ $mime->setHTMLBody($html);
 $body = $mime->get();
 $hdrs = $mime->headers($hdrs);
 
-$mail =& Mail::factory('mail','-f '.$regemailaddr);
-$mail->send($to, $hdrs, $body);
+@$mail =& Mail::factory('mail','-f '.$regemailaddr);
+@$mail->send($to, $hdrs, $body);
 ?>

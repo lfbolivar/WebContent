@@ -8,7 +8,9 @@ require $priv_app_files.'sysParams/dbConfig_params.php';
 $db_host     = $host_param;			// Host name 
 $db_username = $db_username_param;	// Mysql username 
 $db_pass = $db_pass_param;	// Mysql password 
-$db_name  = $db_name_param;	// Database name 
+$db_name  = $db_name_param;	// Database name
+$db_port = $db_port_param;
+
 $tbl_name = "member";				// member Table name
 $tbl_name2 = "user";				// user Table name
 $tbl_name3 = "ad";					// advertisement Table name
@@ -22,10 +24,12 @@ $data = ["host"   => $host_param,			// Host name
          "user"   => $db_username_param,	// Mysql username
          "pass"   => $db_pass_param,	    // Mysql password
          "name"   => $db_name_param,	    // Database name
-         "table"  => $tbl_name2,			// user Table name
+		 "table1" => $tbl_name1,			// member Table name
+		 "table2" => $tbl_name2,			// user Table name
          "table3" => $tbl_name3,			// ad Table name
          "table4" => $tbl_name4,			// image Table name
-         "table5" => $tble_name5			// category table name
+         "table5" => $tbl_name5,				// category table name
+         "port" => $db_port_param
 		];		
 
 // Connects to the ClassAds Database 

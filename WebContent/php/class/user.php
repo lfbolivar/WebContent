@@ -6,13 +6,20 @@
  * Class User
  * 
  * The class contains basic (min) attributes related to the application user table
- * - __construct()
  * 
- * The class contains x methods:
+ * The User class contains x methods:
+ * - __construct()
+ * - register_user_session() TBD
  * - logon_session_found()
  * - logon_session_NOTfound()
- * - adminUser()
- * - logoutUser()
+ * - logout_user()
+ * - timed_out($params)
+ * 
+ * The Member class extends User and provides x methods:
+ * - member_session_found()
+ * - member_request_to_post_content()
+ * 
+ * The Admin class extends User and provides x methods:
  */
 
 class User {	
@@ -31,6 +38,7 @@ class User {
 	private $user_vchPassword		= NULL;
 	private $user_vchEmail			= NULL;
 	private $user_dtRegistered		= NULL;
+	private $params					= NULL;
 	
 /*
  *
@@ -38,7 +46,7 @@ class User {
  *
  * 
  */
-	function __construct($session_vchEmail, $session_vchPassword, $session_dtRegistered ){
+	function __construct($session_vchEmail, $session_vchPassword, $session_dtRegistered){
 		
 		$this->user_vchEmail =$session_vchEmail;
 		$this->user_vchPassword =$session_vchPassword;
@@ -49,6 +57,7 @@ class User {
 
 		$this->priv_class_files      = $objConfig->get('priv_class_files');
 		$this->sec_html_files        = $objConfig->get('sec_html_files');
+		$this->sec_php_files         = $objConfig->get('sec_php_files');
 		$this->html_files            = $objConfig->get('html_files');
 		$this->pub_header_title      = $objConfig->get('pub_header_title');
 		$this->pub_welcome_message   = $objConfig->get('pub_welcome_message');
@@ -275,8 +284,8 @@ class User {
 
 		// Since session was destroyed above allow the user to re-logon.
 		$objConfig = Config::getInstance();
-		$this->modal = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Logon</a>';
-		$objConfig->set('modal', $this->modal);
+		$modal = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Logon</a>';
+		$objConfig->set('modal', $modal);
 		
 		//  Sets path for files and delete session.
 		//  Sets path for files, start session and get session variables if they exist.
@@ -287,8 +296,8 @@ class User {
 		
 		// Implement public header html code to produce page container
 		// Followup with logonMsg and allow user to submit credentials
-		include $this->sec_html_files.'pageHeader2.html';
-		include $this->html_files.'pageHeaderMenu.html';
+		require $this->sec_html_files.'pageHeader2.html';
+		require $this->html_files.'pageHeaderMenu.html';
 		
 		$MsgTitle = "Logout.php";
 		$redirect = "Logon.php";
@@ -298,40 +307,70 @@ class User {
 		$Msg2= "Click the Logon button in the left pane to re-establish your session";
 		$button = "Logon";
 		//include $html_files.'pageBodyPrivate.html';
-		include $this->sec_html_files.'logonNew.html';
-		include $this->html_files.'pageFooter.html';
+		require $this->sec_html_files.'logonNew.html';
+		require $this->html_files.'pageFooter.html';
 		unset($_POST['logon']);
 		exit();
 		
+	}
+	/*
+	 * The timed_out() method will allow recovery from a session reaching timeout
+	 */
+	function timed_out($params){
+	
+		$domain 				= $this->_domain;
+		$pub_header_title 		= $this->pub_header_title;
+		$pub_welcome_message 	= $this->pub_welcome_message;
+		$pub_welcome_message2 	= $this->pub_welcome_message2;
+		
+		$modal 		= $params['modal'];
+	
+		// Implement private header html code to produce page container
+		// Followup with custom menu for the member view
+		require $this->sec_html_files.'pageHeader2.html';
+		require $this->html_files.'pageHeaderMenu.html';
+	
+		$MsgTitle 	= $params['MsgTitle'];
+		$MsgType 	= $params['MsgType'];
+		$Msg1 		= $params['Msg1'];
+		$Msg2 		= $params['Msg2'];
+
+		require $this->sec_html_files.'logonMsg.html';
+		require $this->html_files.'pageFooter.html';
+		exit();
+	
 	}
 	
 }
 /*
  * Class Member extends User
- * 
+ *
  * The class contains x methods:
- */  
+ */
 class Member extends User {
-		
+
+/*
+ * Method to check open session user and redirect to ToolBox
+ */
 	function member_session_found(){
-		
+	
 		$domain = $this->_domain;
-		
+	
 		// New config class allows for dynamic/abstract definition of file paths and
 		// Singleton Pattern access to public and private set paths
-		
+	
 		require_once $this->priv_class_files.'db_user.php';
 		$data['semail']=$this->user_vchEmail;
-		
+	
 		$fetch = new db_user($data);
 		$u_logonName = $fetch->read();
-		
+	
 		if ($this->user_vchPassword != $u_logonName['logonPass']){
-
+	
 			$pub_header_title = $this->pub_header_title;
 			$pub_welcome_message = $this->pub_welcome_message;
 			$pub_welcome_message2 = $this->pub_welcome_message2;
-				
+	
 			//echo('-Member.php-  Incorrect password match, please try again, pass: '.$sessionPass.' vchPass: '.$info['vchPassword'].'');
 			//echo('-Member.php- Session password did not match: '.$_SESSION['ClassAdsEmail'].' PASS: '.$_SESSION['ClassAdsPassword']."");
 			$redirect = "Logout.php";
@@ -339,23 +378,23 @@ class Member extends User {
 			$Msg1 = "Incorrect password match with stored session";
 			$Msg2= "Click Login button below.";
 			$button = "Login";
-			include $sec_html_files.'logonMsg.html';
-			include $sec_html_files.'pageFooterPrivate.html';
+			require $this->sec_html_files.'logonMsg.html';
+			require $this->sec_html_files.'pageFooterPrivate.html';
 			unset($_POST['logout']);
 			exit();
 		}
 		//otherwise they are shown the admin or main application area/page and the DB session is stored and committed.
 		else {
-
+	
 			$priv_header_title = $this->priv_header_title;
 			$priv_welcome_message = $this->priv_welcome_message;
 			$priv_welcome_message2 = $this->priv_welcome_message2;
-				
+	
 			// Implement private header html code to produce page container
 			// Followup with custom menu for the member view
-			include $this->sec_html_files.'pageHeaderPrivate.html';
-			include $this->html_files.'pageMemberMenu.html';
-			
+			require $this->sec_html_files.'pageHeaderPrivate.html';
+			require $this->html_files.'pageMemberMenu.html';
+	
 			// session_write_close();
 			// echo ('-Member.php- Session found: '.$_SESSION['ClassAdsEmail'].' PASS: '.$_SESSION['ClassAdsPassword'].'');
 			// echo ('logonName: '.$_SESSION['ClassAdsLogonName']."\n");
@@ -370,19 +409,97 @@ class Member extends User {
 			}
 			$Msg1 = "If you want to publish content in the ".$localregion;
 			$Msg2 = "Place an ad here for FREE!!!.  Click on 'Post'";
-			include $this->sec_html_files.'member.html';
-			include $this->sec_html_files.'pageFooterPrivate.html';
+			require $this->sec_html_files.'member.html';
+			require $this->sec_html_files.'pageFooterPrivate.html';
 			exit();
 		}
-	} //  End member_sessio_found()	
-}
+	} //  End member_sessio_found() method
+	
+	/*
+	 * Method to check open session member or user when attempting to add new content.
+	 */
+	function member_request_to_post_content(){
+		
+		$domain = $this->_domain;
+		
+		// New config class allows for dynamic/abstract definition of file paths and
+		// Singleton Pattern access to public and private set paths
+		
+		require_once $this->priv_class_files.'db_member.php';
+		$member = array();
+		$data['semail']=$this->user_vchEmail;
+		$member['semail']=$this->user_vchEmail;
+		
+		$obj_db_member = new db_member($data, $member);
+		$member = $obj_db_member->read();
+		
+		if ($this->user_vchPassword != $member['vchPassword']) {
+			// Implement private header html code to produce page container
+			// Followup with custom menu for the member view
+			require $this->sec_html_files.'pageHeaderPrivate.html';
+			require $this->html_files.'pageMemberMenu.html';
+				
+			//echo('-Member.php-  Incorrect password match, please try again, pass: '.$sessionPass.' vchPass: '.$info['vchPassword'].'');
+			//header("Location: Login.php");
+			//echo ('-Member.php- Session password did not match: '.$_SESSION['ClassAdsEmail'].' PASS: '.$_SESSION['ClassAdsPassword']."");
+			$redirect = "Logout.php";
+			$MsgType = "Member.php Warning:";
+			$Msg1 = "Incorrect password match with stored session";
+			$Msg2= "Click Login button below.";
+			$button = "Logon";
+			require $this->sec_html_files.'logonNew.html';
+			require $this->sec_html_files.'pageFooterPrivate.html';
+			unset($_POST['logout']);
+			exit();
+		} else {
+/*
+			// Now that we found a member record let's see if we have a user and greet him/her on second page of NewAd process
+			$check2 = mysqli_query($link, "SELECT * FROM ".$tbl_name2." WHERE vchEmail = '$sessionEmail'")or die('-Member.php- '.mysqli_error().'');
+			//$info2 = mysqli_fetch_array( $check2 )
+			while($info2 = mysqli_fetch_array( $check2 ))
+			{
+*/
+			// otherwise they are shown the New Advertisement area
+			// Now that we found a member record let's see if we have a user and greet him/her on second page of NewAd process
+			//	echo (' member '.$info2['vchPassword']);
+			// New config class allows for dynamic/abstract definition of file paths and
+			// Singleton Pattern access to public and private set paths
+			
+			require_once $this->priv_class_files.'db_user.php';
+			$data['semail']=$this->user_vchEmail;
+			
+			$obj_db_user = new db_user($data);
+			$user_data = $obj_db_user->read();
+				
+			if ($this->user_vchPassword == $user_data['vchPassword']) {
+				//load existing user information with greeting on page to of NewAd process and capture classified data
+				$first = $user_data['vchFirstName'];
+				$last = $user_data['vchLastName'];
+				$AdUserName = $first.' '.$last;
+				include $this->sec_php_files.'NewAdForm2.php';
+				exit();
+			}
+//			}
+			//echo ('-Member.php- Session found: '.$_SESSION['ClassAdsEmail'].' PASS: '.$_SESSION['ClassAdsPassword'].'');
+			//echo ("Admin Area<p>");
+			//echo ("Your Content<p>");
+			//echo ("<a href=Logout.php>Logout</a>");
+			$email = $this->user_vchEmail;
+			$password = $this->user_vchPassword;
+			include $this->sec_php_files.'NewAdForm.php';
+			exit();
+		}
+	}	// ends check_if_member_exists() method
+		
+}	// ends Member class
+
 
 /*
  * Class Admin extends User
  *
  * The class contains x methods:
  */
-class Admin extends Member {
+class Admin extends User {
 	
 }
 

@@ -3,7 +3,15 @@
  * Author: LF Bolivar
  * Created: 10/16/2016
  *
- * Class db_ad_image_join
+ * Class db_gallery
+ * 
+ * Methods:
+ * __construct($data)
+ * join_category_ad()
+ * join_ad_image()
+ * join_details()
+ * display_gallery_image($img)
+ * 
  */
 //  Local config allows for dynamic definition of file paths and single point for private paths
 require 'dbConfig_params.php';
@@ -15,40 +23,48 @@ class db_gallery {
 	private $_dbUser	= NULL;
 	private $_dbPass	= NULL;
 	private $_dbName	= NULL;
+	private $_dbPort    = NULL;
+	
+	private $_tbMember  = NULL;
 	private $_tbUser	= NULL;
 	private $_tbImage	= NULL;
 	private $_tbAd		= NULL;
 	private $_tbCategory= NULL;
 	
-	private $_catid		= NULL;
-	private $_ad		= NULL;
-	private $_FileId	= NULL;
+	private $_catid		= Null;
+	private $_ad		= Null;
+	private $_FileId	= Null;
 	
-	private $ImageArray 		= NULL;
-	private $ImageIdArray		= NULL;
-	private $IdArray 			= NULL;
-	private $DescArray 			= NULL;
-	private $AdArray 			= NULL;
-	private $URLArray 			= NULL;
-	private $CaptionArray 		= NULL;
-	private $HeadlineArray 		= NULL;
-	private $AdDateArray 		= NULL;
-	private $AdExDateArray 		= NULL;
-	private $AdModDateArray		= NULL;
-	private $AdDescArray 		= NULL;
-	private $AdValidArray 		= NULL;
-	private $UserFirstNameArray = NULL;
-	private $UserLastNameArray 	= NULL;
-	private $EmailArray 		= NULL;
-	private $Addr1Array 		= NULL;
-	private $Addr2Array 		= NULL;
-	private $Addr3Array 		= NULL;
-	private $CityArray 			= NULL;
-	private $StateArray 		= NULL;
-	private $PhoneArray			= NULL;
-	private $CountryArray 		= NULL;
-	private $HideArray 			= NULL;
-	private $ZipArray 			= NULL;
+/* First pass or first layer at Category-to-Ad level */
+	private $ImageArray 		= array();
+	private $IdArray 			= array();
+	private $DescArray 			= array();
+	private $CountArray 		= array();
+	private $AdArray 			= array();
+
+/*  Second pass or drill-down layer 2 at Ad-Image level */
+	private $ImageIdArray		= array();
+	private $URLArray 			= array();
+	private $CaptionArray 		= array();
+	private $HeadlineArray 		= array();
+	
+	private $AdDateArray 		= array();
+	private $AdExDateArray 		= array();
+	private $AdModDateArray		= array();
+	private $AdDescArray 		= array();
+	private $AdValidArray 		= array();
+	private $UserFirstNameArray = array();
+	private $UserLastNameArray 	= array();
+	private $EmailArray 		= array();
+	private $Addr1Array 		= array();
+	private $Addr2Array 		= array();
+	private $Addr3Array 		= array();
+	private $CityArray 			= array();
+	private $StateArray 		= array();
+	private $PhoneArray			= array();
+	private $CountryArray 		= array();
+	private $HideArray 			= array();
+	private $ZipArray 			= array();
 	
 
 	function __construct($data) {
@@ -57,20 +73,29 @@ class db_gallery {
 		$this->_dbUser		=$data['user'];
 		$this->_dbPass		=$data['pass'];
 		$this->_dbName		=$data['name'];
-		$this->_tbUser		=$data['table'];
+		$this->_dbPort      =$data['port'];
+		
+		$this->_tbMember	=$data['table1'];
+		$this->_tbUser		=$data['table2'];
 		$this->_tbAd		=$data['table3'];
 		$this->_tbImage		=$data['table4'];
 		$this->_tbCategory	=$data['table5'];
 		
-		$this->_catid		=$data['catid'];
-		$this->_ad			=$data['ad'];
-		$this->_FileId		=$data['FileId'];
+		if (isset($data['catid'])){
+		  $this->_catid		=$data['catid'];
+		}
+		if (isset($data['ad'])){
+		  $this->_ad			=$data['ad'];
+		}
+		if (isset($data['FileId'])){
+		  $this->_FileId		=$data['FileId'];
+		}
 		
 		// Connects to the Database provided
-		$this->mysqli = new mysqli($this->_dbHost,$this->_dbUser,$this->_dbPass,$this->_dbName) or
+		$this->mysqli = new mysqli($this->_dbHost,$this->_dbUser,$this->_dbPass,$this->_dbName,$this->_dbPort) or
 		die('db_category_ad_join '.$this->_dbName.' Connection error: '.mysqli_connect_error().' ');
 		$this->mysqli->select_db($this->_dbName) or
-		die('db_category_ad_join '.$this->_dbName.' mysqli_select_db error: '.mysqli_error($this->mysqli).' ');
+		die('db_category_ad_join '.$this->_dbName.' mysqli_select_db error: '.mysqli_error($this->mysqli));
 
 		// Internal UTF-8
 		$this->mysqli->query ( "SET NAMES 'utf8'" );
@@ -95,7 +120,7 @@ class db_gallery {
 				                       FROM ".$this->_tbCategory."
 			                           left outer join ".$this->_tbAd." 
 				                       on  CatId = iAdCatId
-				                       and dtAdExpireDate > now() 
+				                       and date(dtAdExpireDate) > curdate()
 				                       and tiAdValid <> 0 
 				                       group by 1,2,3 
 				                       order by 2")
@@ -107,40 +132,35 @@ class db_gallery {
 						return 0;
 					} else {
 						$result = array();
-						$ImageArray = "";
-						$IdArray = "";
-						$DescArray = "";
-						$CountArray = 0;
-						$AdArray = "";
 	
 						while($info = $check->fetch_array()){
 							// Loop and load each category to Category Array
 							//	echo ($info['vchAdCategory'])
-							if (empty($ImageArray)){
+							if (empty($this->ImageArray)){
 								//$result['CatImageArray'] = $info['CatImage'];
-								$ImageArray = array($info['CatImage']);
-								$IdArray    = array($info['CatId']);
-								$DescArray  = array($info['CatDesc']);
-								$CountArray = array($info['count(*)']);
-								$AdArray    = array($info['min(IAdCatId)']);
+								$this->ImageArray = array($info['CatImage']);
+								$this->IdArray    = array($info['CatId']);
+								$this->DescArray  = array($info['CatDesc']);
+								$this->CountArray = array($info['count(*)']);
+								$this->AdArray    = array($info['min(IAdCatId)']);
 							}
 							else{
-								array_push($ImageArray, $info['CatImage']);
-								array_push($IdArray, $info['CatId']);
-								array_push($DescArray, $info['CatDesc']);
-								array_push($CountArray, $info['count(*)']);
-								array_push($AdArray, $info['min(IAdCatId)']);
+								array_push($this->ImageArray, $info['CatImage']);
+								array_push($this->IdArray, $info['CatId']);
+								array_push($this->DescArray, $info['CatDesc']);
+								array_push($this->CountArray, $info['count(*)']);
+								array_push($this->AdArray, $info['min(IAdCatId)']);
 							}
 	
 							//$result['logonName'] = $info['vchFirstName']." ".$info['vchLastName'];
 							//$result['logonPass'] = $info['vchPassword'];
 							//$result['logonEmail']= $info['vchEmail'];
 						}
-						$result['ImageArray'] = $ImageArray;
-						$result['IdArray']    = $IdArray;
-						$result['DescArray']  = $DescArray;
-						$result['CountArray'] = $CountArray;
-						$result['AdArray']    = $AdArray;
+						$result['ImageArray'] = $this->ImageArray;
+						$result['IdArray']    = $this->IdArray;
+						$result['DescArray']  = $this->DescArray;
+						$result['CountArray'] = $this->CountArray;
+						$result['AdArray']    = $this->AdArray;
 	
 						return $result;
 					}
@@ -161,7 +181,7 @@ class db_gallery {
 				                       FROM ".$this->_tbAd." as A
 							           left join ".$this->_tbImage." as I 
 				                       on A.iAdId = I.iFileAdId
-				                       WHERE (dtAdExpireDate > now()
+				                       WHERE (date(dtAdExpireDate) > curdate()
 				                       and iAdCatId = '$this->_catid'
 				                       and tiAdValid <> 0)
 				                       or A.iAdId = 0")
@@ -172,57 +192,52 @@ class db_gallery {
 					return 0;
 				} else {
 					$result = array();
-					$ImageArray = "";
-					$ImageIdArray = 0;
-					$IdArray = "";
-					$DescArray = "";
-					$CountArray = 0;
-					$AdArray = "";
-					$URLArray = "";
-					$CaptionArray = "";
-					$HeadlineArray = "";
 	
 					while($info = $check->fetch_array()){
 						// Loop and load each category to Category Array
 						//	echo ($info['vchAdCategory'])
-						if (empty($ImageArray)){
-							$ImageArray = array($info['iAdId']);
-							$ImageIdArray = array($info['iFileID']);
-							$IdArray = array($info['iAdCatId']);
-							$DescArray = array($info['vchAdDesc']);
-							// $CountArray = array($info['count(*)']);
-							$AdArray = array($info['iAdId']);
-							$URLArray = array($info['vcAdURL']);
-							$CaptionArray = array($info['vchAdCaption']);
-							$HeadlineArray = array($info['vchAdHeadLine']);
+						if (empty($this->ImageArray)){
+							$this->ImageArray    = array($info['iAdId']);
+							$this->IdArray       = array($info['iAdCatId']);
+							$this->DescArray     = array($info['vchAdDesc']);
+							// $this->CountArray = array($info['count(*)']);
+							$this->AdArray       = array($info['iAdId']);
+							// Second pass
+							$this->ImageIdArray  = array($info['iFileID']);
+							$this->URLArray      = array($info['vcAdURL']);
+							$this->CaptionArray  = array($info['vchAdCaption']);
+							$this->HeadlineArray = array($info['vchAdHeadLine']);
+							$this->AdExDateArray = array($info['dtAdExpireDate']);
 						}
 						else{
 							// Loop and display each item detail for given category
-							array_push($ImageArray, $info['iAdId']);
-							array_push($ImageIdArray, $info['iFileID']);
-							array_push($IdArray, $info['iAdCatId']);
-							array_push($DescArray, $info['vchAdDesc']);
-							// array_push($CountArray, $info['count(*)']);
-							array_push($AdArray, $info['iAdId']);
+							array_push($this->ImageArray,      $info['iAdId']);
+							array_push($this->IdArray,         $info['iAdCatId']);
+							array_push($this->DescArray,       $info['vchAdDesc']);
+							// array_push($this->CountArray,   $info['count(*)']);
+							array_push($this->AdArray,         $info['iAdId']);
 							//$AdArray[] = $info['vchUserEmail'];
 							// echo 'vma-$email='.$info['vchUserEmail'];
-							array_push($URLArray, $info['vcAdURL']);
-							array_push($CaptionArray, $info['vchAdCaption']);
-							array_push($HeadlineArray, $info['vchAdHeadLine']);
+							array_push($this->ImageIdArray,    $info['iFileID']);
+							array_push($this->URLArray,        $info['vcAdURL']);
+							array_push($this->CaptionArray,    $info['vchAdCaption']);
+							array_push($this->HeadlineArray,   $info['vchAdHeadLine']);
+							array_push($this->AdExDateArray,   $info['dtAdExpireDate']);
 						}
 					}
 					// print_r($ImageIdArray);
-					$result['ImageArray']	= $ImageArray;
-					$result['ImageIdArray']	= $ImageIdArray;
-					$result['IdArray']		= $IdArray;
-					$result['DescArray']	= $DescArray;
-					//$result['CountArray']	= $CountArray;
-					$result['AdArray']		= $AdArray;
-	
-					$result['URLArray']		= $URLArray;
-					$result['CaptionArray']	= $CaptionArray;
-					$result['HeadlineArray']= $HeadlineArray;
-	
+					$result['ImageArray']	= $this->ImageArray;
+					$result['IdArray']		= $this->IdArray;
+					$result['DescArray']	= $this->DescArray;
+					//$result['CountArray']	= $this->CountArray;
+					$result['AdArray']		= $this->AdArray;
+					//Second pass
+					$result['ImageIdArray']	= $this->ImageIdArray;
+					$result['URLArray']		= $this->URLArray;
+					$result['CaptionArray']	= $this->CaptionArray;
+					$result['HeadlineArray']= $this->HeadlineArray;
+					$result['AdExDateArray']= $this->AdExDateArray;
+					
 					return $result;
 				}
 				//return $qry_param;
@@ -236,14 +251,16 @@ class db_gallery {
 		// Aggregate select query groups by Ad(table3) and displays images from image(table4) using a join 
         // and checking ExpireDate > then today.
 		// and dtAdExpireDate > now() and tiAdValid <> 0 group by 1,2,3 order by 2")
-		$check = $this->mysqli->query("SELECT A.*, I.*, C.*, U.* FROM ".$this->_tbAd." A
-							left join ".$this->_tbImage." I on A.iAdId = I.iFileAdId
-			    		and $this->_FileId = I.iFileId
-			    		left join ".$this->_tbCategory." C on A.iAdCatId = C.CatId
-							left join ".$this->_tbUser." U on A.vchUserEmail = U.vchEmail
-			    		WHERE dtAdExpireDate > now() and $this->_ad = A.iAdId")
-			    or die("mysql error on db_gallery.php : ".mysqli_error($this->mysqli));
-			    
+		$check = $this->mysqli->query("SELECT A.*
+				                            , I.*
+				                            , C.*
+				                            , U.* 
+								       FROM ".$this->_tbAd." as A
+							            left join (".$this->_tbImage." as I,".$this->_tbCategory." as C,".$this->_tbUser." as U)
+		                                  on (I.iFileAdId=A.iAdId and C.CatId=A.iAdCatId and U.vchEmail=A.vchUserEmail)
+			    		                WHERE A.iAdId = $this->_ad and I.iFileID = $this->_FileId and date(A.dtAdExpireDate) > curdate()")
+		                          or die("mysql error from class=db_gallery() method=join_details(): ".mysqli_error($this->mysqli));
+		
 			    if ($check->num_rows == 0){
 			    	return 0;
 			    } else {
@@ -252,98 +269,139 @@ class db_gallery {
 			    	while($info = $check->fetch_array()){
 
 			    		// Loop and display each item detail for given category
-			    		if (empty($ImageArray)){
-			    			$ImageArray 		= array($info['iAdId']);
-			    			$ImageIdArray		= array($info['iFileID']);
-			    			$IdArray 			= array($info['iAdCatId']);
-			    			$DescArray 			= array($info['CatDesc']);
-			    			$AdArray 			= array($info['iAdId']);
-			    			$URLArray 			= array($info['vchAdURL']);
-			    			$CaptionArray 		= array($info['vchAdCaption']);
-			    			$HeadlineArray 		= array($info['vchAdHeadLine']);
-			    			$AdDateArray 		= array($info['dtAdDate']);
-			    			$AdExDateArray 		= array($info['dtAdExpireDate']);
-			    			$AdModDateArray		= array($info['tsAdModifyDate']);
-			    			$AdDescArray 		= array($info['vchAdDesc']);
-			    			$AdValidArray 		= array($info['tiAdValid']);
-			    			$UserFirstNameArray = array($info['vchFirstName']);
-			    			$UserLastNameArray 	= array($info['vchLastName']);
-			    			$EmailArray 		= array($info['vchUserEmail']);
-			    			$Addr1Array 		= array($info['vchAddress1']);
-			    			$Addr2Array 		= array($info['vchAddress2']);
-			    			$Addr3Array 		= array($info['vchAddress3']);
-			    			$CityArray 			= array($info['vchCity']);
-			    			$StateArray 		= array($info['vchState']);
-			    			$PhoneArray			= array($info['vchPhone']);
-			    			$CountryArray 		= array($info['vchCountry']);
-			    			$HideArray 			= array($info['tiHide_email']);
-			    			$ZipArray 			= array($info['vchZip']);
+			    		if (empty($this->ImageArray)){
+			    		    $this->ImageArray 		= array($info['iAdId']);
+			    		    $this->IdArray 			= array($info['iAdCatId']);
+			    		    $this->DescArray 		= array($info['CatDesc']);
+			    		    $this->AdArray 			= array($info['iAdId']);
+
+			    			//Second Pass - Drill-down level-2
+			    		    $this->ImageIdArray		= array($info['iFileID']);
+			    		    $this->URLArray 		= array($info['vchAdURL']);
+			    		    $this->CaptionArray 	= array($info['vchAdCaption']);
+			    		    $this->HeadlineArray 	= array($info['vchAdHeadLine']);
+
+			    			// Third pass - Drill-down level-3
+			    		    $this->AdDateArray 		= array($info['dtAdDate']);
+			    		    $this->AdExDateArray 	= array($info['dtAdExpireDate']);
+			    		    $this->AdModDateArray	= array($info['tsAdModifyDate']);
+			    		    $this->AdDescArray 		= array($info['vchAdDesc']);
+			    		    $this->AdValidArray 	= array($info['tiAdValid']);
+			    		    $this->UserFirstNameArray = array($info['vchFirstName']);
+			    		    $this->UserLastNameArray = array($info['vchLastName']);
+			    		    $this->EmailArray 		= array($info['vchUserEmail']);
+			    		    $this->Addr1Array 		= array($info['vchAddress1']);
+			    		    $this->Addr2Array 		= array($info['vchAddress2']);
+			    		    $this->Addr3Array 		= array($info['vchAddress3']);
+			    		    $this->CityArray 		= array($info['vchCity']);
+			    		    $this->StateArray 		= array($info['vchState']);
+			    		    $this->PhoneArray		= array($info['vchPhone']);
+			    		    $this->CountryArray 	= array($info['vchCountry']);
+			    		    $this->HideArray 		= array($info['tiHide_mail']);
+			    		    $this->ZipArray 		= array($info['vchZip']);
 			    			
 			    		}
 			    		else
 			    		{
 			    			// Loop and display each item detail for given category
-			    			array_push($ImageArray,			$info['iAdId']);
-			    			array_push($ImageIdArray, 		$info['iFileID']);
-			    			array_push($IdArray,			$info['iAdCatId']);
-			    			array_push($DescArray,			$info['CatDesc']);
-			    			array_push($AdArray,			$info['iAdId']);
-			    			array_push($URLArray,			$info['vchAdURL']);
-			    			array_push($CaptionArray,		$info['vchAdCaption']);
-			    			array_push($HeadlineArray,		$info['vchAdHeadLine']);
-			    			array_push($AdDescArray,		$info['vchAdDesc']);
-			    			array_push($AdDateArray,		$info['dtAdDate']);
-			    			array_push($AdExDateArray,		$info['dtAdExpireDate']);
-			    			array_push($AdModDateArray,		$info['tsAdModifyDate']);
-			    			array_push($AdDescArray,		$info['vchAdDesc']);
-			    			array_push($AdValidArray,		$info['tiAdValid']);
-			    			array_push($UserFirstNameArray,	$info['vchFirstName']);
-			    			array_push($UserLastNameArray,	$info['vchLasttName']);
-			    			array_push($EmailArray,			$info['vchUserEmail']);
-			    			array_push($Addr1Array,			$info['vchAddress1']);
-			    			array_push($Addr2Array,			$info['vchAddress2']);
-			    			array_push($Addr3Array,			$info['vchAddress3']);
-			    			array_push($CityArray,			$info['vchCity']);
-			    			array_push($StateArray,			$info['vchState']);
-			    			array_push($PhoneArray,			$info['vchPhone']);
-			    			array_push($CountryArray,		$info['vchCountry']);
-			    			array_push($HideArray,			$info['tiHide_email']);
-			    			array_push($ZipArray,			$info['vchZip']);
+			    		    array_push($this->ImageArray,	$info['iAdId']);
+			    		    array_push($this->IdArray,		$info['iAdCatId']);
+			    		    array_push($this->DescArray,	$info['CatDesc']);
+			    		    array_push($this->AdArray,		$info['iAdId']);
+
+			    		    //Second Pass - Drill-down level-2
+			    		    array_push($this->ImageIdArray, $info['iFileID']);
+			    		    array_push($this->URLArray,		$info['vchAdURL']);
+			    		    array_push($this->CaptionArray,	$info['vchAdCaption']);
+			    		    array_push($this->HeadlineArray,$info['vchAdHeadLine']);
+			    		    
+			    		    // Third pass - Drill-down level-3
+			    		    array_push($this->AdDateArray,	$info['dtAdDate']);
+			    		    array_push($this->AdExDateArray,$info['dtAdExpireDate']);
+			    		    array_push($this->AdModDateArray,$info['tsAdModifyDate']);
+			    		    array_push($this->AdDescArray,	$info['vchAdDesc']);
+			    		    array_push($this->AdValidArray,	$info['tiAdValid']);
+			    		    array_push($this->UserFirstNameArray,$info['vchFirstName']);
+			    		    array_push($this->UserLastNameArray,$info['vchLasttName']);
+			    		    array_push($this->EmailArray,	$info['vchUserEmail']);
+			    		    array_push($this->Addr1Array,	$info['vchAddress1']);
+			    		    array_push($this->Addr2Array,	$info['vchAddress2']);
+			    		    array_push($this->Addr3Array,	$info['vchAddress3']);
+			    		    array_push($this->CityArray,	$info['vchCity']);
+			    		    array_push($this->StateArray,	$info['vchState']);
+			    		    array_push($this->PhoneArray,	$info['vchPhone']);
+			    		    array_push($this->CountryArray, $info['vchCountry']);
+			    		    array_push($this->HideArray,	$info['tiHide_mail']);
+			    		    array_push($this->ZipArray,		$info['vchZip']);
 			    		}
 			    		 
 			    	}
 			    	// print_r($ImageIdArray);
-			    	$result['ImageArray']			= $ImageArray;
-			    	$result['ImageIdArray']			= $ImageIdArray;
-			    	$result['IdArray']				= $IdArray;
-			    	$result['DescArray']			= $DescArray;
-			    	$result['AdArray']				= $AdArray;
+			    	$result['ImageArray']			= $this->ImageArray;
+			    	$result['IdArray']				= $this->IdArray;
+			    	$result['DescArray']			= $this->DescArray;
+			    	$result['AdArray']				= $this->AdArray;
 			    	
-			    	$result['URLArray']				= $URLArray;
-			    	$result['CaptionArray']			= $CaptionArray;
-			    	$result['HeadlineArray']		= $HeadlineArray;
+			    	//Second Pass - Drill-down level-2
+			    	$result['ImageIdArray']			= $this->ImageIdArray;
+			    	$result['URLArray']				= $this->URLArray;
+			    	$result['CaptionArray']			= $this->CaptionArray;
+			    	$result['HeadlineArray']		= $this->HeadlineArray;
 
-			    	$result['AdDateArray']			= $AdDateArray;
-			    	$result['AdExDateArray']		= $AdExDateArray;
-			    	$result['AdModDateArray']		= $AdModDateArray;
-			    	$result['AdDescArray']			= $AdDescArray;
-			    	$result['AdValidArray']			= $AdValidArray;
-			    	$result['UserFirstNameArray']	= $UserFirstNameArray;
-			    	$result['UserLastNameArray']	= $UserLastNameArray;
-			    	$result['EmailArray']			= $EmailArray;
-			    	$result['Addr1Array']			= $Addr1Array;
-			    	$result['Addr2Array']			= $Addr2Array;
-			    	$result['Addr3Array']			= $Addr3Array;
-			    	$result['CityArray']			= $CityArray;
-			    	$result['StateArray']			= $StateArray;
-			    	$result['PhoneArray']			= $PhoneArray;
-			    	$result['CountryArray']			= $CountryArray;
-			    	$result['HideArray']			= $HideArray;
-			    	$result['ZipArray']				= $ZipArray;
+			    	// Third pass - Drill-down level-3
+			    	$result['AdDateArray']			= $this->AdDateArray;
+			    	$result['AdExDateArray']		= $this->AdExDateArray;
+			    	$result['AdModDateArray']		= $this->AdModDateArray;
+			    	$result['AdDescArray']			= $this->AdDescArray;
+			    	$result['AdValidArray']			= $this->AdValidArray;
+			    	$result['UserFirstNameArray']	= $this->UserFirstNameArray;
+			    	$result['UserLastNameArray']	= $this->UserLastNameArray;
+			    	$result['EmailArray']			= $this->EmailArray;
+			    	$result['Addr1Array']			= $this->Addr1Array;
+			    	$result['Addr2Array']			= $this->Addr2Array;
+			    	$result['Addr3Array']			= $this->Addr3Array;
+			    	$result['CityArray']			= $this->CityArray;
+			    	$result['StateArray']			= $this->StateArray;
+			    	$result['PhoneArray']			= $this->PhoneArray;
+			    	$result['CountryArray']			= $this->CountryArray;
+			    	$result['HideArray']			= $this->HideArray;
+			    	$result['ZipArray']				= $this->ZipArray;
 			    	
 			    	return $result;
 			    }
 			    //return $qry_param;
 	}
-
+	/*
+	 * Function/Method to display image thumbnail or maxsize_image
+	 * $rs = mysqli_query($link, "select vchFileType, bFileContent, bThumbnail from ".$tbl_name4." where iFileID = '$image'");
+	 * $row = mysqli_fetch_assoc($rs);
+	 *
+	 */
+	function display_gallery_image($img){
+	
+		$image 			= $img['iFileId'];
+		$check = $this->mysqli->query("SELECT * 
+	
+		                            FROM ".$this->_tbImage." 
+									WHERE iFileID = '$image'")
+				or die("mysql error from class=db_gallery() method=display_gallery_image(): ".mysqli_error($this->mysqli));
+	
+				// print_r("catid: ".$this->_catid);
+				if ($check->num_rows == 0){
+					return 0;
+				} else {
+					$result = array();
+					while($info = $check->fetch_array()){
+						$result['bFileContent'] = $info['bFileContent'];
+						$result['bThumbnail'] 	= $info['bThumbnail'];					
+						$result['vchFileType'] 	= $info['vchFileType'];
+						$result['fileName'] 	= $info['vchFileName'];
+						$result['tmpName']  	= $info['bFileContent'];   // Load to this name in case there is no thumbnail?
+						$result['fileSize'] 	= $info['iFileSize'];
+						$result['fileType'] 	= $info['vchFileType'];				
+					}
+					return $result;
+				}
+	}
+	
 }

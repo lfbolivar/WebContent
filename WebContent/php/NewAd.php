@@ -1,100 +1,61 @@
 <?php
-//  This code checks our session to make sure the user is logged in, the same way the login page did.
-//  If they are logged in, they are shown the AdNewForm area.
-//  If they are not logged in they are redirected to the login page.
+/*
+ * Created: 11/27/2016
+ * Author:  LF Bolivar
+ *
+ * New NewAd.php script to call new Content class and modularize the functions
+ * associated with updating content in the Ad table via the WorkBench toolbox.
+ *
+ */
 //  Local config allows for dynamic definition of file paths and single point for private paths
 require_once "setConfig.php";
+require $class_files.'user.php';
 
-//  If they are not logged in they are redirected to the login page.
-// Sets path for files and start session.
-require PRIVATE_SESSION."sessionConfig.php";
-session_start();
+//  Sets path for files and start session.
+//  Sets path for files, start session and get session variables if they exist.
+require_once 'class/session.php';
+$objSess = new Session(Null);
+$session_vars = $objSess->readSession();
 
-// Connects to your Database
-//  Include the db connection script from non html location
-include PRIVATE_DB."dbConfig.php";
+// First check if session was created and currently exists.
+if(isset($session_vars['sessionEmail'])) {
 
-// Checks session to make sure user is still logged in
-if(isset($_SESSION['ClassAdsEmail']))
-{
+	$sessionEmail 	= $session_vars['sessionEmail'];
+	$sessionPass 	= $session_vars['sessionPass'];
+	$logonName 		= $session_vars['sessionName'];
 
-	$sessionEmail = $_SESSION['ClassAdsEmail'];
-	$sessionPass= $_SESSION['ClassAdsPassword'];
-
-	$check = mysqli_query($link, "SELECT * FROM ".$tbl_name." WHERE vchEmail = '$sessionEmail'")or die('-Member.php- '.mysqli_error().'');
-	while($info = mysqli_fetch_array( $check ))
-	{
-		//	echo (' member '.$info['vchPassword']);
-		//if the cookie has the wrong password, they are taken to the login page
-		if ($sessionPass != $info['vchPassword'])
-		{
-			// Implement private header html code to produce page container
-			// Followup with custom menu for the member view
-			include $sec_html_files.'pageHeaderPrivate.html';
-			include $html_files.'pageMemberMenu.html';
-			
-			//echo('-Member.php-  Incorrect password match, please try again, pass: '.$sessionPass.' vchPass: '.$info['vchPassword'].'');
-			//header("Location: Login.php");
-			//echo ('-Member.php- Session password did not match: '.$_SESSION['ClassAdsEmail'].' PASS: '.$_SESSION['ClassAdsPassword']."");
-			$redirect = "Logout.php";
-			$MsgType = "Member.php Warning:";
-			$Msg1 = "Incorrect password match with stored session";
-			$Msg2= "Click Login button below.";
-			$button = "Logon";
-			include $sec_html_files.'logonNew.html';
-			include $sec_html_files.'pageFooterPrivate.html';
-			unset($_POST['logout']);
-			exit();
-		}
-		//otherwise they are shown the New Advertisement area
-		else
-		{
-			// Now that we found a member record let's see if we have a user and greet him/her on second page of NewAd process
-			$check2 = mysqli_query($link, "SELECT * FROM ".$tbl_name2." WHERE vchEmail = '$sessionEmail'")or die('-Member.php- '.mysqli_error().'');
-			//$info2 = mysqli_fetch_array( $check2 )
-			while($info2 = mysqli_fetch_array( $check2 ))
-			{
-				//	echo (' member '.$info2['vchPassword']);
-				if ($sessionPass == $info2['vchPassword'])
-				{
-					//load existing user information with greeting on page to of NewAd process and capture classified data
-					$first = $info2['vchFirstName'];
-					$last = $info2['vchLastName'];
-					$AdUserName = $first.' '.$last;
-					include $sec_php_files.'NewAdForm2.php';
-					exit();
-				}
-			}
-			//echo ('-Member.php- Session found: '.$_SESSION['ClassAdsEmail'].' PASS: '.$_SESSION['ClassAdsPassword'].'');
-			//echo ("Admin Area<p>");
-			//echo ("Your Content<p>");
-			//echo ("<a href=Logout.php>Logout</a>");
-			$email = $_SESSION['ClassAdsEmail'];
-			$password = $_SESSION['ClassAdsPassword'];
-			include $sec_php_files.'NewAdForm.php';
-			exit();
-		}
-	}
-}
-else
-{
-	// Implement private header html code to produce page container
-	// Followup with custom menu for the member view
-	include $sec_html_files.'pageHeader2.html';
-	include $html_files.'pageHeaderMenu.html';
+	// New content class allows for dynamic/abstract definition of file paths and
+	// Singleton Pattern access to public and private set paths
+	// if there is an active session, it it displays and empty content form
+	// Member extends User class and provides validation of existing login user
+	// Before displaying the Content Entry form in the Workbench window.
 	
-	//if the cookie does not exist, they are taken to the login screen
+	$obj_member = new Member($sessionEmail, $sessionPass, null);
+	$obj_member->member_request_to_post_content();
+
+} else {	
+	/*
+	 * Implement public header html code to produce page container
+	 * Followup with logonMsg and allow user to submit credentials
+	 */
+	$params = array();
+	$params['modal'] = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Logon</a>';
+	
 	//header("Location: Login.php");
 	//echo ('Session does not exist: '.$_SESSION['ClassAdsEmail'].' PASS: '.$_SESSION['ClassAdsPassword'].'');
-	$MsgTitle = "MEMBER";
-	$redirect = "Logout.php";
-	$MsgType = "Member.php Warning:";
-	$Msg1 = "User name and password sesssion lost";
-	$Msg2= "Please re-establish credentials by Login in.";
-	$button = "Login";
-	include $sec_html_files.'loginMsg.html';
-	include $html_files.'pageFooter.html';
+	$params['MsgTitle'] = "MEMBER";
+	$params['redirect'] = "Logout.php";
+	$params['MsgType'] = "Member.php Warning:";
+	$params['Msg1'] = "User name and password sesssion lost";
+	$params['Msg2']= "Please re-establish credentials with Logon.";
+	$params['button'] = "Logon";
+	
 	unset($_POST['submit']);
-	exit();
+	
+	require_once 'class/user.php';
+	
+	$obj_user = new User();
+	$obj_user->timed_out($params);
+	
 }
 ?>

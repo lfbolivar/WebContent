@@ -2,17 +2,17 @@
 #######################################################
 /*
  *  File Name: setConfig.php
- *  Created by: LF Bolivar
- *  Contact: lfbolivar@bolitec.org, bolitec.org
- *  Last Modified: Nov 8 2015
- *                 May 9 2016
- *  
- *  Configuration does the following things:
- *  - Has site settings in one location
- *  - Stores URLs and URIs as constants
- *  - Advanced configuration and security options 
- *
- */
+*  Created by: LF Bolivar
+*  Contact: lfbolivar@bolitec.org, bolitec.org
+*  Last Modified: Nov 8 2015
+*                 May 9 2016
+*
+*  Configuration does the following things:
+*  - Has site settings in one location
+*  - Stores URLs and URIs as constants
+*  - Advanced configuration and security options
+*
+*/
 require'class/Config.php';
 
 #  *************************************************** #
@@ -23,7 +23,7 @@ $objConfig = Config::getInstance();
 $developer_email = "webmaster@bolitec.org";
 
 //  Determine whether we are working on a local or production server
-$host = substr($_SERVER[HTTP_HOST], 0, 5);
+$host = substr($_SERVER['HTTP_HOST'], 0, 5);
 if (in_array($host, array('local', '127.0', '192.1'))){
 	$local = TRUE;
 } ELSE {
@@ -33,43 +33,63 @@ if (in_array($host, array('local', '127.0', '192.1'))){
 // Determine location of files and the URL of the site:
 // Allow development on different servers.
 if ($local){
-	
+
 	// Always debug when running locally:
 	$debug = TRUE;
-	
-    //  Save the domain and app name for loading system variables and master pages
-    //  Test system variables
-    $domain = 'bolitec.org';
-    $sec_domain = 'http://localhost:8888/WebContent/WebContent/';
+
+	//  Save the domain and app name for loading system variables and master pages
+	//  Test system variables
+	$domain = 'bolitec.org';
+	$sec_domain = 'http://localhost:8888/WebContent/';
 	$app_name = 'WebContent/';
-    $pub_path = '/Users/Fernando/Documents/2015/Projects/WebContent/WebContent/';
-    $priv_path = '/Users/Fernando/Documents/2015/Projects/WebContent/WebContent/private/';
-    
+	$pub_path = '/Users/Fernando/Documents/2015/Projects/WebContent/';
+	$priv_path = '/Users/Fernando/Documents/2015/Projects/WebContent/WebContent/private/';
+
+	$pub_header_color = "blue";  // Background color on header frame.
+	$pub_container_color = "solid gray";  //  Container color
+	$pub_header_type_color = "white";  //  lettering/font color
+
+	$priv_header_color = "orange";  // Background color on header frame.
+	$priv_menu_color = "purple";
+	$priv_container_color = "white";
+
+	$pub_header_title = "WebContentTest";  // Value displays in pageHeader.html
+
 } else {
-	
+
 	// Production system Variables
-    $domain = 'bolitec.org';
-    $sec_domain = 'https://secure.bolitec.org/';
+	$domain = 'bolitec.org';
+	$sec_domain = 'http://bolitec.org/';
 	$app_name = 'WebContent/';
-    $pub_path = '/home/bolitec/public_html/secure/';
-    $priv_path = '/home/bolitec/WebContent/';
-	
-//  $base_uri = "".$app_name."/";
-//	$base_url = "https://secure.bolitec.org/".$app_name."/";
-	
+	$pub_path = '/home/bolitec/public_html/';
+	$priv_path = '/home/bolitec/';
+
+	$pub_header_color = "green";  // Background color on header frame.
+	$pub_container_color = "solid gray";  //  Container color
+	$pub_header_type_color = "white";  //  lettering/font color
+
+	$priv_header_color = "orange";  // Background color on header frame.
+	$priv_menu_color = "purple";
+	$priv_container_color = "white";
+
+	$pub_header_title = "WebContent";  // Value displays in pageHeader.html
+
+	//  $base_uri = "".$app_name."/";
+	//	$base_url = "https://secure.bolitec.org/".$app_name."/";
+
 	// For extra security, store your files in a folder outside
 	// of the public webtree and define the path, ie,
-//	define('PRIVATE_SESSION', '/home/lbolivar/php/');
-//	define('PRIVATE_DB', '/home/lbolivar/php/ClassAds/');
-	
+	//	define('PRIVATE_SESSION', '/home/lbolivar/php/');
+	//	define('PRIVATE_DB', '/home/lbolivar/php/ClassAds/');
+
 }
 //  Set local or production variables
 $objConfig->set('domain', $domain);
 
 
 // Define the constants:
-$base_uri = $pub_path;
-$base_url = $sec_domain;
+$base_uri = $pub_path.$app_name;
+$base_url = $sec_domain.$app_name;
 
 // The $modal variable is holding the login parameters that allow jQuery code to display login form
 // Once the user login is complete this variable then stores/points to the Member.php to facilitate session use.
@@ -156,11 +176,15 @@ define('PRIVATE_DB', $priv_php_files);
 /* This section contains the registration email variables */
 ###############################################################
 $regemailtitle = 'WebContent';
+$objConfig->set('regemailtitle', $regemailtitle);
+
 $regemailaddr = 'webmaster@bolitec.org';
+$objConfig->set('regemailaddr', $regemailaddr);
+
 $localregion = "World Wide Web";
+$objConfig->set('localregion', $localregion);
 
 // Variables to establish Public and Private Header text values and fonts.
-$pub_header_title = "WebContentTest";  // Value displays in pageHeader.html
 $objConfig->set('pub_header_title', $pub_header_title);
 
 $pub_header_font = 'Calibri,Arial,"Times New Roman",Times,serif'; //font-family for public (Gallery) displays in pageHeader.html
@@ -168,15 +192,11 @@ $pub_header_font = 'Calibri,Arial,"Times New Roman",Times,serif'; //font-family 
 $pub_welcome_message = 'Welcome to the Web Content App!';  // Custom welcome message for public (gallery) displays in pageHeader.html
 $objConfig->set('pub_welcome_message', $pub_welcome_message);
 
-$pub_welcome_message2 = 'Once your membership is validated via email you can activate and view your content in the Public Gallery! To Register, Login or upload content click on the Member link below';  // Custom welcome message for public (gallery) displays in pageHeader.html
+$pub_welcome_message2 = 'Once your registration is validated via email you can activate and view your content in the public Gallery! To register or upload content click on the Logon link below';  // Custom welcome message for public (gallery) displays in pageHeader.html
 $objConfig->set('pub_welcome_message2', $pub_welcome_message2);
 
 $pub_content_desc = "Content";  // description of content displayed in AdDetail.php and browsedetails.html
 $objConfig->set('pub_content_desc', $pub_content_desc);
-
-$pub_header_color = "blue";  // Background color on header frame.
-$pub_container_color = "solid gray";  //  Container color
-$pub_header_type_color = "white";  //  lettering/font color
 
 $priv_content_desc = "Content";  // description of content displayed in MyAdDetail.php and mydetails.html
 $objConfig->set('priv_content_desc', $priv_content_desc);
@@ -192,10 +212,6 @@ $objConfig->set('priv_welcome_message', $priv_welcome_message);
 
 $priv_welcome_message2 = 'To view or modify your Ad select your ';  // Custom welcome message for public (gallery) displays in pageHeader.html
 $objConfig->set('priv_welcome_message2', $priv_welcome_message2);
-
-$priv_header_color = "orange";  // Background color on header frame.
-$priv_menu_color = "purple";
-$priv_container_color = "white";
 
 // Public Gallery image configuration variables.
 $pub_browseAd_bg_image = "../WebContent/images/shopping.jpg";  // image displayed as background on main page.
@@ -226,24 +242,33 @@ $priv_background_image = "../".$app_name."/images/adbackground2.jpg";  // set yo
 
 # table settings for images display
 define('ROWS', 3);
-define('COLS', 4);
+define('COLS', 5);
 
 # thumbnail demensions
 define('THMBWIDTH', 80);
 define('THMBHEIGHT',80);
+
+# image upload maxsize
+define('IMGMAXSIZE',640);
+
+# image quality value
+define('IMGQUALITY',90);
 
 # gallery title
 define('TITLE', "WebContentApp");
 
 # watermark your images, ie,
 # define('WATERMARK', "This is a watermark");
-define('WATERMARK', $_SERVER['HTTP_HOST']);
+#define('WATERMARK', $_SERVER['HTTP_HOST']);
 
 # location to self
 define('SELF', $_SERVER['PHP_SELF']);
 
 # allowed image MIME types
 define('TYPE', serialize(array('image/jpg', 'image/jpeg', 'image/pjpeg', 'image/gif', 'image/png')));
+
+# allowed max image size
+define('MAX_FILE_SIZE',25000000);
 
 # check for GD library
 if(!function_exists('imagegif')) {
@@ -264,18 +289,17 @@ $max = (60 * 1);
  *    $debug - TRUE;
  *    require($sec_php_files.'setConfig.php');
  * }
- *    
+ *
  * To debug the entire site, do
- * $debug = TRUE;
- * 
- * before this next conditional
- */
- 
- //  Assume debugging is off
-if (!isset($debug)) {
-	$debug = FALSE;
-} 
+ 	* $debug = TRUE;
+ 	*
+ 	* before this next conditional
+ 	*/
 
-require_once'class/err_handler.php';
-$err = new errHandler();
-$err->myErrorHandler($e_number, $e_message, $e_file, $e_line, $e_vars);
+ //  Assume debugging is off
+ if (!isset($debug)) {
+ 	$debug = FALSE;
+ }
+//restore_error_handler();
+ //require_once'class/err_handler.php';
+ 

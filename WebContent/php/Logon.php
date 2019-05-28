@@ -46,53 +46,56 @@ if ($session_vars != FALSE) {
 	
 	$session = new User($email, $pass, null);
 	$session->logon_session_found();
-//} else {
-//	$modal = '<a href="Member.php">Logon</a>';
-}
-// When no session is found check to see if the logon form is posted
-if (isset($_POST['logon'])){
 
-	// The form is set and contains logon credentials
-	// Make sure they filled in email and password required fields
-	if(!$_POST['email'] | !$_POST['pass']){
-	
-		$email = null;
-		$pass  = null;
+} else {
+
+	// When no session is found check to see if the logon form is posted
+	if (isset($_POST['logon'])){
+
+		// The form is set and contains logon credentials
+		// Make sure they filled in email and password required fields
+		if(!$_POST['email'] | !$_POST['pass']){
+		
+			$email = null;
+			$pass  = null;
+		}
+
+		// checks it against the database
+		if (!get_magic_quotes_gpc()){
+			//$_POST['email'] = addslashes($_POST['email']);
+			//$_POST['pass'] = addslashes($_POST['pass']);
+
+		    //if there is an active session, it logs you in and directs you to the members page
+			$email = addslashes($_POST['email']);
+			$pass = addslashes($_POST['pass']);
+
+		}
+		$session = new User($email, $pass, null);
+		$session->logon_session_NOTfound();
+
+	} else {
+
+		//  Load variables to assist user in re-establishing logon credentials and access
+		$params = array();
+		$params['modal'] = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Logon</a>';
+/*	
+		// Implement private header html code to produce page container
+		// Followup with custom menu for the member view
+		include $sec_html_files.'pageHeader2.html';
+		include $html_files.'pageHeaderMenu.html';
+*/	
+		$params['MsgTitle'] = "Logon.php";
+		$params['MsgType'] = "Welcome:";
+		$params['Msg1'] = "To Logon to the Member's Area and store content please click on the";
+		$params['Msg2'] = "Logon link on the left.";
+/*
+		include $sec_html_files.'logonNew.html';
+		include $html_files.'pageFooter.html';
+		exit();*/
+		
+		$session = new User();
+		$session->timed_out($params);
+		
 	}
-
-	// checks it against the database
-	if (!get_magic_quotes_gpc()){
-		//$_POST['email'] = addslashes($_POST['email']);
-		//$_POST['pass'] = addslashes($_POST['pass']);
-
-	    //if there is an active session, it logs you in and directs you to the members page
-		$email = addslashes($_POST['email']);
-		$pass = addslashes($_POST['pass']);
-
-	}
-	$session = new User($email, $pass, null);
-	$session->logon_session_NOTfound();
-	//exit();	
-}
-else
-{
-	// Initiate, start and store a new session by including dbConfig.php at the top of this script.
-	// Included in the handler override is a session_start() and concludes below with a commit of the DB session.
-	// Reference details related to handler functions in SessionHandler.php';
-	// session_write_close();
-	$modal = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Logon</a>';
-	
-	// Implement private header html code to produce page container
-	// Followup with custom menu for the member view
-	include $sec_html_files.'pageHeader2.html';
-	include $html_files.'pageHeaderMenu.html';
-	
-	$MsgTitle = "Logon.php";
-	$MsgType = "Welcome:";
-	$Msg1 = "To Logon to the Member's Area and store content please click on the";
-	$Msg2 = "Logon link on the left.";
-	include $sec_html_files.'logonNew.html';
-	include $html_files.'pageFooter.html';
-	exit();
 }
 ?>

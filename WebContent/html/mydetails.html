@@ -16,9 +16,9 @@
 </ul>
 
 <div id="Headline" class="tabcontent">
-<table>
+<table >
 	<tr>
-		<td class=b colspan="2" align="center"><br />
+		<td class=ad_form  colspan="2" align="center"><br />
 		<img src='DisplayImage.php?imageName=<?php echo($ImageId)?>' alt='Image Not Found'></td>
 	</tr>
 	<tr>
@@ -31,7 +31,7 @@
 	</tr>
 	<tr>
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
-		<a href="<?php echo ($URL) ?>"><? echo ($AdURL) ?></a></td>
+		<a href="<?php echo ($AdURL) ?>"><? echo ($AdURL) ?></a></td>
 	</tr>
 	<tr>
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
@@ -159,15 +159,17 @@
 				<option value="30" selected>1 month </option>
 				<option value="60">2 months </option>
 				<option value="90">3 months </option>
-					END OF COMMENTED FIELDS 							####################--> <!--###############		To Place Ads by WEEK uncomment below				
+					END OF COMMENTED FIELDS 						####################--> 
+	<!--###############		To Place Ads by WEEK uncomment below				
 				<option value="7" selected>1 week</option>
 				<option value="14">2 weeks</option>
 				<option value="21">3 weeks</option>
-				<option value="28">4 weeks</option>						####################--> <!-- ################	Weekly options reduced								
+				<option value="28">4 weeks</option>					####################--> 
+	<!-- ################	Weekly options reduced								
 				<option value="35">5 weeks
 				<option value="42">6 weeks
 				<option value="49">7 weeks
-				<option value="56">8 weeks								####################-->
+				<option value="56">8 weeks							####################-->
 	<tr>
 		<td colspan="1" width="300" bgcolor="#F1F1F9" align="right"><font
 			face="arial,helvetica" size="2" color="#000080"> <b>Ad Headline
@@ -340,7 +342,7 @@
 	</tr>
 	<tr>
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><input
-			type="hidden" name="MAX_FILE_SIZE" value="10000000"> <input
+			type="hidden" name="MAX_FILE_SIZE" value="<?php echo(MAX_FILE_SIZE) ?>"> <input
 			name="userfile" type="file" class="box" id="userfile" size="60"></td>
 	</tr>
 	<tr>

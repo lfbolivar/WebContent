@@ -1,21 +1,24 @@
 <?php
+$objConfig = Config::getInstance();
+require $objConfig->get('priv_app_files').'sysParams/dbConfig_params.php';
+
 //  This establishes the database variables and initiates the db connection
 global $_hostname;
-$_hostname = "localhost";			// Host name
+$_hostname = $host_param;			// Host name
 
 global $_session_user;
-$_session_user = 'lfbolivar';	// Mysql username
+$_session_user = $db_username_param;	// Mysql username
 // echo ($_SERVER['DB_USER']."\n");
 
 global $_session_pass;
-$_session_pass = 'Tereb!nth';	// Mysql password
+$_session_pass = $db_pass_param;	// Mysql password
 // echo ($_SERVER['DB_PASS']."\n");
 
 global $_session_db_name;
-$_session_db_name = 'mamp_session';	// Database name
+$_session_db_name = $db_session_name;	// Database name
 
 global $_session_tbl_name;
-$_session_tbl_name = 'sessions';	// member Table name
+$_session_tbl_name = $db_session_table;	// member Table name
 
 global $_connection;
 $_connection = mysqli_init();

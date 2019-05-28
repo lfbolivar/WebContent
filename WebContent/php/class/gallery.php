@@ -17,7 +17,6 @@
 
 class Gallery {
 	
-	public $_CatBody;
 	public $_domain;
 //	public $_modal = NULL;
 	public $image;
@@ -37,13 +36,15 @@ class Gallery {
 	public $sec_html_files;
 	public $sec_url_php;
 	
-	public $categoryArray;
 	public $htmlDetail;
 		
+	protected $_CatBody;
+	protected $_CatId;
 	protected $_title;	
 	protected $Image;
 	
-	private $cat = NULL;
+	private $cat = array();
+	private $categoryArray = array();	
 	
 	
 /*
@@ -78,76 +79,26 @@ class Gallery {
 		
 	}
 
-/*
- * 
- * Method to browse the gallery by reading the category table to establish category icons to display.
- * 
- */
-	function display_gallery_delete($cat) {
-
-		// Only DB credentials are needed to connect and read the category table (table5)
-		// fetch all columns  from the  category table
-		require $this->priv_class_files.'db_category_ad_join.php';
-		
-		$obj_category_ad_join = new db_category_ad_join($data);
-		$categoryArray = $obj_category_ad_join->read();
-		//echo($categoryArray['CatImageArray']);
-		
-		// Include Cascading Style Sheet and html tag definition
-		require $this->html_files.'pageHeader.html';
-
-		
-		$this->_title = !empty($this->_CatBody) ? TITLE.' - '.basename($this->_CatBody) : TITLE;
-		print('<title>'.$this->title.'</title>'."\r\n");
-		print('</head>'."\r\n".'<body>'."\r\n");
-		
-		//	Set messages and variables before call to PublicGallery to process display functions/methods.
-		//	Set the variables to display before the html is generated
-		$categoryArray['htmlDetail']	= $this->html_files.'browse.html';
-		$categoryArray['htmlBody']		= $this->html_files.'pageBody.html';
-		$categoryArray['catdesc']		= $this->_CatBody;
-		$pub_header_title     			= $this->_pub_header_title;
-		$pub_welcome_message  			= $this->_pub_welcome_message;
-		$pub_welcome_message2 			= $this->_pub_welcome_message2;
-		$modal                			= $this->_modal;
-		
-		require $this->html_files.'pageHeaderMenu.html';
-		
-		if(!empty($categoryArray)){
-			$obj_gallery = new PublicGallery($categoryArray);
-			$obj_gallery->display_thumbnails();
-			//print('<!-- Closed div class=content -->'."\r\n".'</div>'."\r\n");
-		}
-		else {
-			print('</ul>'."\r\n");
-			print('<div class="content2">');
-			//echo('<h2>Browse '.$this->_CatBody.'</h2>'."\r\n");
-			print_r('<h2>Browse '.$this->_CatBody.'</h2>'."\r\n");
-			print('<h3 class="content2">Nothing to display here! </h3>'."\r\n");
-				
-		}
-				
-		// set the html variables and send the tags
-		$domain = $this->_domain;
-		require $this->html_files.'pageFooter.html';
-		exit();		
-	}
 	/*
 	 * 	Method to display category
 	 */
 	function display_gallery($cat) {
 	
-		require $this->priv_class_files.'db_gallery.php';
-		
+	    //$data = array();
+	    
+	    require $this->priv_class_files.'db_gallery.php';
+	    		
 		// Only DB credentials are needed to connect and read the category table (table5)
 		// fetch all columns  from the  category table
 		if (empty($cat['catid']) && empty($cat['ad'])) {
 			
 			$obj_gallery = new db_gallery($data);
-			$categoryArray = $obj_gallery->join_category_ad();
+			$this->categoryArray = $obj_gallery->join_category_ad();
 			//echo($categoryArray['CatImageArray']);
 			
-			$categoryArray['htmlDetail']	= $this->html_files.'browse.html';
+			if ($this->categoryArray != 0){
+				$this->categoryArray['htmlDetail']	= $this->html_files.'browse.html';
+			}
 				
 		}			
 		// $this->_catid = $cat['catid'];
@@ -155,36 +106,41 @@ class Gallery {
 
 			$data['catid']	= $cat['catid'];
 			$this->_CatBody	= $cat['catdesc'];
+			$this->_CatId	= $cat['catid'];
 			
 			$obj_gallery = new db_gallery($data);
-			$categoryArray = $obj_gallery->join_ad_image();
+			$this->categoryArray = $obj_gallery->join_ad_image();
 			
-			$categoryArray['htmlDetail']	= $this->html_files.'category.html';
+			if ($this->categoryArray != 0){
+				$this->categoryArray['htmlDetail']	= $this->html_files.'category.html';
+				$this->categoryArray['catid']		= $this->_CatId;
 			}
+			
+		}
 		if (!empty($cat['ad'])) {
 			
-			$data['ad'] 	= $cat['ad'];
-			$this->_CatBody	= $cat['catdesc'];
-			$data['FileId'] = $cat['FileId'];
+			$data['ad']        = $cat['ad'];
+			$this->_CatBody    = $cat['catdesc'];
+			$data['FileId']    = $cat['FileId'];
 			
 			$obj_gallery = new db_gallery($data);
-			$categoryArray = $obj_gallery->join_details();
+			$this->categoryArray = $obj_gallery->join_details();
 				
-			$categoryArray['htmlDetail']	= $this->html_files.'browsedetails.html';
+			if ($this->categoryArray != 0){
+				$this->categoryArray['htmlDetail']	= $this->html_files.'browsedetails.html';
 			}
+		}
 		//print_r("catid: ".$this->_catid);
 		
 		// Include Cascading Style Sheet and html tag definition
-		include $this->html_files.'pageHeader.html';
+		require $this->html_files.'pageHeader.html';
 		
 		$this->_title = !empty($this->_CatBody) ? TITLE.' - '.basename($this->_CatBody) : TITLE;
-		print('<title>'.$this->title.'</title>'."\r\n");
+		//print('<title>'.$this->title.'</title>'."\r\n");
 		print('</head>'."\r\n".'<body>'."\r\n");
 		
 		// Set messages and variables before call to PublicGallery to process display functions/methods.
-		$categoryArray['catdesc']		= $this->_CatBody;
-		$categoryArray['htmlBody']		= $this->html_files.'pageBody.html';
-		$pub_header_title     			= $this->_pub_header_title;
+		$pub_header_title     	        = $this->_pub_header_title;
 		$pub_welcome_message  			= $this->_pub_welcome_message;
 		$pub_welcome_message2 			= $this->_pub_welcome_message2;
 		$priv_content_desc				= $this->_priv_content_desc;
@@ -192,8 +148,12 @@ class Gallery {
 		
 		require $this->html_files.'pageHeaderMenu.html';
 		
-		if(!empty($categoryArray)){
-			$obj_gallery = new PublicGallery($categoryArray);
+		if(!empty($this->categoryArray)){
+			
+			$this->categoryArray['catdesc']		= $this->_CatBody;
+			$this->categoryArray['htmlBody']	= $this->html_files.'pageBody.html';
+			
+			$obj_gallery = new PublicGallery($this->categoryArray);
 			$obj_gallery->display_thumbnails();
 			//print('<!-- Closed div class=content -->'."\r\n".'</div>'."\r\n");
 		}
@@ -208,7 +168,7 @@ class Gallery {
 		
 		//include $php_files.'PubGallery.php';
 		$domain = $this->_domain;
-		include $this->html_files.'pageFooter.html';
+		require $this->html_files.'pageFooter.html';
 		exit();
 	}
 
@@ -217,7 +177,9 @@ class Gallery {
 	 */
 	function display_workbench($sessionLogin) {
 	
-		// Only DB credentials are needed to connect and read the category table (table5)
+	    // $data = array();
+	    
+	    // Only DB credentials are needed to connect and read the category table (table5)
 		// fetch all columns  from the  category table
 		require $this->priv_class_files.'db_workbench.php';
 	
@@ -231,7 +193,9 @@ class Gallery {
 			$categoryArray = $obj_workbench->read_ad_by_category();
 			//echo($categoryArray['CatImageArray']);
 			
-			$categoryArray['htmlDetail']	= $this->html_files.'viewAd.html';
+			if ($categoryArray != 0){
+				$categoryArray['htmlDetail']	= $this->html_files.'viewAd.html';
+			}
 		}
 
 		// $this->_catid = $cat['catid'];
@@ -239,11 +203,15 @@ class Gallery {
 		
 			$data['catid'] 	= $sessionLogin['catid'];
 			$this->_CatBody	= $sessionLogin['catdesc'];
-		
+			$this->_CatId	= $sessionLogin['catid'];
+				
 			$obj_workbench = new db_workbench($data);
 			$categoryArray = $obj_workbench->read_ad_images();
 		
-			$categoryArray['htmlDetail']= $this->html_files.'mycategory.html';
+			if ($categoryArray != 0){
+				$categoryArray['htmlDetail']= $this->html_files.'mycategory.html';
+				$categoryArray['catid']=$this->_CatId;
+			}
 		}
 		if (!empty($sessionLogin['adid'])) {
 			
@@ -254,7 +222,9 @@ class Gallery {
 			$obj_workbench = new db_workbench($data);
 			$categoryArray = $obj_workbench->read_ad_detail();
 			
-			$categoryArray['htmlDetail']= $this->html_files.'mydetails.html';
+			if ($categoryArray != 0){
+				$categoryArray['htmlDetail']= $this->html_files.'mydetails.html';
+			}
 				
 		}
 		
@@ -267,10 +237,7 @@ class Gallery {
 		print('</head>'."\r\n".'<body>'."\r\n");
 	
 		//	Set messages and variables before call to PublicGallery to process display functions/methods.
-		//	Set the variables to display before the html is generated
-		$categoryArray['htmlBody']		= $this->html_files.'pageBodyPrivate.html';
-		$categoryArray['catdesc']		= $this->_CatBody;
-		
+		//	Set the variables to display before the html is generated		
 		$priv_header_title     			= $this->_priv_header_title;
 		$priv_welcome_message  			= $this->_priv_welcome_message;
 		$priv_welcome_message2 			= $this->_priv_welcome_message2;
@@ -279,6 +246,10 @@ class Gallery {
 		require $this->sec_html_files.'pageHeaderPrivMenu2.html';
 	
 		if(!empty($categoryArray)){
+
+			$categoryArray['htmlBody']		= $this->html_files.'pageBodyPrivate.html';
+			$categoryArray['catdesc']		= $this->_CatBody;
+				
 			$obj_gallery = new PublicGallery($categoryArray);
 			$obj_gallery->display_thumbnails();
 			//print('<!-- Closed div class=content -->'."\r\n".'</div>'."\r\n");
@@ -314,41 +285,41 @@ class PublicGallery extends Gallery {
 	public $imageName;
 	
 
-	protected $CatAdArray;
-	protected $CatCaptionArray;
-	protected $CatCountArray;
-	protected $CatDescArray;
-	protected $CatImageArray;
-	protected $CatImageIdArray;
-	protected $CatIdArray;
-	protected $CatHtmlDetail;
-	protected $CatHtmlBody;
+	protected $CatAdArray= array();
+	protected $CatCaptionArray= array();
+	protected $CatCountArray= array();
+	protected $CatDescArray= array();
+	protected $CatImageArray = array();
+	protected $CatImageIdArray= array();
+	protected $CatIdArray= array();
+	protected $CatHtmlDetail= array();
+	protected $CatHtmlBody= array();
 
 	protected $_pub_content_desc;
 	protected $_priv_content_desc;	
 	
-	protected $CatAdDateArray;
-	protected $CatAdDescArray;
-	protected $CatAddr1Array;
-	protected $CatAddr2Array;
-	protected $CatAddr3Array;
-	protected $CatAdExDateArray;
-	protected $CatAdModDateArray;
-	protected $CatAdValidArray;
-	protected $CatArray;
-	protected $CatCityArray;
-	protected $CatCountryArray;
-	protected $CatEmailArray;
-	protected $CatHeadlineArray;
-	protected $CateHideArray;
-	protected $CatPeriodArray;
-	protected $CatPhoneArray;
-	protected $CatStateArray;
-	protected $CatStatusArray;
-	protected $CatURLArray;
-	protected $CatUserFirstNameArray;
-	protected $CatUserLastNameArray;
-	protected $CatZipArray;
+	protected $CatArray= array();
+	
+	protected $CatAdDateArray= array();
+	protected $CatAdDescArray= array();
+	protected $CatAddr1Array= array();
+	protected $CatAddr2Array= array();
+	protected $CatAddr3Array= array();
+	protected $CatAdExDateArray= array();
+	protected $CatAdModDateArray= array();
+	protected $CatAdValidArray= array();
+	protected $CatCityArray= array();
+	protected $CatCountryArray= array();
+	protected $CatEmailArray= array();
+	protected $CatHeadlineArray= array();
+	protected $CatHideArray= array();
+	protected $CatPeriodArray= array();
+	protected $CatPhoneArray= array();
+	protected $CatStateArray= array();
+	protected $CatURLArray= array();
+	protected $CatUserFirstNameArray= array();
+	protected $CatUserLastNameArray= array();
+	protected $CatZipArray= array();
 	
 	protected $c;
 	protected $end;
@@ -364,6 +335,7 @@ class PublicGallery extends Gallery {
 	protected $rows;
 	protected $section;
 	protected $start;
+	protected $_CatId;
 	
 	protected $AdMail;
 	protected $AdCaption;
@@ -380,43 +352,50 @@ class PublicGallery extends Gallery {
 	/*
 	 *	Constructor Method to initialize variables
 	 */
-	function __construct($catArray) {
+	function __construct($CatArray) {
 		
-		$this->CatCaptionArray 		= $catArray['CaptionArray'];
-		$this->CatCountArray 		= $catArray['CountArray'];
-		$this->CatImageArray 		= $catArray['ImageArray'];
-		$this->CatImageIdArray		= $catArray['ImageIdArray'];
-		$this->CatIdArray    		= $catArray['IdArray'];
-		$this->CatDescArray  		= $catArray['DescArray'];
-		$this->CatAdArray    		= $catArray['AdArray'];
+	    if (isset($CatArray['ImageArray'])){
+    	    $this->CatImageArray 		= $CatArray['ImageArray'];
+    	    $this->CatIdArray    		= $CatArray['IdArray'];
+    	    $this->CatDescArray  		= $CatArray['DescArray'];
+    	    $this->CatCountArray 		= $CatArray['CountArray'];
+    	    $this->CatAdArray    		= $CatArray['AdArray'];
+	    }
+	    
+	    if (isset($CatArray['ImageIdArray'])){		
+	        $this->CatImageIdArray		= $CatArray['ImageIdArray'];
+	        $this->CatURLArray			= $CatArray['URLArray'];
+	        $this->CatCaptionArray		= $CatArray['CaptionArray'];
+	        $this->CatHeadlineArray		= $CatArray['HeadlineArray'];
+	        $this->CatAdValidArray		= $CatArray['AdValidArray'];
+	        $this->CatAdExDateArray		= $CatArray['AdExDateArray'];
+	    }
 		
-		$this->CatURLArray			= $catArray['URLArray'];
-		$this->CatCaptionArray		= $catArray['CaptionArray'];
-		$this->CatHeadlineArray		= $catArray['HeadlineArray'];
+	    if (isset($CatArray['AdDateArray'])){
+	        $this->CatAdDateArray		= $CatArray['AdDateArray'];
+	        $this->CatAdModDateArray	= $CatArray['AdModDateArray'];
+	        $this->CatAdDescArray		= $CatArray['AdDescArray'];
+	        $this->CatAdPeriodArray		= $CatArray['PeriodArray'];
+	        $this->CatUserFirstNameArray= $CatArray['UserFirstNameArray'];
+	        $this->CatUserLastNameArray	= $CatArray['UserLastNameArray'];
+	        $this->CatEmailArray		= $CatArray['EmailArray'];
+	        $this->CatAddr1Array		= $CatArray['Addr1Array'];
+	        $this->CatAddr2Array		= $CatArray['Addr2Array'];
+	        $this->CatAddr3Array		= $CatArray['Addr3Array'];
+	        $this->CatCityArray			= $CatArray['CityArray'];
+	        $this->CatStateArray		= $CatArray['StateArray'];
+	        $this->CatPhoneArray		= $CatArray['PhoneArray'];
+	        $this->CatCountryArray		= $CatArray['CountryArray'];
+	        $this->CatHideArray			= $CatArray['HideArray'];
+	        $this->CatZipArray			= $CatArray['ZipArray'];
+	    }
 		
-		$this->CatAdDateArray		= $catArray['AdDateArray'];
-		$this->CatAdExDateArray		= $catArray['AdExDateArray'];
-		$this->CatAdModDateArray	= $catArray['AdModDateArray'];
-		$this->CatAdDescArray		= $catArray['AdDescArray'];
-		$this->CatAdPeriodArray		= $catArray['PeriodArray'];
-		$this->CatAdValidArray		= $catArray['AdValidArray'];
-		$this->CatUserFirstNameArray= $catArray['UserFirstNameArray'];
-		$this->CatUserLastNameArray	= $catArray['UserLastNameArray'];
-		$this->CatEmailArray		= $catArray['EmailArray'];
-		$this->CatAddr1Array		= $catArray['Addr1Array'];
-		$this->CatAddr2Array		= $catArray['Addr2Array'];
-		$this->CatAddr3Array		= $catArray['Addr3Array'];
-		$this->CatCityArray			= $catArray['CityArray'];
-		$this->CatStateArray		= $catArray['StateArray'];
-		$this->CatStatusArray		= $catArray['StatusArray'];
-		$this->CatPhoneArray		= $catArray['PhoneArray'];
-		$this->CatCountryArray		= $catArray['CountryArray'];
-		$this->CatHideArray			= $catArray['HideArray'];
-		$this->CatZipArray			= $catArray['ZipArray'];
-		
-		$this->CatHtmlDetail		= $catArray['htmlDetail'];
-		$this->CatHtmlBody			= $catArray['htmlBody'];
-		$this->_CatBody         	= $catArray['catdesc'];
+	    $this->CatHtmlDetail		= $CatArray['htmlDetail'];
+	    $this->CatHtmlBody			= $CatArray['htmlBody'];
+	    $this->_CatBody         	= $CatArray['catdesc'];
+	    if (isset($CatArray['catid'])){
+		    $this->_CatId				= $CatArray['catid'];
+		}
 		
 		//  Sets path for files and start session.
 		$objConfig = Config::getInstance();
@@ -464,8 +443,8 @@ class PublicGallery extends Gallery {
 		
 		$this->query = !empty($this->Image) ? '?file='.rawurlencode($this->Image).'&pg=' : '?pg=';
 		$this->pages = $this->total <= $this->section ? 1 : ceil($this->total / $this->section);
-		$this->p = '<li><a href="'.SELF.$this->query.$this->prev.'">Prev</a></li>';
-		$this->n = '<li><a href="'.SELF.$this->query.$this->next.'">Next</a></li>';
+		$this->p = '<li><a href="'.SELF.$this->query.$this->prev.'&cat='.$this->_CatId.'&catd='.$this->_CatBody.'">Prev</a></li>';
+		$this->n = '<li><a href="'.SELF.$this->query.$this->next.'&cat='.$this->_CatId.'&catd='.$this->_CatBody.'">Next</a></li>';
 		$this->c = '<li><p>Page '.$this->pg.' of '.$this->pages.'</p></li>';
 	
 		//echo('<div class="navigate_images">'."\r\n");
@@ -495,7 +474,8 @@ class PublicGallery extends Gallery {
 		require $this->CatHtmlBody;
 		//print('<div class="content">'."\r\n");
 		//echo('<h2>Browse '.$CatBody.'</h2>'."\r\n");
-	}
+		//print_r($CatBody);
+		}
 	
 	/*
 	 *	Method to display thumbnails
@@ -559,7 +539,6 @@ class PublicGallery extends Gallery {
 					$AdURL			= $this->CatURLArray[$this->index];
 					$AdCaption		= $this->CatCaptionArray[$this->index];
 					$AdHeadline 	= $this->CatHeadlineArray[$this->index];
-					$AdStatus		= $this->CatStatusArray[$this->index];
 					$AdDesc			= $this->CatAdDescArray[$this->index];
 					$AdDate			= $this->CatAdDateArray[$this->index];
 					$AdExDate		= $this->CatAdExDateArray[$this->index];
@@ -571,30 +550,45 @@ class PublicGallery extends Gallery {
 					$AdValid = $this->CatAdValidArray[$this->index];
 					if ($AdValid == 0){
 						$AdActive = "Hidden";
-					} else {
+					} else if ($AdExDate > date("Y-m-d")){
 						$AdActive = "Visible";
+					} else {
+					    $AdActive = "Expired";
 					}
 					// This checks if user wants private personal information
 					$Hide  = $this->CatHideArray[$this->index];
 					// echo ($Hide ? 'Yes' : 'No');
-					if ($Hide == 0){
-						$Addr1 = "Private";
-						$Addr2 = "Phone: Private";
-						$Addr3 = "";
-						$City = "";
-						$State = "";
-						$Zip = "";
-						$Country = "";
-						$Phone = "";
-					} else {
-						$Addr1 = $this->CatAddr1Array[$this->index];
-						$Addr2 = $this->CatAddr2Array[$this->index];
-						$Addr3 = $this->CatAddr3Array[$this->index];
-						$City = $this->CatCityArray[$this->index];
-						$State = $this->CatStateArray[$this->index];
-						$Zip = $this->CatZipArray[$this->index];
-						$Country = $this->CatCountryArray[$this->index];
-						$Phone = $this->CatPhoneArray[$this->index];
+					switch ($Hide){
+						case 0:
+							$Addr1 = "Private";
+							$Addr2 = "";
+							$Addr3 = "";
+							$City = "";
+							$State = "";
+							$Zip = "";
+							$Country = "";
+							$Phone = "Phone: Private";
+							break;
+						case 1:
+							$Addr1 = $this->CatAddr1Array[$this->index];
+							$Addr2 = $this->CatAddr2Array[$this->index];
+							$Addr3 = $this->CatAddr3Array[$this->index];
+							$City = $this->CatCityArray[$this->index];
+							$State = $this->CatStateArray[$this->index];
+							$Zip = $this->CatZipArray[$this->index];
+							$Country = $this->CatCountryArray[$this->index];
+							$Phone = "Phone: ".$this->CatPhoneArray[$this->index];
+							break;
+						case 2:
+							$Addr1 = "Private";
+							$Addr2 = "";
+							$Addr3 = "";
+							$City = "";
+							$State = "";
+							$Zip = "";
+							$Country = "";
+							$Phone = "Phone: ".$this->CatPhoneArray[$this->index];
+							break;
 					}
 					//print_r ($this->images_files.$this->image);
 					if (!file_exists($this->images_files.$this->image))

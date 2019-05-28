@@ -19,9 +19,9 @@ $session_vars = $objSess->readSession();
 // First check if session was created and currently exists.
 if(!isset($session_vars['sessionEmail']))
 {
-	$modal = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Member</a>';
+	$modal = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Logon</a>';
 }else{
-	$modal = '<a href="Member.php">Member</a>';
+	$modal = '<a href="Member.php">ToolBox</a>';
 }
 
 // Include Cascading Style Sheet definition
@@ -45,11 +45,13 @@ if (isset($_POST['Ad']))
 	// New Class gallery calls method display_category()
 	$objGallery = new Gallery();
 	$objGallery->display_gallery($cat);
-}
-else
-{
-	include $php_files.'index.php?p=Browse.php';
+} else {
+	//include $php_files.'index.php?p=Browse.php';
 	//echo ($_POST['cat'].'Form is not set');
-	exit();
+	//exit();
+	// New Class gallery calls method display_category()
+	$objGallery = new Gallery();
+	$objGallery->display_gallery(null);
+	
 }
 ?>

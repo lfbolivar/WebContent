@@ -17,29 +17,37 @@ $objSess = new Session(Null);
 $session_vars = $objSess->readSession();
 
 // First check if session was created and currently exists.
-if(!isset($session_vars['sessionEmail']))
-{
-	$modal = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Member</a>';
-}else{
-	$modal = '<a href="Member.php">Member</a>';
+if(!isset($session_vars['sessionEmail'])){
+	$modal = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Logon</a>';
+} else {
+	$modal = '<a href="Member.php">ToolBox</a>';
 }
 $cat = array();
 // This Category php script is used to display all open (un-expired) classifieds as a drill down 
 // from Browse script without a login or registration.
 // Detail select query by Category passed from the browseAd.html page.
-if (isset($_POST['catid']))
-{
+if (isset($_POST['catid'])){
 	$cat['catdesc'] = $_POST['catdesc'];
 	$cat['catid'] = $_POST['catid'];
 	
 	// New Class gallery calls method display_category()	
 	$objGallery = new Gallery();
 	$objGallery->display_gallery($cat);
-}
-else
-{
-	include $php_files.'index.php?p=Browse.php';
+} else {
+	if (isset($_REQUEST['cat'])) {
+		//print_r($_REQUEST);
+		$cat['catid'] 		= $_REQUEST['cat'];
+		$cat['catdesc'] 	= $_REQUEST['catd'];
+		$objGallery = new Gallery();
+		$objGallery->display_gallery($cat);
+		
+	} else {
+	//require $url_php.'index.php?p=Browse.php';
 	//echo ($_POST['cat'].'Form is not set');
-	exit();
+	//exit();
+		$objGallery = new Gallery();
+		$objGallery->display_gallery(null);
+		
+	}
 }
 ?>

@@ -64,30 +64,57 @@ class db_ad extends PDO {
 		$this->_db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$this->_db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		
-/*		$this->mysqli = new mysqli($this->_dbHost,$this->_dbUser,$this->_dbPass,$this->_dbName) 
-			or die('db_category '.$this->_dbName.' Connection error: '.mysqli_connect_error().' ');
-		
-		$this->mysqli->select_db($this->_dbName) 
-			or die('db_category '.$this->_dbName.' mysqli_select_db error: '.mysqli_error($this->mysqli).' ');
-
-		// Internal UTF-8
-		$this->mysqli->query ( "SET NAMES 'utf8'" );
-		$this->mysqli->query ( 'SET character_set_connection=utf8' );
-		$this->mysqli->query ( 'SET character_set_client=utf8' );
-		$this->mysqli->query ( 'SET character_set_results=utf8' );
-*/
 	}
 	/*
 	 * create() Funtion/Method to create an Ad table row
 	 */
-	function create($data){
+	function create(){
 		
+		$stmt = $this->_db->prepare("insert into ".$this->_tbAd."
+				( iAdId, vchAdCaption, vchAdHeadLine, vchAdDesc, vchAdURL, dtAdExpireDate
+				, iAdPeriod, vchUserEmail, vchUserPassword, vchAdUserName, iAdCatId, tiAdValid)
+				VALUES(:AdId, :AdCaption, :AdHeadline, :AdDesc, :AdURL, :AdExpireDate
+				     , :AdPeriod, :UserEmail, :UserPass, :UserName, :AdCatId, :AdValid)");
+		
+		$stmt->bindparam(':AdId',			$this->_AdId,			PDO::PARAM_INT);
+		$stmt->bindParam(':AdCaption',		$this->_AdCaption,		PDO::PARAM_STR);
+		$stmt->bindParam(':AdHeadline',		$this->_AdHeadline,		PDO::PARAM_STR);
+		$stmt->bindParam(':AdDesc',			$this->_AdDesc,			PDO::PARAM_STR);
+		$stmt->bindParam(':AdURL',			$this->_AdURL,			PDO::PARAM_STR);
+		$stmt->bindParam(':AdExpireDate',	$this->_AdExpireDate,	PDO::PARAM_STR);
+		$stmt->bindparam(':AdPeriod',		$this->_AdPeriod,		PDO::PARAM_INT);
+		$stmt->bindParam(':UserEmail',		$this->_UserEmail,		PDO::PARAM_STR);
+		$stmt->bindParam(':UserPass',		$this->_UserPass,		PDO::PARAM_STR);
+		$stmt->bindParam(':UserName',		$this->_UserName,		PDO::PARAM_STR);
+		$stmt->bindparam(':AdCatId',		$this->_AdCatId,		PDO::PARAM_INT);
+		$stmt->bindparam(':AdValid',		$this->_AdValid,		PDO::PARAM_INT);
+		$stmt->execute();
+		$affected_rows = $stmt->rowCount();
+		if ($affected_rows == 0){
+			return 0;
+		} else {
+			return $this->_db->lastInsertId();
+		}	
 	}
 
 	/*
 	 * read() Funtion/Method to select an Ad table row
 	 */
 	function read(){
+/*		$query = "SELECT iAdId 'Ad' FROM ".$tbl_name3." WHERE vchUserEmail = '$sessionEmail' and vchUserPassword = '$sessionPass' and $AdId = iAdId";*/
+		$stmt = $this->_db->prepare("select * from ".$this->_tbAd."
+				                     WHERE iAdId		=:AdId");
+		
+		$stmt->bindparam(':AdId',		$this->_AdId,			PDO::PARAM_INT);
+
+		$stmt->execute();
+		$result = array();
+		$result = $stmt->fetch(PDO::FETCH_ASSOC);
+		if (empty($result) ){
+			return 0;
+		} else {
+			return $result;
+		}
 		
 	}
 	/*
@@ -123,52 +150,21 @@ class db_ad extends PDO {
 		$stmt->bindparam(':AdId',			$this->_AdId,			PDO::PARAM_INT);
 		$stmt->execute();
 		$affected_rows = $stmt->rowCount();
-		return $affected_rows;
-/*		
-		$this->_SQL = sprintf("update %s set vchAdCaption = '%s'
-				                           , vchAdHeadLine = '%s'
-				                           , vchAdDesc = '%s'
-				                           , vchAdURL = '%s'
-				                           , dtAdExpireDate = '%s'
-				                           , iAdPeriod = %d
-				                           , vchUserEmail = '%s'
-				                           , vchUserPassword = '%s'
-				                           , vchAdUserName = '%s'
-				                           , iAdCatId = %d
-				                           , tiAdValid = %d
-				              WHERE iAdId = %d"
-				                           , $this->_tbAd
-				                           , $this->_AdCaption
-				                           , $this->_AdHeadline
-				                           , $this->_AdDesc
-				                           , $this->_AdURL
-				                           , $this->_AdExpireDate
-				                           , $di
-				                           , $this->_AdUserEmail
-				                           , $this->_AdUserPassword
-				                           , $this->_AdUserName
-				                           , $this->_AdCategory
-				                           , $this->_nAdValid
-				                           , $this->_AdId);
-		$check = $this->mysqli->query($this_SQL)
-		or die('class=db_ad method=update(): '.mysqli_error($this->mysqli));
-		if ($check->num_rows == 0){
-			return 0;
-		} else {
-			$result = array();
-		}
-		while($CatRow = $check->fetch_array()) {
-			// Loop and display each item detail for given category
-			$result[$CatRow['CatId']] = $CatRow['CatDesc'];
-		}
-		return $result;
-		*/
-		
+		return $affected_rows;		
 	}
 	/*
 	 * delete() Funtion/Method to delete an Ad table row
 	 */
 	function delete(){
-	
+		
+		$stmt = $this->_db->prepare("delete from ".$this->_tbAd."
+				                     WHERE iAdId		=:AdId");
+		
+		$stmt->bindparam(':AdId',		$this->_AdId,			PDO::PARAM_INT);
+		
+		$stmt->execute();
+		$affected_rows = $stmt->rowCount();
+		return $affected_rows;
+		
 	}
 }

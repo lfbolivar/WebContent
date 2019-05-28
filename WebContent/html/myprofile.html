@@ -1,4 +1,6 @@
 <!-- Start of myprofile.html -->
+<!--  Close out Menu -->
+	</ul>	
 <div class="content">
 		<h2 class="content">Profile Update Form</h2><br />
 
@@ -28,32 +30,32 @@
 		<b><?php echo $MsgTitle ?></b></font></th>
 		</tr>
 	<tr>
-		<td class=b  colspan="2" bgcolor="#F1F1F9" align="left">
-		<font FACE="arial,helvetica">
+		<td colspan="2" align="left">
+		<font FACE="arial,helvetica" color="red">
 		<?php echo ($MsgType) ?></font></td>
 		</tr>
 	<tr>
-		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">
-		<font color="#660066" FACE="arial,helvetica"><br/></font></td>
+		<td  colspan="2" align="left">
+		<font color="red" FACE="arial,helvetica"><br/></font></td>
 		</tr>
 	<tr>
-		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">
-		<font FACE="arial,helvetica">
+		<td  colspan="2" align="Left">
+		<font FACE="arial,helvetica" color="red">
 		<?php echo ($msg1) ?></font></td>
 		</tr>
 	<tr>
-		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">
-		<font FACE="arial,helvetica">
+		<td colspan="2"  align="left">
+		<font FACE="arial,helvetica" color="red">
 		<?php echo ($msg2) ?></font></td>
 		</tr>
 	<tr>
-		<td class=b  colspan="2" bgcolor="#F1F1F9" align="center">
+		<td colspan="2" align="Left">
 		<font color="#660066" FACE="arial,helvetica"><br /></font></td>
 		</tr>
 	<tr>
-		<td class=c colspan="2" width="555" align="center">
+		<td class=c bgcolor="#660066" colspan="2" width="555" align="center">
 		<font face="arial,helvetica" size="2" color="WHITE">
-		STEP-1 Please provide your contact information...</font></td>
+		Please provide your contact information...</font></td>
 		</tr>
 	<tr>
 		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">
@@ -116,7 +118,7 @@
 		<td colspan="1" width="375" bgcolor="#F1F1F9" align="left">
 		<font face="arial, helvetica" size="2">
 		<input type=text name=city size="28" VALUE="<?echo $city?>">
-		<input type="text" name=state size="1" maxlength="2" VALUE="<?echo $state?>">
+		<input type="text" name=state size="2" maxlength="2" VALUE="<?echo $state?>">
 		<input type=text name=zip size="10" VALUE="<?echo $zip ?>"></font></td>
 		</tr>
 	<tr>
@@ -136,25 +138,21 @@
 		<input type=text name=phone size="28" VALUE="<?echo $phone?>"></font></td>
 		</tr>
 	<tr>
-		<td colspan="2" bgcolor="#F1F1F9"><br /></td>
+		<td class=b colspan="2" width="375" bgcolor="#F1F1F9" align="center">
+		<font face="arial, helvetica" size="2"><br />
+		Do you wish to display your <b>City, State, Phone</b> in the <b>Public Gallery</b>?</font></td>
 		</tr>
 	<tr>
 		<td colspan="1" width="180" bgcolor="#F1F1F9" align="right"></td>
 		<td class=b colspan="1" width="375" bgcolor="#F1F1F9" align="left">
 		<font face="arial, helvetica" size="2">
-		Do you wish to display your <b>City, State, Phone</b> in the <b>AD</b>?</font></td>
-		</tr>
-	<tr>
-		<td colspan="1" width="180" bgcolor="#F1F1F9" align="right"></td>
-		<td class=b colspan="1" width="375" bgcolor="#F1F1F9" align="left">
-		<font face="arial, helvetica" size="2">
-		<select name=citystphone size="1">
-			<?php $showit = array(0 => No,1 => Yes);
+		<select name=hide_mail size="1">
+			<?php $showit = array(0 => No,1 => Yes, 2 => PhoneOnly);
 			foreach($showit as $v => $s){
 				//	echo "<OPTION";
-				if ($citystphone == $v){
+				if ($hide_mail == $v){
 					echo "<option value='$v' SELECTED>$s</option>/n" ;
-					//	next($citystphone);
+					//	next($hide_mail);
 				}
 				else {
 					echo "<option value='$v'>$s</option>/n";
@@ -192,7 +190,7 @@
 		<td colspan="2" bgcolor="#F1F1F9"><br /></td>
 		</tr>
 	<tr>
-		<td class=c colspan="2" width="555" align="center">
+		<td class=c bgcolor="#660066" colspan="2" width="555" align="center">
 		<font face="arial,helvetica" size="2" color="WHITE">
 		Once your modifications are made click on the <b>Update</b> button below...</font></td>
 		</tr>
@@ -205,17 +203,16 @@
 		</ul>
 		</td> -->	
 		<td colspan="2" bgcolor="#F1F1F9" align="center"><br />
-		<INPUT TYPE=submit name="myProfile" value="Update"><br />
+		<INPUT TYPE=submit name="myProfile" value="Update">
 		</td>
-		</tr>
-	<tr>
-		<td colspan="2" align="center">
-		<!-- <font face="arial,helvetica" size="1" color="WHITE">
-	  	<b>Bolitech.com <?php// echo date("Y") ?></b></font>-->
+	<!-- <tr>
+		<td colspan="2"  align="center"><br />
+		 <font face="arial,helvetica" size="1" color="WHITE">
+	  	<b>Bolitech.com <?php// echo date("Y") ?></b></font>
 		</td>
-		</tr>
+		</tr> -->
 	<tr>
-		<td class=c colspan="2" align="center"><br />
+		<td class=c bgcolor="#660066" colspan="2" align="center">
 		<font face="arial,helvetica" size="1" color="WHITE">
 		<b>myprofile.html</b></font></td>
 		</tr>

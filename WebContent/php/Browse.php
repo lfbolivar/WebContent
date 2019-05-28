@@ -22,18 +22,19 @@ $objConfig = Config::getInstance();
 if(!isset($session_vars['sessionEmail'])) {
 	// The $modal variable is holding the login parameters that allow jQuery code to display login form
 	// Once the user login is complete this variable then stores/points to the Member.php to facilitate session use.
-	$modal = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Login</a>';
+	$modal = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Logon</a>';
 	
 } else {
 	$modal = '<a href="Member.php">ToolBox</a>';
 }
 
+$cat = array();
 //print_r($modal);
 //echo($session_vars['sessionEmail']);
 
 $objConfig->set('modal', $modal);
 	
 $objGallery = new Gallery();
-$objGallery->display_gallery();
+$objGallery->display_gallery($cat);
 
 ?>

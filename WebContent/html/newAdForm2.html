@@ -1,259 +1,286 @@
-<div class="content">
-		<h2 class="content">Add Content Form</h2>
+<!-- Start of newAdForm2.html -->  
+<!-- ################################################################################## --> 
+<!-- The first section contains display information as it appears on the Public Gallery -->  
+<!-- ################################################################################## -->  
+<!--<div class="img">
+<img src="<?php echo ($sec_url_php) ?>DisplayImage.php?imageName=<?php echo($ImageId)?>" alt="Not Found" width="110" height="90"></img>
+ <div class="desc"><?php echo ($Id) ?></div>
+ <div class="desc"><?php echo ($Caption) ?></div>
+ <div class="desc"><?php echo ($Headline) ?></div>  
+//-->
+<div class="tabmenu">
+<ul class="tab">
+  <li><a href="javascript:void(0)" class="tablinks" onclick="openDetail(event, 'Content')" id="defaultOpen">Content</a></li>
+  <li><a href="javascript:void(0)" class="tablinks" onclick="openDetail(event, 'Image')">Image</a></li>
+</ul>
+<FORM ACTION="<?php echo $redirect ?>" enctype="multipart/form-data" METHOD="POST">
+<div id="Content" class="tabcontent">
+<!-- 		<h2 class="content">Add Content Form</h2>   -->
 		<p>
-<FORM ACTION="<?php echo $redirect ?>" METHOD="POST">
 <!-- *******************************************************************************-->
 <!-- *** This is STEP-2 section of the table where the form captures category info  -->
-<!-- *******************************************************************************-->
-<table bgcolor="#F1F1F9" cellpadding="0" border="0" cellspacing="0">
-	<!-- width='448' below 
-	<tr>
-		<td bgcolor="#000080" colspan="2" align="center">
-			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="555" height="104" id="banner" align="middle">
-				<param name="allowScriptAccess" value="sameDomain" />
-				<param name="movie" value="http://www.bolitech.com/ClassAds/banner.swf" />
-				<param name="quality" value="high" />
-				<param name="bgcolor" value="#ffffff" />
-				<embed src="<?php echo $url_home ?>banner.swf" quality="high" bgcolor="#ffffff" width="555" height="104" name="banner" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
-			</object></td></tr>-->
-	<tr>
-<!--  	<td bgcolor="#000080" colspan="2" align="center">
-		<img style="vertical-align: middle;" src="<?php// echo ($priv_newad_form_image) ?>" alt="Los Arcos" width="600"></img></td>
-		</tr> -->	
-<!-- *** This is the Title Cell *** -->
-	<tr>
-		<td class=b bgcolor="#000080" colspan="2" align="center">
-		<font color="#F1F1F9" FACE="arial,helvetica,bold" size="5">
-		 <? echo($MsgType) ?></font></td>
-		 </tr>
-<!-- *** This is Message section *** -->
+<!-- *****************************************************************************-->
+<table>
+
+<!-- *** This is the Title Cell ***
 		<tr>
-			<td colspan="2" bgcolor="#F1F1F9" align="center"><font
-				color="#000080" FACE="arial,helvetica"><br /></td>
-		</tr>
+			<td colspan="2" align="center">
+			<font color="#F1F1F9" FACE="arial,helvetica,bold" size="5">
+		 	<? echo($MsgType) ?></font></td></tr>   -->
+
+<!-- *** This is Message section *** 
 		<tr>
-			<td colspan="2" bgcolor="#F1F1F9" align="center"><font
-				color="#000080" FACE="arial,helvetica"> <? echo ($msg1) ?></td>
-		</tr>
+			<td class=c colspan="2"  bgcolor="#F1F1F9" align="center">
+			<font color="#000080" FACE="arial,helvetica"></font><br /></td></tr> -->
 		<tr>
-			<td colspan="2" bgcolor="#F1F1F9" align="center"><font
-				color="#000080" FACE="arial,helvetica"> <? echo ($msg2) ?></td>
-		</tr>
+			<td colspan="2" bgcolor=white align="left">
+			<font color=red FACE="arial,helvetica">
+			<? echo ($msg1) ?></font></td></tr>
 		<tr>
-			<td colspan="2" bgcolor="#F1F1F9" align="center"><font
-				color="#000080" FACE="arial,helvetica"><br /></td>
-		</tr>
+			<td colspan="2" bgcolor=white align="left">
+			<font color=red FACE="arial,helvetica">
+			<? echo ($msg2) ?></font></td></tr>
 		<tr>
-			<td colspan="2" width="555" bgcolor="#000080" align="center"><font
-				face="arial,helvetica" size="2" color="WHITE"> STEP-2 Please provide
-			your Classified Advertisement information...</b></font></td>
-		</tr>
+			<td colspan="2" bgcolor=white align="center">
+			<font color="#000080" FACE="arial,helvetica"></font><br /></td></tr>
 		<tr>
-			<td colspan="2" bgcolor="#F1F1F9" align="center"><font
-				color="#000080" FACE="arial,helvetica"><br /></td>
-		</tr>
+			<td  class=c colspan="2" bgcolor=#660066 align="center">
+			<font face="arial,helvetica" size="2" >
+			Please provide your content information...</font></td></tr>
 		<tr>
-			<td width="270" bgcolor="#F1F1F9" align="right"><font
-				face="arial, helvetica" size="2" color="#000080"> <b>Classified
-			Category: </font></b></td>
-			<td width="275" bgcolor="#F1F1F9" align="left"><font
-				face="arial, helvetica" size="2" color="#000080"> 
-				<SELECT NAME=AdCategory size="1" VALUE="<?echo $AdCategory ?>">
-				<? foreach($options as $category => $catdesc)
-				{
+			<td colspan="2" bgcolor="#F1F1F9" align="center">
+			<font FACE="arial,helvetica"></font><br /></td></tr>
+		<tr>
+			<td bgcolor="#F1F1F9" align="right">
+			<font face="arial, helvetica" size="2" color="#000080"> 
+			<b>Classified Category:</b></font></td>
+			<td  bgcolor="#F1F1F9" align="left">
+			<font face="arial, helvetica" size="2" color="#000080"> 
+				<SELECT NAME=AdCategory size="1">
+				<? foreach($options as $category => $catdesc) {
 					//	echo "<OPTION";
-					if ($AdCategory==$category)
-					{
+					if ($AdCategory==$category) {
 						echo "<option value=$category SELECTED>$catdesc</option> \n" ;
 						//	next($adcategory);
-					}
-					else
-					{
+					} else {
 						echo "<option value=$category>$catdesc</option> \n";
 					}
 				}
 				?>
-			</SELECT><font face="arial, helvetica" size="3" color="#000080"> *</font></td>
-		</tr>
+				</SELECT></font>
+			<font face="arial, helvetica" size="3" color="#000080"> *</font></td></tr>
 		<tr>
-			<td colspan="2" bgcolor="#F1F1F9"><font color="#F1F1F9"></td>
-		</tr>
+			<td colspan="2" bgcolor="#F1F1F9"><font color="#F1F1F9"></font></td></tr>
 		<tr>
-			<td width="300" bgcolor="#F1F1F9" align="right"><font
-				face="arial,helvetica" SIZE="2" color="#000080"> <b>How long should
-			your AD be displayed: </b></td>
-			<td width="300" bgcolor="#F1F1F9" align="left"><select size="1"
-				name="AdPeriod" value="<?echo $AdPeriod ?>">
-				<?php foreach($periodWk as $per => $perdesc)
-				{
+			<td  bgcolor="#F1F1F9" align="right">
+			<font face="arial,helvetica" SIZE="2" color="#000080">
+			<b>How long should your AD be displayed: </b></font></td>
+			<td  bgcolor="#F1F1F9" align="left">
+			<select size="1" name="AdPeriod">
+				<?php foreach($periodWk as $per => $perdesc) {
 					//	echo "<OPTION";
-					if ($AdPeriod==$per)
-					{
+					if ($AdPeriod==$per) {
 						echo "<option value=$per SELECTED>$perdesc</option> \n" ;
 						//	next($adcategory);
-					}
-					else
-					{
+					} else {
 						echo "<option value=$per>$perdesc</option> \n";
 					}
 				}?>
-
-				<!--###############		To Place Ads by MONTH uncomment below
-				<option value="30" selected>1 month </option>
-				<option value="60">2 months </option>
-				<option value="90">3 months </option>
-					END OF COMMENTED FIELDS 							####################-->
-
-				<!--###############		To Place Ads by WEEK uncomment below				
-				<option value="7" selected>1 week</option>
-				<option value="14">2 weeks</option>
-				<option value="21">3 weeks</option>
-				<option value="28">4 weeks</option>						####################-->
-				<!-- ################	Weekly options reduced								
-				<option value="35">5 weeks
-				<option value="42">6 weeks
-				<option value="49">7 weeks
-				<option value="56">8 weeks								####################-->
 			</select>
-		
-		</font><font face="arial, helvetica" size="3" color="#000080"> *</font></td>
-	</tr>
-	<tr>
-		<td width="300" bgcolor="#F1F1F9" align="right"><font
-			face="arial,helvetica" size="2" color="#000080"> <b>Ad Headline
-		Caption: </b></td>
-		<td width="300" bgcolor="#F1F1F9" align="left"><select
-			name="AdCaption" size="1" value="<?echo $AdCaption ?>">
-			<?php foreach($caption as $cap => $capdesc)
-			{
-				//	echo "<OPTION";
-				if ($AdCaption==$cap)
-				{
+			<font face="arial, helvetica" size="3" color="#000080"> *</font></td></tr>
+		<tr>
+			<td  bgcolor="#F1F1F9" align="right">
+			<font face="arial,helvetica" size="2" color="#000080">
+			<b>Ad Headline Caption: </b></font></td>
+			
+			<td  bgcolor="#F1F1F9" align="left">
+			<select name="AdCaption" size="1">
+			<?php foreach($caption as $cap => $capdesc) {
+				if ($AdCaption==$cap) {
 					echo "<option value=$cap SELECTED>$capdesc</option> \n" ;
-					//	next($adcategory);
-				}
-				else
-				{
+				} else {
 					echo "<option value=$cap>$capdesc</option> \n";
 				}
 			}?>
-			<!-- ################
-				<option value="Subject:"> -- Click To Scroll  ></option>
-				<option value="FOR SALE">For Sale </option>
-				<option value="WANTED">Wanted </option>
-				<option value="BEST OFFER FOR">Best offer for </option>
-				<option value="POSITION DESIRED">Position desired </option>
-				<option value="POSITION OFFERED">Position offered </option>
-				<option value="FOR RENT">For Rent </option>
-				<option value="FOR LEASE">For Lease </option>
-				<option value="SERVICES OFFERED">Services Offered </option>
-				<option value="BUSINESS OPPORTUNITY">Business Opportunity </option>
-				<option value="BUY WHOLESALE">Buy Wholesale </option>	####################-->
-		</select><font face="arial, helvetica" size="3" color="#000080"> *</font></td>
-	</tr>
-	<tr>
-		<td colspan="2" bgcolor="#F1F1F9"><br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" bgcolor="#F1F1F9" align="center"><font
-			face="arial,helvetica" size="2" color="#000080"> <b>Headline for your
-		AD</b><br />
-		</font> <font face="arial,helvetica" size="1" color="#000080"> (<i>This
-		should be the specific topic of your AD... </i>)</font></font> <br />
-		<input type="text" name="AdHeadline" value="<?echo $AdHeadline ?>"
-			size="55" maxlength="100"> <font face="arial, helvetica" size="3"
-			color="#000080"> *</font></td>
-	</tr>
-	<tr>
-		<td bgcolor="#F1F1F9"><br />
-		</td>
-	</tr>
-
-	<!-- ######## COMMENT OUT THIS AREA IF YOU DO NOT WANT TO ALLOW URL'S IN THE AD ###-->
-	<tr>
-		<td colspan="2" bgcolor="#F1F1F9"><br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" bgcolor="#F1F1F9" align="center"><font
-			face="arial,helvetica" size="2" color="#000080"> <b>Have a Web Site?
-		Include your URL in the Ad</b><br />
-		</font> <font face="arial,helvetica" size="1" color="#000080">(Enter
-		exactly as shown here: http://www.yourdomain.com)</font> <br />
-		<input type="text" name="AdURL" value="<?echo $AdURL ?>"
-			maxlength="100" size="60"></td>
-		<td bgcolor="#F1F1F9"><br />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" bgcolor="#F1F1F9"><br />
-		</td>
-	</tr>
-	<!-- ######## Ad Description  ###-->
-	<tr>
-		<td colspan="2" bgcolor="#F1F1F9" ALIGN="CENTER"><font
-			face="arial,helvetica" size="2" color="#000080"> <b>Now enter your AD
-		content below</b></font>
-		<blockquote><font face="arial, helvetica" size="2" color="#000080">
-		Just continously type your text, words will wrap <b>automatically.</b>
-		You may enter up to approximately </font></font> <b><font
-			face="arial, helvetica" size="2" color="#000080">100</font></b> <font
-			FACE="arial,helvetica" color="#000080"> <font face="arial, helvetica"
-			size="2" color="#000080"> words in your AD content. For a <b>better</b>
-		appearance, use <b>paragraph breaks</b> wherever possible. You will be
-		able to <b>upload</b> a photoimage during final processing... (<i>or
-		at a later time if you wish </i>)</font></font></blockquote>
-		<font face="arial,helvetica,bold" size="2" color="#000080">Click the
-		here to upload image at a later time</font> <input type="checkbox"
-			name="AdNoUpload" value="<? echo $AdNoUpload ?>"></td>
-		<!--			<p align="center">
-			<b><font face="arial, helvetica" color="#FF0000" size="2">WARNING: IF YOU ENTER YOUR HEADLINE OR<br />CONTENT IN ALL CAPS YOUR AD WILL BE DELETED!</font></b>
-			<font FACE="arial,helvetica"> -->
-		</td>
+			</select><font face="arial, helvetica" size="3" color="#000080"> *</font></td></tr>
+		<tr>
+			<td colspan="2" bgcolor="#F1F1F9"><br /></td></tr>
+			
+<!--  ########################################################  -->
+<!--  ########   This is the input for  - Headline  -  #######  -->
+<!--  ########################################################  -->
 		<tr>
 			<td colspan="2" bgcolor="#F1F1F9" align="center">
-			<p><font face="arial" size="2" color="#000080"><br />
-			<b>For a Line break:</b> press enter <b>ONCE</b>.&nbsp;&nbsp; <b>Paragraph
-			break:</b> press enter <b>TWICE</b>.<br />
-			</font>
+			<font face="arial,helvetica" size="2" color="#000080"> 
+			<b>Headline for your entry</b></font><br />
+			<font face="arial,helvetica" size="1" color="#000080"> 
+			(<i>This should be the specific topic of your AD... </i>)</font><br />
+			<input type="text" name="AdHeadline" value="<?echo $AdHeadline ?>" size="55" maxlength="100"> 
+			<font face="arial,helvetica" size="3" color="#000080"> *</font></td></tr>
+		<tr>
+			<td colspan="2" bgcolor="#F1F1F9"><br /></td>
+		</tr>
+
+<!-- ######## COMMENT OUT THIS AREA IF YOU DO NOT WANT TO ALLOW URL'S IN THE AD ###-->
+<!--  ##########################################################  -->
+<!--  ########   This is the input for   - URL -       #########  -->
+<!--  ##########################################################  -->
+		<tr>
+			<td colspan="2" bgcolor="#F1F1F9" align="center">
+			<font face="arial,helvetica" size="2" color="#000080">
+			<b>Have a Web Site? Include your URL</b></font><br />
+			<font face="arial,helvetica" size="1" color="#000080">
+			(<i>Enter exactly as shown here: http://www.yourdomain.com</i>)</font> <br />
+			<input type="text" name="AdURL" value="<?echo $AdURL ?>" maxlength="100" size="60"></td></tr>
+		<tr>
+			<td colspan="2" bgcolor="#F1F1F9"><br /></td></tr>
+
+	<!-- ######## Ad Description  ###-->
+		<tr>
+			<td colspan="2" bgcolor="#F1F1F9" ALIGN="CENTER">
+			<font face="arial,helvetica" size="2" color="#000080">
+			<b>Now enter your content detail description below</b></font>
+			<blockquote><font face="arial, helvetica" size="2" color="#000080">
+			Just continously type your text, words will wrap <b>automatically.</b>
+			You may enter up to approximately </font><b>
+			<font face="arial, helvetica" size="2" color="#000080">100</font></b>
+			<font face="arial, helvetica" size="2" color="#000080">
+			words in input box below. For a <b>better</b> appearance, use 
+			<b>paragraph breaks</b> wherever possible.</font></blockquote></td> 
+
+<!--			<p align="center">
+			<b><font face="arial, helvetica" color="#FF0000" size="2">WARNING: IF YOU ENTER YOUR HEADLINE OR<br />CONTENT IN ALL CAPS YOUR AD WILL BE DELETED!</font></b>
+			<font FACE="arial,helvetica"> -->
+			
+			<tr>
+				<td colspan="2" bgcolor="#F1F1F9" align="center">
+				<p><font face="arial" size="2" color="#000080">
+				<b>For a Line break:</b> press enter <b>ONCE</b>
+				<b>Paragraph break:</b> press enter <b>TWICE</b>.<br /></font>
 
 			<tr>
 				<td colspan="2" bgcolor="#F1F1F9" align="center">
-				<textarea cols="60" rows="8" name="AdDesc" wrap="virtual"><?echo $AdDesc ?></textarea>
-				<font face="arial, helvetica" size="3" color="#000080"> *</font><br />
-				</td>
-			</tr>
+				<textarea cols="60" rows="8" name="AdDesc" wrap="soft"><?echo $AdDesc ?></textarea>
+				<font face="arial, helvetica" size="3" color="#000080"> *</font><br /></td></tr>
+			
 			<tr>
-				<td colspan="2" bgcolor="#000080" align="center">
+				<td colspan="2" bgcolor=#660066 align="center">
 				<font face="arial,helvetica" size="2" color="WHITE"> 
-				When done entering, Please continue by clicking on the Publish button below...</font></td>
-			</tr>
-
+				When done entering, Please continue by clicking on the Publish button below...</font></td></tr>
 </table>
-<table width="600" bgcolor="#000080" cellpadding="0" border="0" cellspacing="0">
+
+<table class=ad_form>
 	<tr>
-<!-- 	<td colspan="1" width=400 " bgcolor="#F1F1F9" align="left">
- 	<ul>
+		<td colspan="2" bgcolor="#F1F1F9" align="center">
+			<font face="arial, helvetica" size="2" color="#000080">
+			You can <b>upload</b> a photo/image anytime... (<i>From Content once posted</i>)<br />
+			<font face="arial,helvetica,bold" size="2" color="#000080">
+			Click the here to upload image </font> 
+			<input type="hidden" name="AdNoUpload" id="AdNoUpload" value="<? echo $AdNoUpload ?>">
+			<label><input type="radio" name="Upload2" value="now" id="Upload_Now" onclick="openDetail(event, 'Image')">Now</label>
+			<label><input type="radio" name="Upload2" value="later" id="Upload_later" >Later</label></font></td></tr>
+<!--  	<ul>
 			<li><a href="Member.php">Cancel</a></li>
 			<li><a href="ViewMyAd.php">My Ads</a></li>
 			<li><a href="../pophelp/postad.html">Help</a></li> 
-		</ul> 			
-		</td>  -->
-		<td colspan="2" width="400" bgcolor="#F1F1F9" align="center"><br />
-		<INPUT TYPE=submit name="NewAdForm2" value="Publish">
-		</td>
+		</ul>  -->
+		
+		<tr>
+			<td width=600 colspan="2" bgcolor="#F1F1F9" align="center"><br />
+				<INPUT TYPE=submit name="NewAdForm2" value="Publish">
+			</td>
 		</tr>
 	<tr>
-<!-- 	<td width="555" colspan="2" align="center">
+<!-- 	<td width="600" colspan="2" align="center">
 			<font face="arial,helvetica" size="1" color="WHITE">
 			<b>Bolitech.com 2005-<?php echo date("Y") ?></b></font></td> -->	
 		</tr>
 	<tr>
-		<td width="555" colspan="2" bgcolor="#000080" align="center">
+		<td  colspan="2" bgcolor=#660066 align="center">
 		<font face="arial,helvetica" size="1" color="WHITE">
 		<b>newAdForm2.html</b></font></td>
 		</tr>
 	
 </table>
+<!--  </FORM> -->
+</div>
+<!-- #################################################################################################### -->
+<!-- The third section contains a form that allows the upload of a new image file associated with the Ad. -->
+<!-- #################################################################################################### -->
+<div id="Image" class="tabcontent">
+<!-- <FORM action="Upload.php" method="post" enctype="multipart/form-data" name="upload"> -->
+<!-- <FORM ACTION="Upload.php" METHOD="POST" name="upload">  -->
+	<table >
+	<tr>
+		<td  class=c colspan="2" bgcolor=#660066 align="center">
+		<font  face="arial,helvetica" size="2" > 
+		Please select an image to upload and add to your <?php echo($this->_priv_content_desc)?>(s)...</font></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		</td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center">
+		<input type="hidden" name="MAX_FILE_SIZE" value="<?php echo(MAX_FILE_SIZE) ?>"> 
+		<input name="userfile" type="file" class="box" id="userfile" size="60"></td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		</td>
+	</tr>
+	<tr>
+		<td class=b colspan="2"  align="center">
+		<input type="hidden" name=myAd value="<?php echo ($Id) ?>" /> 
+<!-- 		<input name="upload" type=submit class="box" id="upload" value="Upload" />  -->
+			<INPUT TYPE=submit name="NewAdForm2" id="NewAdForm2" value="Publish" onclick="setUpload()"/>
+
+			</td>
+	</tr>
+	<tr>
+		<td class=b colspan="2" bgcolor="#F1F1F9" align="center"><br />
+		</td>
+	</tr>
+	</table>
+	</div>
 </FORM>
+</div>
+<script type="text/javascript">
+
+function openDetail(evt, tabName) {
+    // Declare all variables
+    var i, tabcontent, tablinks;
+
+    // Get all elements with class="tabcontent" and hide them
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+
+    // Get all elements with class="tablinks" and remove the class "active"
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+
+    // Show the current tab, and add an "active" class to the link that opened the tab
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+	
+    //  Reset radio button used to toggle tabs
+    document.getElementById("Upload_Now").checked = false;
+    document.getElementById("Upload_later").checked = true;
+
+}
+function setUpload(){
+	document.getElementById("AdNoUpload").value = "image";
+	document.getElementById("NewAdForm2").click();
+}
+
+//Get the element with id="defaultOpen" and click on it
+document.getElementById("defaultOpen").click();
+//  Reset radio button used to toggle tabs
+
+
+
+</script>

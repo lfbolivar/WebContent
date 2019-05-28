@@ -145,7 +145,7 @@ div.content2{
 }
 div.content2 h3{
 	color:red
-	}
+}
 
 div.url{
 	margin-left:0px;
@@ -166,13 +166,13 @@ div.url a:hover{
 	color:white;
 }
 
-<!-- ******************** Table settings for MyGallery.php and My  ***********  -->
-table {
-	background-color: #F1F1F9;
-	color:#F1F1F9;
-	width:700px;
-	cellpadding: 0;
-	border-color:#F1F1F9;
+<!-- ******************** Table settings for private WorkBench  ***********  -->
+div.content table {
+	border:0;
+	background-color:#F1F1F9;
+	width:600px;
+	cellspacing:0;
+	
 }
 th {
 	background-color: #660066;
@@ -180,7 +180,7 @@ th {
 td.a {
 	background-color: #000080;
 	border-color:#F1F1F9;
-	width:100%;
+	width:600px;
 	colspan:2;
 	text-align: center;
 	font-size: 100%;
@@ -192,32 +192,57 @@ td.b {
 	border-color: #F1F1F9;
 	color: #660066;
 	font-size: 100%;
-	font: 15px arial, helvetica
+	font: 15px arial, helvetica;
+	width:600px;
 }
-
+<!--  Magenta(Red) background white letters -->
 td.c {
-	background-color: #660066;
-	color: white;
-	font: 10px calibri, arial, helvetica
+	background-color:#660066;
+	font:10px calibri, arial, helvetica;
+	width:600px;
+}
+td.c font{
+	background-color:#660066;
+	color:white;
+	width:600px;
 }
 td.e {
 	background-color:white;
 	color:purple;
 	font:15px calibri, arial, helvetica;
-	width:100%;
+	width:600px;
 	text-align:center;
+}
+<!-- *********** Table newAdForm2.html and mydetails.html *************** -->
+<!-- This class is grey background and magenta foreground -->
+td.ad_form {
+	background-color:#F1F1F9;
+	color:#660066;
+	width:755px;	
+}
+<!-- This class is grey background and dark blue foreground -->
+td.ad_form1 {
+	background-color:#F1F1F9;
+	color:#000080;
+	width:755px;	
+}
+
+<!-- This class is dark blue background and grey foreground -->
+td.ad_form2 {
+	background-color:#000080;
+	color:#F1F1F9;
+	width:755px;
+}
+td.ad_form3 {
+	background-color:#000080;
+	color:#F1F1F9;
+	width:755px;
 }
 <!--********************* --><!--Image Gallery section --><!--*********************  -->
 div.img{
 	margin:2px;
-<!--  /*	border:1px solid #0000ff;  */ -->
 	height:<?=THMBHEIGHT?>px;
-<!--  /*	height:156px; 
-	auto; px;<?php echo (THMBHEIGHT) ?>*/  -->
 	width:<?=THMBWIDTH?>px;
-<!--  /*	auto; px;<?php echo (THMBWIDTH) ?> float : left;*/  -->
-	text-align:center;
-<!--  /*	clear: both; */  -->
 }
 div.img img{
 	text-align:center;
@@ -226,6 +251,10 @@ div.img img{
 <!--   /*	border:2px solid #ffffff; */  -->
 }
 div.img input:hover{
+	border:2px solid #0000ff;
+	background-color:#ff3300;
+}
+div.img a:hover{
 	border:2px solid #0000ff;
 	background-color:#ff3300;
 }
@@ -316,7 +345,7 @@ div.tabmenu ul.tab {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    width: 505px;
+    width: 600px;
     height: 30px;
     position:relative;
     background-color: #F1F1F9; 

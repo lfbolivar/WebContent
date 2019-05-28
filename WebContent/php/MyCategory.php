@@ -33,35 +33,43 @@ if(isset($session_vars['sessionEmail'])) {
 		$objWB->display_workbench($session_vars);
 		
 	} else {
-		include $sec_php_files.'ViewMyAd.php';
-		//echo ($_POST['cat'].'Form is not set');
-		exit();
+		if (isset($_REQUEST['cat'])) {
+			//print_r($_REQUEST);
+			$session_vars['catid'] 		= $_REQUEST['cat'];
+			$session_vars['catdesc'] 	= $_REQUEST['catd'];
+			$objWB = new Gallery();
+			$objWB->display_workbench($session_vars);
+				
+		} else {
+			include $sec_php_files.'ViewMyAd.php';
+			//echo ($_POST['cat'].'Form is not set');
+			exit();
+		}
 	}
 } else {
-	/*
-	//if the session does not exist, you are taken to the login screen
-	require_once 'class/user.php';
-	
-	$obj_user = new User();
-	$obj_user->logout_user();
-*/
-	// Implement public header html code to produce page container
-	// Followup with logonMsg and allow user to submit credentials
-	include $sec_html_files.'pageHeader.html';
-	include $html_files.'pageHeaderMenu.html';
 
+	/*
+	 * Implement public header html code to produce page container
+	 * Followup with logonMsg and allow user to submit credentials
+	 */
+	$params = array();
+	$params['modal'] = '<a href="#loginmodal" class="flatbtn" id="modaltrigger">Logon</a>';
+	
 	//header("Location: Login.php");
 	//echo ('Session does not exist: '.$_SESSION['ClassAdsEmail'].' PASS: '.$_SESSION['ClassAdsPassword'].'');
-	$MsgTitle = "MY CATEGORY";
-	$redirect = "Logout.php";
-	$MsgType = "Member.php Warning:";
-	$Msg1 = "User name and password sesssion lost";
-	$Msg2= "Please re-establish credentials with Login.";
-	$button = "Login";
-	include $sec_html_files.'logonMsg.html';
-	include $sec_html_files.'pageFooter.html';
+	$params['MsgTitle'] = "MY CATEGORY";
+	$params['redirect'] = "Logout.php";
+	$params['MsgType'] = "Member.php Warning:";
+	$params['Msg1'] = "User name and password sesssion lost";
+	$params['Msg2']= "Please re-establish credentials with Logon.";
+	$params['button'] = "Login";
+
 	unset($_POST['submit']);
-	exit();
+
+	require_once 'class/user.php';
+	
+	$obj_user = new User(NULL, NUll, NUll);
+	$obj_user->timed_out($params);
 	
 }
 ?>
